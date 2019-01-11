@@ -60,7 +60,7 @@ ng new minimalista -s -S -t
 ## 2.3 Profesional
 
 ```console
-ng new profesional --experimental-ivy true -p acme --routing true
+ng new profesional -p acme --routing true
 ```
 
 ---
