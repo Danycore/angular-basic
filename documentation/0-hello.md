@@ -251,9 +251,9 @@ Configuración en `angular.json`
     "scripts": {
     "build:doc": "cd ./documentation/ && bs e -o ../docs/readme",
     "build:prod": "ng build --prod",
-    "build:pub": "ng build --prod --output-path docs --base-href https://academiabinaria.github.io/ActiBot/",
+    "build:pub": "ng build --prod --output-path docs --base-href https://academiabinaria.github.io/angular-board/",
     "e2e": "ng e2e",
-    "http-server": "http-server ./dist/actibot/ -c-1 -p4271 -a localhost -o",
+    "http-server": "http-server ./dist/angular-board/ -c-1 -p4271 -a localhost -o",
     "lint": "ng lint",
     "ng": "ng",
     "pub:doc": "npm run build:doc && npm run push",
@@ -273,7 +273,7 @@ Configuración en `angular.json`
 
 ```typescript
 export const environment = {
-    appName: 'Actibot',
+    appName: 'Angular Board',
     production: false
 };
 ```
@@ -288,6 +288,14 @@ title = environment.appName + 'hello world ;-)';
 
 ```html
 <img width="100" src="./assets/logo.png" />
+```
+
+---
+
+### Ejecución en modo producción
+
+```console
+npm run start:prod
 ```
 
 ---
