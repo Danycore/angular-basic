@@ -40,11 +40,15 @@ class: impact
 
 > Angular es una plataforma de desarrollo dogmática y llave en mano.
 
+--
+
 Necesitarás un editor moderno como [VS Code](https://code.visualstudio.com/) y [NodeJS](https://nodejs.org/en/) con su manejador de de paquetes _npm_.
 
 ```console
 node -v
 ```
+
+--
 
 Instrucciones para instalar angular cli.
 
