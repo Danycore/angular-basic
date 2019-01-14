@@ -40,7 +40,7 @@ class: impact
 
 > Angular es una plataforma de desarrollo dogmática y llave en mano.
 
-Necesitarás [NodeJS](https://nodejs.org/en/) y su manejador de de paquetes _npm_.
+Necesitarás un editor moderno como [VS Code](https://code.visualstudio.com/) y [NodeJS](https://nodejs.org/en/) con su manejador de de paquetes _npm_.
 
 ```console
 node -v
@@ -64,6 +64,14 @@ $ ng new --help
 -   Soluciones a medida.
 
 > Para más información mira la documentación del comando [ng new](https://angular.io/cli/new).
+
+```console
+ng new primera
+cd primera
+npm start
+```
+
+--
 
 ---
 
@@ -107,6 +115,8 @@ La aplicación que sirve de ejemplo a este tutorial fue creada con este comando:
 
 ```console
 ng new angular-board --routing true -s -S
+cd angular-board
+npm start
 ```
 
 ---
