@@ -179,8 +179,8 @@ class: impact
 
 1. Abre el fichero `app.component.ts`
 2. Busca dentro de él una clase llamada `AppComponent`.
-3. Asígnale el saludo de rigor: `title = 'actibot: hello world ;-)';`.
-4. Guarda y comprueba cómo tu navegador **se habrá actualizado automáticamente**.
+3. Asígnale el saludo de rigor: `title = 'angular-board' + ' hello world'`
+4. Guarda y comprueba que tu navegador **se actualiza automáticamente**.
 
 ---
 
