@@ -16,9 +16,35 @@ class: impact
 
 ---
 
-# 1. Instalación de Angular CLI 7
+# 1. Angular y el CLI
 
-Necesitarás _NodeJS_ y su manejador de de paquetes _npm_.
+# 2. Estructura de una aplicación Angular
+
+# 3. Configuración
+
+# 4. Angular y su ecosistema
+
+---
+
+class: impact
+
+# 1 Angular y el CLI
+
+## Instalación de Angular CLI 7
+
+## Crear y ejecutar aplicaciones Angular
+
+---
+
+## 1.1 Instalación de Angular CLI 7
+
+> Angular es una plataforma de desarrollo dogmática y llave en mano.
+
+Necesitarás [NodeJS](https://nodejs.org/en/) y su manejador de de paquetes _npm_.
+
+```console
+node -v
+```
 
 Instrucciones para instalar angular cli.
 
@@ -31,17 +57,17 @@ $ ng new --help
 
 ---
 
-# 2. Crear y ejecutar aplicaciones Angular 7
+## 1.2. Crear y ejecutar aplicaciones Angular
 
-## Configuración que viene por defecto,
+-   Configuración que viene por defecto,
 
-## Soluciones a medida.
+-   Soluciones a medida.
 
 > Para más información mira la documentación del comando [ng new](https://angular.io/cli/new).
 
 ---
 
-## 2.1 Normal
+### 1.2.1 Normal
 
 ```console
 ng new normal
@@ -49,7 +75,7 @@ ng new normal
 
 --
 
-## 2.2 Minimalista
+### 1.2.2 Minimalista
 
 ```console
 ng new minimalista -s -S -t
@@ -57,7 +83,7 @@ ng new minimalista -s -S -t
 
 --
 
-## 2.3 Profesional
+### 1.2.3 Profesional
 
 ```console
 ng new profesional -p acme --routing true
@@ -65,7 +91,7 @@ ng new profesional -p acme --routing true
 
 ---
 
-## 2.4 Empresarial
+### 1.2.4 Empresarial
 
 ```console
 ng new empresarial --create-application false
@@ -75,9 +101,9 @@ ng generate application compras -p acme --routing true
 
 --
 
-## 2.5 Angular Board
+### 1.2.5 Angular Board
 
-> La aplicación que sirve de ejemplo a este tutorial fue creada con este comando:
+La aplicación que sirve de ejemplo a este tutorial fue creada con este comando:
 
 ```console
 ng new angular-board --routing true -s -S
@@ -85,15 +111,27 @@ ng new angular-board --routing true -s -S
 
 ---
 
-class: impact
+> Recap:
 
-# 3. Estructura de una aplicación Angular
+# 1 Angular y el CLI
 
-## Ficheros y carpetas principales
+## Instalación de Angular CLI 7
+
+## Crear y ejecutar aplicaciones Angular
 
 ---
 
-## 3.1 Ficheros y carpetas principales
+class: impact
+
+# 2. Estructura de una aplicación Angular
+
+## Ficheros y carpetas principales
+
+## Edición de un Hola Mundo
+
+---
+
+## 2.1 Ficheros y carpetas principales
 
 -   **angular.json** _: configuración del propio CLI. La madre de todos los configuradores_
 -   **package.json** _: dependencias de librerías y scripts_
@@ -101,26 +139,15 @@ class: impact
     -   **index.html** _: un fichero HTML índice estándar_
     -   **main.ts** _: fichero TypeScript de arranque de la aplicación_
     -   **app/** _: la carpeta con el código específico de tu aplicación_
-        -   **app.module.ts** _: las aplicaciones son árboles de módulos, y este es su raíz_
-        -   **app.component.ts** _: las páginas son árboles de componentes, y este es su raíz_
-        -   **app.component.html** _: los componentes tienen una parte visual, y esta es su plantilla_
+        -   **app.module.ts** _: la aplicación es un árbol de módulos, y este es su raíz_
+        -   **app.component.ts** _: la página es un árbol de componentes, y este es su raíz_
+        -   **app.component.html** _: el componente tiene una parte visual, esta es su vista_
 
 ---
 
-# 4. Edición
+## 2.2. Edición
 
-## 4.1 Hola Mundo
-
-**cambiar un fichero de código y comprobar el resultado** en el navegador.
-
-1. Abre el fichero `app.component.ts`
-2. Busca dentro de él una clase llamada `AppComponent`.
-3. Asígnale el saludo de rigor: `title = 'actibot: hello world ;-)';`.
-4. Guarda y comprueba cómo tu navegador **se habrá actualizado automáticamente**.
-
----
-
-## 4.2 `npm start`
+### 2.2.1 `npm start`
 
 1. `npm start`
 2. `ng serve`
@@ -132,19 +159,50 @@ class: impact
 
 ---
 
-# 5. Configuración
+### 2.2.2 Edición de un Hola Mundo
 
-## 5.1 Angular.json
+**cambiar un fichero de código y comprobar el resultado** en el navegador.
+
+1. Abre el fichero `app.component.ts`
+2. Busca dentro de él una clase llamada `AppComponent`.
+3. Asígnale el saludo de rigor: `title = 'actibot: hello world ;-)';`.
+4. Guarda y comprueba cómo tu navegador **se habrá actualizado automáticamente**.
+
+---
+
+> Recap:
+
+# 2. Estructura de una aplicación Angular
+
+## Ficheros y carpetas principales
+
+## Edición de un Hola Mundo
+
+---
+
+class: impact
+
+# 3. Configuración
+
+## Configurar el CLI
+
+## Configurar el Workflow
+
+## Configurar la aplicación
+
+---
+
+## 3.1 Angular.json
 
 -   Configuración Multi proyecto propia de angular.
 -   Rutas y configuraciones básicas para entornos de compilación y despliegue
 
-## 5.2 Package.json
+## 3.2 Package.json
 
 -   Dependencias en ejecución y para desarrollo
 -   Scripts de ayuda
 
-## 5.3 Environment
+## 3.3 Environment
 
 -   Usadas en tiempo de ejecución
 -   Valores distintos por entorno
@@ -220,20 +278,45 @@ title = environment.appName + 'hello world ;-)';
 
 ---
 
-# 6. Angular 7, el CLI 7 y su ecosistema
+> Recap:
 
--   [Angular Console](https://angularconsole.com/)
--   [Prettier](https://prettier.io/)
--   [Angular Material](https://material.angular.io/)
+# 3. Configuración
+
+## Configurar el CLI
+
+## Configurar el Workflow
+
+## Configurar la aplicación
 
 ---
 
-## 6.1 Prettier.config.js
+class: impact
+
+# 4. Angular y su ecosistema
+
+## Extensiones de Visual Studio
+
+## Configurar Prettier
+
+## Ecosistema de terceros
+
+---
+
+## 4.1. Extensiones de Visual Studio
+
+-   [Extensiones Esenciales](https://marketplace.visualstudio.com/items?itemName=johnpapa.angular-essentials)
+-   [Prettier](https://prettier.io/)
+
+---
+
+## 4.2 Configurar Prettier
+
+### Prettier.config.js
 
 ```js
 module.exports = {
-    printWidth: 80,
-    tabWidth: 4,
+    printWidth: 100,
+    tabWidth: 2,
     useTabs: false,
     semi: true,
     singleQuote: true,
@@ -248,3 +331,22 @@ module.exports = {
     proseWrap: 'preserve'
 };
 ```
+
+---
+
+## 4.3 Ecosistema de terceros
+
+-   [Angular Console](https://angularconsole.com/)
+-   [Angular Material](https://material.angular.io/)
+
+---
+
+> Recap:
+
+# 4. Angular 7, el CLI 7 y su ecosistema
+
+## Extensiones de Visual Studio
+
+## Configurar Prettier
+
+## Ecosistema de terceros
