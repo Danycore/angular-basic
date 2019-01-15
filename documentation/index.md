@@ -1,10 +1,9 @@
-title: Angular Básico
 class: animation-fade
 layout: true
 
 .bottom-bar[
 
-{{title}}
+Angular Básico
 
 ]
 
@@ -12,7 +11,7 @@ layout: true
 
 class: impact
 
-# {{title}}
+# Angular Básico
 
 ## Tutorial de introducción
 
