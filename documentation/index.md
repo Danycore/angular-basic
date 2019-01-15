@@ -1,12 +1,15 @@
-title: Angular Básico
 class: animation-fade
 layout: true
+
+.bottom-bar[
+
+]
 
 ---
 
 class: impact
 
-# {{title}}
+# Angular Básico
 
 ## Tutorial de introducción
 
