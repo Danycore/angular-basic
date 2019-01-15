@@ -296,6 +296,8 @@ title = environment.appName + 'hello world ;-)';
 
 ```console
 npm run start:prod
+cd dist/angular-board
+http://localhost:4271/
 ```
 
 ---
