@@ -9,7 +9,7 @@
     "url": "https://twitter.com/albertobasalo"
   },
   "scripts": {
-    "build:doc": "cd ./documentation/ && bs e -l -o ../docs/readme",
+    "build:doc": "cd ./documentation/ && bs e --no-inline -o ../docs/readme",
     "build:prod": "ng build --prod",
     "build:pub": "ng build --prod --output-path docs --base-href https://academiabinaria.github.io/angular-board/",
     "e2e": "ng e2e",
