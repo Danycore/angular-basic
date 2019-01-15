@@ -15,6 +15,6 @@ class: impact
 
 ---
 
-# [0-Hello](./0-hello.html)
+# [0-Hello](https://academiabinaria.github.io/angular-board/readme/0-hello.html)
 
-# [1-Base](./1-base.html)
+# [1-Base](https://academiabinaria.github.io/angular-board/readme/1-base.html)
