@@ -9,7 +9,7 @@
     "url": "https://twitter.com/albertobasalo"
   },
   "scripts": {
-    "build:doc": "cd ./documentation/ && bs e --no-inline -o ../docs/readme",
+    "build:doc": "cd ./markdown/ && bs e --no-inline -o ../docs/readme",
     "build:prod": "ng build --prod",
     "build:pub": "ng build --prod --output-path docs --base-href https://academiabinaria.github.io/angular-board/",
     "e2e": "ng e2e",
@@ -19,7 +19,7 @@
     "pub:doc": "npm run build:doc && npm run push",
     "pub": "npm run build:pub && npm run build:doc && npm run push",
     "push": "git add * && git commit -m 'pub' && git push",
-    "start:doc": "cd ./documentation/ && bs s",
+    "start:doc": "cd ./markdown/ && bs s",
     "start:prod": "npm run build:prod && npm run http-server",
     "start": "ng serve --aot -o --port 4270",
     "test": "ng test"

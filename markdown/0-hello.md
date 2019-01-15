@@ -249,17 +249,14 @@ Configuración en `angular.json`
 ```json
 {
     "scripts": {
-    "build:doc": "cd ./documentation/ && bs e -o ../docs/readme",
     "build:prod": "ng build --prod",
     "build:pub": "ng build --prod --output-path docs --base-href https://academiabinaria.github.io/angular-board/",
     "e2e": "ng e2e",
     "http-server": "http-server ./dist/angular-board/ -c-1 -p4271 -a localhost -o",
     "lint": "ng lint",
     "ng": "ng",
-    "pub:doc": "npm run build:doc && npm run push",
-    "pub": "npm run build:pub && npm run build:doc && npm run push",
+    "pub": "npm run build:pub && npm run push",
     "push": "git add * && git commit -m 'pub' && git push",
-    "start:doc": "cd ./documentation/ && bs s",
     "start:prod": "npm run build:prod && npm run http-server",
 *   "start": "ng serve --aot -o --port 4270",
     "test": "ng test"
@@ -302,17 +299,9 @@ http://localhost:4271/
 
 Publicación en GitHub, con toques finales, analytics...
 
-```html
-<footer>
-    <a href="./readme/index.html">Tutorial</a> <span> creado por </span>
-    <a href="http://twitter.com/albertobasalo">Alberto Basalo</a>
-</footer>
-```
-
 ```console
-npm run start:pub
-cd dist/angular-board
-http://localhost:4271/
+npm run build:pub
+cd docs
 ```
 
 ---
@@ -394,3 +383,13 @@ module.exports = {
 ## Configurar Prettier
 
 ## Ecosistema de terceros
+
+---
+
+> Next:
+
+# 1. Base para una aplicación Angular
+
+## Módulos
+
+## Componentes
