@@ -20,4 +20,4 @@ class: impact
 
 # [0-Hello](./0-hello.html)
 
-# _continuará..._
+# [1-Base](./1-base.html)
