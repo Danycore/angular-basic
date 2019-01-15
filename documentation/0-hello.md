@@ -300,6 +300,21 @@ cd dist/angular-board
 http://localhost:4271/
 ```
 
+Publicación en GitHub, con toques finales, analytics...
+
+```html
+<footer>
+    <a href="./readme/index.html">Tutorial</a> <span> creado por </span>
+    <a href="http://twitter.com/albertobasalo">Alberto Basalo</a>
+</footer>
+```
+
+```console
+npm run start:pub
+cd dist/angular-board
+http://localhost:4271/
+```
+
 ---
 
 > Recap:
@@ -330,6 +345,7 @@ class: impact
 
 -   [Extensiones Esenciales](https://marketplace.visualstudio.com/items?itemName=johnpapa.angular-essentials)
 -   [Prettier](https://prettier.io/)
+-   [Angular Console](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console)
 
 ---
 
@@ -358,10 +374,14 @@ module.exports = {
 
 ---
 
-## 4.3 Ecosistema de terceros
+## 4.3 Ecosistema
 
--   [Angular Console](https://angularconsole.com/)
 -   [Angular Material](https://material.angular.io/)
+-   [Bootstrap](https://ng-bootstrap.github.io/#/home)
+-   [Augury](https://augury.rangle.io/)
+-   [Apollo GraphQL](https://www.apollographql.com/docs/)
+-   [Ionic](https://ionicframework.com/)
+-   [Angular Console](https://angularconsole.com/)
 
 ---
 
