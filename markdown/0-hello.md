@@ -248,7 +248,7 @@ Configuración en `angular.json`
 
 ```json
 {
-    "scripts": {
+  "scripts": {
     "build:prod": "ng build --prod",
     "build:pub": "ng build --prod --output-path docs --base-href https://academiabinaria.github.io/angular-board/",
     "e2e": "ng e2e",
@@ -388,8 +388,12 @@ module.exports = {
 
 > Next:
 
-# 1. Base para una aplicación Angular
+# Base para una aplicación Angular
 
 ## Módulos
 
 ## Componentes
+
+## Visibilidad entre componentes
+
+## Transitividad y Organización
