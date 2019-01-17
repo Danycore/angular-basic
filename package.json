@@ -9,10 +9,11 @@
     "url": "https://twitter.com/albertobasalo"
   },
   "scripts": {
-    "build:doc": "cd ./markdown/ && bs e --no-inline -o ../docs/readme",
+    "build:doc": "cd ./markdown/ && bs e -o ../docs/readme",
     "build:prod": "ng build --prod",
     "build:pub": "ng build --prod --output-path docs --base-href https://academiabinaria.github.io/angular-board/",
     "e2e": "ng e2e",
+    "export:doc": "cd ./markdown/ && bs p -h -o ../public/readme",
     "http-server": "http-server ./dist/angular-board/ -c-1 -p4271 -a localhost -o",
     "lint": "ng lint",
     "ng": "ng",
