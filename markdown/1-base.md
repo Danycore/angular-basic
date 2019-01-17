@@ -440,9 +440,6 @@ AppComponent
    |
    +--FooterComponent
 
-
-
-
 ```
 
 ---
