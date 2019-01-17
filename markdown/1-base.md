@@ -413,9 +413,11 @@ AppModule
 |  |
 |  +--RouterModule
 |
-+--BrowseModule
++--BrowserModule
 |
 +--CoreModule
+   |
+   +--CommonModule
    |
    +--RouterModule
 
