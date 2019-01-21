@@ -12,6 +12,10 @@ const routes: Routes = [
         loadChildren: './about/about.module#AboutModule'
     },
     {
+        path: 'projects',
+        loadChildren: './projects/projects.module#ProjectsModule'
+    },
+    {
         path: 'not-found',
         component: NotFoundComponent
     },

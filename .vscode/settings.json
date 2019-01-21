@@ -8,5 +8,6 @@
     "latex",
     "plaintext"
   ],
-  "workbench.colorTheme": "Winter is Coming (Light)"
+  "workbench.colorTheme": "Winter is Coming (Light)",
+  "editor.tabSize": 2
 }
