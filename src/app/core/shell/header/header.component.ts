@@ -7,7 +7,7 @@ import { environment } from '../../../../environments/environment';
     styles: []
 })
 export class HeaderComponent implements OnInit {
-    public title = environment.appName + ' hello world ;-) ';
+    public title = environment.appName;
     constructor() {}
 
     ngOnInit() {}
