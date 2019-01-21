@@ -18,3 +18,5 @@ class: impact
 # [0-Hello](https://academiabinaria.github.io/angular-board/readme/0-hello.html)
 
 # [1-Base](https://academiabinaria.github.io/angular-board/readme/1-base.html)
+
+# [2-SPA](https://academiabinaria.github.io/angular-board/readme/2-spa.html)

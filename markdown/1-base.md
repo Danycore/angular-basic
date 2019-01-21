@@ -70,8 +70,8 @@ Resulta en el fichero `core/core.module.ts`
 
 ```typescript
 @NgModule({
-    imports: [],
-    declarations: []
+  imports: [],
+  declarations: []
 })
 export class CoreModule {}
 ```
@@ -116,9 +116,9 @@ class: impact
 
 ## 2.1 Anatomía de un componente
 
--   Un componente es una clase decorada en **TypeScript**
--   Asociada a una plantilla **html**
--   Con un selector **html**
+- Un componente es una clase decorada en **TypeScript**
+- Asociada a una plantilla **html**
+- Con un selector **html**
 
 ```typescript
 import { Core } from '@angular/core';
@@ -135,7 +135,7 @@ export class AppComponent {}
 
 ### Para ser consumido
 
--   Requiere un módulo donde declararse
+- Requiere un módulo donde declararse
 
 ```typescript
 @NgModule({
@@ -149,11 +149,11 @@ export class AppModule {}
 
 --
 
--   Y está listo para ser instanciado
+- Y está listo para ser instanciado
 
 ```html
 <body>
-    <app-root></app-root>
+  <app-root></app-root>
 </body>
 ```
 
@@ -265,16 +265,16 @@ y entonces `app.component.html` queda ridículamente simple:
 
 ### La componentización implica mover contenido
 
--   El contenido de `app.component.html` irá a _Header, Main y Footer_
--   La propiedad `title` se moverá a `header.component.ts`
+- El contenido de `app.component.html` irá a _Header, Main y Footer_
+- La propiedad `title` se moverá a `header.component.ts`
 
 --
 
--   ¿y qué pasa con `<router-outlet></router-outlet>`?
+- ¿y qué pasa con `<router-outlet></router-outlet>`?
 
 --
 
--   Falla porque no es conocido en `CoreModule`; hay que importarlo
+- Falla porque no es conocido en `CoreModule`; hay que importarlo
 
 ```typescript
 @NgModule({
@@ -345,13 +345,13 @@ class: impact
 
 --
 
--   Al mover contenido de `app.component.html` a los componentes de `CoreModule`.
--   Para que funcionase hubo que importar el `RouterModule`, necesario para usar `<router-outlet>`.
--   ¿Cómo es que **antes funcionaba**?
+- Al mover contenido de `app.component.html` a los componentes de `CoreModule`.
+- Para que funcionase hubo que importar el `RouterModule`, necesario para usar `<router-outlet>`.
+- ¿Cómo es que **antes funcionaba**?
 
 --
 
--   Por la **transitividad** usada en `AppRoutingModule`
+- Por la **transitividad** usada en `AppRoutingModule`
 
 ---
 
@@ -385,18 +385,18 @@ En `app.component.html`
 
 ## 4.2 Organización de la aplicación en módulos
 
--   Los programas se organizan a partir de piezas menores.
--   Los principios de **código limpio** nos permiten identificarlas y reutilizarlas.
--   Los módulos y los componentes son piezas reutilizables
+- Los programas se organizan a partir de piezas menores.
+- Los principios de **código limpio** nos permiten identificarlas y reutilizarlas.
+- Los módulos y los componentes son piezas reutilizables
 
 --
 
--   Habrá piezas _funcionales_ y otras de _infraestructura_.
+- Habrá piezas _funcionales_ y otras de _infraestructura_.
 
 --
 
--   Alguna será de uso único como el `CoreModule`
--   Y otras serán compartidas como el `SharedModule`
+- Alguna será de uso único como el `CoreModule`
+- Y otras serán compartidas como el `SharedModule`
 
 ```bash
 ng g m shared
@@ -460,7 +460,13 @@ AppComponent
 
 # Páginas y rutas Angular SPA
 
-## To be defined
+## Rutas
+
+## Lazy Loading
+
+## Parámetros
+
+## Rutas anidadas
 
 ```
 
