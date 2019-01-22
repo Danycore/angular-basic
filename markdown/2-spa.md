@@ -249,101 +249,7 @@ const routes: Routes = [
 
 class: impact
 
-# 3. Parámetros
-
-## Variables en la ruta
-
-## ActivatedRoute
-
----
-
-## 3.1 Variables en la ruta
-
-Dada esta estructura de módulo y components
-
-```bash
-ng g m projects --routing true
-ng g c projects/projects
-ng g c projects/projects/new-project
-ng g c projects/projects/project
-```
-
---
-
-Y delegamos su gestión desde `AppRoutingModule`
-
-```typescript
-const routes: Routes = [
-  {
-    path: 'projects',
-    loadChildren: './projects/projects.module#ProjectsModule'
-  }
-];
-```
-
----
-
-Podemos gestionar dichas rutas en `projects\projects-routing.module.ts`
-
-```typescript
-const routes: Routes = [
-  {
-    path: '',
-    component: ProjectsComponent
-  },
-  {
-    path: 'new',
-    component: NewProjectComponent
-  },
-  {
-*   path: ':id',
-    component: ProjectComponent
-  }
-];
-```
-
---
-
-Resuelve rutas como: _/projects/write-a-book_ o _/projects/develop-a-personal-web_
-
----
-
-## 3.2 ActivatedRoute
-
-Contenido del fichero `project.component.ts` relacionado con la obtención del parámetro de la ruta activa:
-
-```typescript
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-
-export class ProjectComponent implements OnInit {
-  public projectId = '';
-  constructor(activateRoute: ActivatedRoute) {
-    this.projectId = activateRoute.snapshot.params['id'];
-  }
-  ngOnInit() {}
-}
-```
-
-Usamos la instancia `activateRoute` de la clase `ActivatedRoute`
-
-Para acceder a datos de la URL activa
-
----
-
-> Recap:
-
-# 3. Parámetros
-
-## Variables en la ruta
-
-## ActivatedRoute
-
----
-
-class: impact
-
-# 4. Rutas anidadas
+# 3. Rutas anidadas
 
 ## Children
 
@@ -351,7 +257,7 @@ class: impact
 
 ---
 
-## 4.1 Children
+## 3.1 Children
 
 ```bash
 ng g c about/about/links
@@ -381,7 +287,7 @@ const routes: Routes = [
 
 ---
 
-## 4.2 RouterOutlet anidado
+## 3.2 RouterOutlet anidado
 
 En `AboutComponent` :
 
@@ -397,11 +303,115 @@ En `AboutComponent` :
 
 > Recap:
 
-# 4. Rutas anidadas
+# 3. Rutas anidadas
 
 ## Children
 
 ## RouterOutlet anidado
+
+---
+
+class: impact
+
+# 4. Parámetros
+
+## Variables en la ruta
+
+## ActivatedRoute
+
+---
+
+## 4.1 Variables en la ruta
+
+Dada esta estructura nuevos components
+
+```bash
+ng g c about/about/authors
+ng g c about/about/authors/author
+```
+
+---
+
+Podemos gestionar dichas rutas en `about-routing.module.ts`
+
+```typescript
+{
+  path: '',  component: AboutComponent,
+  children: [
+    {
+      path: 'links', component: LinksComponent
+    },
+    {
+      path: 'info', component: InfoComponent
+    },
+    {
+      path: 'authors', component: AuthorsComponent
+    },
+    {
+*     path: 'authors/:id', component: AuthorComponent
+    }
+  ]
+}
+```
+
+--
+
+Resuelve rutas como: _/authors/albertobasalo_ o _/authors/johndoe_
+
+---
+
+## 4.2 ActivatedRoute
+
+Contenido del fichero `author.component.ts` relacionado con la obtención del parámetro de la ruta activa:
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+export class AuthorComponent implements OnInit {
+  public authorId = '';
+  constructor(activateRoute: ActivatedRoute) {
+    this.authorId = activateRoute.snapshot.params['id'];
+  }
+  ngOnInit() {}
+}
+```
+
+Usamos la instancia `activateRoute` de la clase `ActivatedRoute`
+
+Para acceder a datos de la URL activa y mostrar los datos en la vista
+
+```html
+<h2>Author profile</h2>
+<h3>{{ authorId }}</h3>
+```
+
+---
+
+Enlazamos todo agregando una entrada en `AboutComponent` :
+
+```html
+<a routerLink="authors" class="button"> <span> Credit Authors</span> </a>
+```
+
+--
+
+Y en `authors.component.html`
+
+```html
+<a routerLink="albertobasalo" class="button"> <span> Alberto Basalo</span> </a>
+<a routerLink="jhondoe" class="button"> <span> Jhon Doe</span> </a>
+```
+
+---
+
+> Recap:
+
+# 4. Parámetros
+
+## Variables en la ruta
+
+## ActivatedRoute
 
 ---
 
