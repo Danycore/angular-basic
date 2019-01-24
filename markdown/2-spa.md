@@ -12,7 +12,7 @@ class: impact
 
 # {{title}}
 
-## Base para una aplicación Angular
+## Páginas y rutas Angular SPA
 
 ---
 
@@ -20,9 +20,9 @@ class: impact
 
 # 2. Lazy Loading
 
-# 3. Parámetros
+# 3. Rutas anidadas
 
-# 4. Rutas anidadas
+# 4. Parámetros
 
 ---
 
