@@ -259,6 +259,28 @@ class: impact
 
 ## 3.1 Children
 
+En `HeaderComponent`
+
+```html
+<header class="sticky">
+  <a routerLink="/"
+     class="logo">
+    <span class="icon-home"></span>
+    <span>{{ title }}</span>
+  </a>
+  <a routerLink="about"
+     routerLinkActive="router-link-active"
+     class="button">
+    <img width="32"
+         style="vertical-align: -0.5em"
+         src="./assets/logo.png">
+    <span> About us</span>
+  </a>
+</header>
+```
+
+---
+
 ```bash
 ng g c about/about/links
 ng g c about/about/info
