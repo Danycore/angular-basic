@@ -46,6 +46,10 @@ class: impact
 import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
+    path: 'heroes',
+    component: HeroesComponent
+  },
+  {
     path: 'not-found',
     component: NotFoundComponent
   },
@@ -65,11 +69,13 @@ export class AppRoutingModule {}
 
 ### Componentes y rutas
 
-El componente `NotFoundComponent` se asocia con la ruta `'not-found'`
-
 ```bash
+ng g c heroes
 ng g c core/not-found
 ```
+
+El componente `HeroesComponent` se asocia con la ruta `'heroes'`
+El componente `NotFoundComponent` se asocia con la ruta `'not-found'`
 
 --
 
@@ -128,6 +134,23 @@ Como un atributo, pero con superpoderes
 --
 
 Por ahora, _simplemente_ mantiene la gestión de las rutas en el lado del navegador.
+
+---
+
+### Menu header
+
+El componente `app-header` queda así:
+
+```html
+<header class="sticky">
+  <a routerLink="/" class="logo">
+    <span class="icon-home"></span> <span>{{ title }}</span>
+  </a>
+  <a routerLink="heroes" routerLinkActive="router-link-active" class="button">
+    <span> Heroes</span>
+  </a>
+</header>
+```
 
 ---
 
@@ -232,6 +255,15 @@ const routes: Routes = [
 > Comprobar en ejecución
 
 ### Los bundles se descargan al navegar por las rutas
+
+Agregamos un enlace destacado a esta nueva ruta en el `HeaderComponent`
+
+```html
+<a routerLink="about" routerLinkActive="router-link-active" class="button">
+  <img width="32" style="vertical-align: -0.5em" src="./assets/logo.png" />
+  <span> About us</span>
+</a>
+```
 
 ---
 
@@ -415,7 +447,7 @@ Y en `authors.component.html`
 
 ```html
 <a routerLink="albertobasalo" class="button"> <span> Alberto Basalo</span> </a>
-<a routerLink="jhondoe" class="button"> <span> Jhon Doe</span> </a>
+<a routerLink="johndoe" class="button"> <span> John Doe</span> </a>
 ```
 
 ---
