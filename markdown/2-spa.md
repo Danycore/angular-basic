@@ -260,7 +260,7 @@ Agregamos un enlace destacado a esta nueva ruta en el `HeaderComponent`
 
 ```html
 <a routerLink="about" routerLinkActive="router-link-active" class="button">
-  <img width="32" style="vertical-align: -0.5em" src="./assets/logo.png" />
+  <img width="32" style="vertical-align: -0.5em" src="assets/logo.png" />
   <span> About us</span>
 </a>
 ```
