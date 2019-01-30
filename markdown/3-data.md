@@ -26,141 +26,107 @@ class: impact
 
 class: impact
 
-# 1. Rutas
+# 1. Formularios
 
-## RouterModule
+## Binding
 
-## Router Outlet
-
-## Router Link
+## Doble Binding
 
 ---
 
-## 1.1 RouterModule
+## 1.0 Base
 
-`AppRoutingModule` importa, configura y exportar al `RouterModule`
-
-```typescript
-import { Routes, RouterModule } from '@angular/router';
-const routes: Routes = [
-  {
-    path: 'heroes',
-    component: HeroesComponent
-  },
-  {
-    path: 'not-found',
-    component: NotFoundComponent
-  },
-  {
-    path: '**',
-    redirectTo: 'not-found'
-  }
-];
-@NgModule({
-* imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule {}
-```
-
----
-
-### Componentes y rutas
+Creamos una nueva ruta funcionalidad para la gestión de contactos. Requiere ruta, enlace, módulo y componente.
 
 ```bash
-ng g c heroes
-ng g c core/not-found
+ng g m contacts --routing true
+ng g c contacts/contacts
 ```
 
-El componente `HeroesComponent` se asocia con la ruta `'heroes'`
-El componente `NotFoundComponent` se asocia con la ruta `'not-found'`
-
 --
 
-### RedirectTo
-
-Nadie va voluntariamente a esa ruta
-
---
-
-Sólo los que se pierden
-
---
+En `app-routing` y en `contacts-routing`:
 
 ```typescript
-{
-  path: '**',
-  redirectTo: 'not-found'
-}
+  // app-routing
+  {
+    path: 'contacts',
+    loadChildren: './contacts/contacts.module#ContactsModule'
+  },
+  // contacts-routing
+  {
+    path: '',
+    component: ContactsComponent
+  }
 ```
-
----
-
-## 1.2 Router Outlet
-
-El contenido de `main.component.ts`, ahora será dinámico
-
-```html
-<main class="container">
-  <router-outlet></router-outlet>
-  <!-- Dynamic content here! -->
-</main>
-```
-
-Por ejemplo el contenido de `NotFoundComponent` será
-
-```html
-<h1>Not Found</h1>
-<h2>404</h2>
-<a routerLink="/">Go home</a>
-```
-
----
-
-## 1.2 Router Link
-
-```html
-<a routerLink="/">Go home</a>
-```
-
-Es una _Directiva_
 
 --
 
-Como un atributo, pero con superpoderes
+En `HeaderComponent`
 
---
-
-Por ahora, _simplemente_ mantiene la gestión de las rutas en el lado del navegador.
+```html
+<a routerLink="contacts" routerLinkActive="router-link-active" class="button">
+  <span> Contacts</span>
+</a>
+```
 
 ---
 
-### Menu header
+## 1.1 Binding
 
-El componente `app-header` queda así:
+En `contacts.component.html`
 
 ```html
-<header class="sticky">
-  <a routerLink="/" class="logo">
-    <span class="icon-home"></span> <span>{{ title }}</span>
-  </a>
-  <a routerLink="heroes" routerLinkActive="router-link-active" class="button">
-    <span> Heroes</span>
-  </a>
-</header>
+<h2>{{ header }}</h2>
+<p>{{ description | uppercase }}</p>
+<p>
+  You have <mark [class]="counterClass">{{ numContacts }}</mark> contacts right
+  now.
+</p>
+<input
+  value="Show Form"
+  type="button"
+  class="primary"
+  (click)="formHidden=false"
+/>
+<input
+  value="Hide Form"
+  type="button"
+  class="inverse"
+  (click)="formHidden=true"
+/>
+<form [ngClass]="{'hidden':formHidden}">
+  <fieldset>
+    <legend>Contact Form</legend>
+    <label for="name">Name</label>
+    <input type="text" name="name" placeholder="Contact name" />
+    <label for="email">Password</label>
+    <input type="email" name="email" placeholder="e-mail address" />
+  </fieldset>
+</form>
+```
+
+---
+
+En `contacts.component.ts`
+
+```typescript
+  public header = 'Contacts';
+  public description = 'Manage your contact list';
+  public numContacts = 0;
+  public counterClass = 'tag secondary';
+  public formHidden = false;
 ```
 
 ---
 
 > Recap:
 
-# 1. Rutas
+# 1. Formularios
 
-## RouterModule
+## Binding
 
-## Router Outlet
-
-## Router Link
+## Doble Binding
 
 ---
 
