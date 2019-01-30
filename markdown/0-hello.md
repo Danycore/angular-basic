@@ -63,9 +63,9 @@ $ ng new --help
 
 ## 1.2. Crear y ejecutar aplicaciones Angular
 
--   Configuración que viene por defecto,
+- Configuración que viene por defecto,
 
--   Soluciones a medida.
+- Soluciones a medida.
 
 > Para más información mira la documentación del comando [ng new](https://angular.io/cli/new).
 
@@ -147,15 +147,15 @@ class: impact
 
 ## 2.1 Ficheros y carpetas principales
 
--   **angular.json** _: configuración del propio CLI. La madre de todos los configuradores_
--   **package.json** _: dependencias de librerías y scripts_
--   **src/** _: la carpeta donde están los archivos fuentes_
-    -   **index.html** _: un fichero HTML índice estándar_
-    -   **main.ts** _: fichero TypeScript de arranque de la aplicación_
-    -   **app/** _: la carpeta con el código específico de tu aplicación_
-        -   **app.module.ts** _: la aplicación es un árbol de módulos, y este es su raíz_
-        -   **app.component.ts** _: la página es un árbol de componentes, y este es su raíz_
-        -   **app.component.html** _: el componente tiene una parte visual, esta es su vista_
+- **angular.json** _: configuración del propio CLI. La madre de todos los configuradores_
+- **package.json** _: dependencias de librerías y scripts_
+- **src/** _: la carpeta donde están los archivos fuentes_
+  - **index.html** _: un fichero HTML índice estándar_
+  - **main.ts** _: fichero TypeScript de arranque de la aplicación_
+  - **app/** _: la carpeta con el código específico de tu aplicación_
+    - **app.module.ts** _: la aplicación es un árbol de módulos, y este es su raíz_
+    - **app.component.ts** _: la página es un árbol de componentes, y este es su raíz_
+    - **app.component.html** _: el componente tiene una parte visual, esta es su vista_
 
 ---
 
@@ -166,10 +166,10 @@ class: impact
 1. `npm start`
 2. `ng serve`
 3. **webpack** server en http://localhost:4270
-    1. vigilancia de cambios sobre la carpeta `src/`
-    2. _live reload_
-    3. compilado de la aplicación
-    4. recarga del navegador
+   1. vigilancia de cambios sobre la carpeta `src/`
+   2. _live reload_
+   3. compilado de la aplicación
+   4. recarga del navegador
 
 ---
 
@@ -208,18 +208,18 @@ class: impact
 
 ## 3.1 Angular.json
 
--   Configuración Multi proyecto propia de angular.
--   Rutas y configuraciones básicas para entornos de compilación y despliegue
+- Configuración Multi proyecto propia de angular.
+- Rutas y configuraciones básicas para entornos de compilación y despliegue
 
 ## 3.2 Package.json
 
--   Dependencias en ejecución y para desarrollo
--   Scripts de ayuda
+- Dependencias en ejecución y para desarrollo
+- Scripts de ayuda
 
 ## 3.3 Environment
 
--   Usadas en tiempo de ejecución
--   Valores distintos por entorno
+- Usadas en tiempo de ejecución
+- Valores distintos por entorno
 
 ---
 
@@ -270,8 +270,8 @@ Configuración en `angular.json`
 
 ```typescript
 export const environment = {
-    appName: 'Angular Board',
-    production: false
+  appName: 'Angular Board',
+  production: false
 };
 ```
 
@@ -332,9 +332,9 @@ class: impact
 
 ## 4.1. Extensiones de Visual Studio
 
--   [Extensiones Esenciales](https://marketplace.visualstudio.com/items?itemName=johnpapa.angular-essentials)
--   [Prettier](https://prettier.io/)
--   [Angular Console](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console)
+- [Extensiones Esenciales](https://marketplace.visualstudio.com/items?itemName=johnpapa.angular-essentials)
+- [Prettier](https://prettier.io/)
+- [Angular Console](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console)
 
 ---
 
@@ -344,20 +344,20 @@ class: impact
 
 ```js
 module.exports = {
-    printWidth: 100,
-    tabWidth: 2,
-    useTabs: false,
-    semi: true,
-    singleQuote: true,
-    trailingComma: 'none',
-    bracketSpacing: true,
-    jsxBracketSameLine: false,
-    arrowParens: 'avoid',
-    rangeStart: 0,
-    rangeEnd: Infinity,
-    requirePragma: false,
-    insertPragma: false,
-    proseWrap: 'preserve'
+  printWidth: 100,
+  tabWidth: 2,
+  useTabs: false,
+  semi: true,
+  singleQuote: true,
+  trailingComma: 'none',
+  bracketSpacing: true,
+  jsxBracketSameLine: false,
+  arrowParens: 'avoid',
+  rangeStart: 0,
+  rangeEnd: Infinity,
+  requirePragma: false,
+  insertPragma: false,
+  proseWrap: 'preserve'
 };
 ```
 
@@ -365,12 +365,12 @@ module.exports = {
 
 ## 4.3 Ecosistema
 
--   [Angular Material](https://material.angular.io/)
--   [Bootstrap](https://ng-bootstrap.github.io/#/home)
--   [Augury](https://augury.rangle.io/)
--   [Apollo GraphQL](https://www.apollographql.com/docs/)
--   [Ionic](https://ionicframework.com/)
--   [Angular Console](https://angularconsole.com/)
+- [Angular Material](https://material.angular.io/)
+- [Bootstrap](https://ng-bootstrap.github.io/#/home)
+- [Augury](https://augury.rangle.io/)
+- [Apollo GraphQL](https://www.apollographql.com/docs/)
+- [Ionic](https://ionicframework.com/)
+- [Angular Console](https://angularconsole.com/)
 
 ---
 
@@ -397,3 +397,5 @@ module.exports = {
 ## Visibilidad entre componentes
 
 ## Transitividad y Organización
+
+> **Blog de apoyo:** [Hola Angular CLI](https://academia-binaria.com/hola-angular-cli/)

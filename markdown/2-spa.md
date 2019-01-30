@@ -466,8 +466,10 @@ Y en `authors.component.html`
 
 # Formularios, tablas y modelos de datos en Angular
 
-## To be defined
+## Formularios
 
-```
+## Estructuras y listados
 
-```
+## Modelo y controlador
+
+> **Blog de apoyo:** [Páginas y rutas Angular SPA](https://academia-binaria.com/paginas-y-rutas-angular-spa/)

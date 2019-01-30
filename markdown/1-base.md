@@ -468,6 +468,4 @@ AppComponent
 
 ## Rutas anidadas
 
-```
-
-```
+> **Blog de apoyo:** [Base para una aplicación Angular](https://academia-binaria.com/base-aplicacion-angular/)
