@@ -59,5 +59,8 @@
              placeholder="Education" />
     </ng-template>
   </fieldset>
+  <input type="submit"
+         value="Save"
+         (click)="saveContact()" />
 </form>
 <pre>{{ contact | json }}</pre>

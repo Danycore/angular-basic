@@ -363,6 +363,87 @@ public contact = {
 
 ---
 
+class: impact
+
+# 3. Modelo y controlador
+
+## Interfaces y modelos
+
+## ViewModel en el controlador
+
+---
+
+## 3.1 Interfaces y modelos
+
+> Mejor interface que clase
+
+```typescript
+export interface Option {
+  id: number;
+  description: string;
+}
+
+export interface Contact {
+  name: string;
+  isVIP: boolean;
+  gender: string;
+  workStatus: number | string;
+  companyName: string;
+  education: string;
+}
+```
+
+> tipos compuestos `number | string`
+
+---
+
+Se usan para tipificar las propiedades
+
+```typescript
+public workStatuses: Option[] = [
+    { id: 0, description: 'unknow' },
+    { id: 1, description: 'student' },
+    { id: 2, description: 'unemployed' },
+    { id: 3, description: 'employed' }
+  ];
+public contact: Contact = {
+    name: '',
+    isVIP: false,
+    gender: '',
+    workStatus: 0,
+    companyName: '',
+    education: ''
+  };
+public contacts: Contact[] = [];
+```
+
+## 3.2 ViewModel en el controlador
+
+No solo propiedades, también métodos
+
+```typescript
+public saveContact() {
+  this.contacts.push({ ...this.contact });
+  this.numContacts = this.contacts.length;
+}
+```
+
+```html
+<input type="submit" value="Save" (click)="saveContact()" />
+```
+
+---
+
+> Recap
+
+# 3. Modelo y controlador
+
+## Interfaces y modelos
+
+## ViewModel en el controlador
+
+---
+
 > Next:
 
 # Flujo de datos entre componentes Angular
