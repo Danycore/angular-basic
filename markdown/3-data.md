@@ -195,7 +195,7 @@ Usa la comunicación en ambos sentidos
 --
 
 > La directiva se asocia con una propiedad del controlador...
-> o mejor aún, con una propiedad del modelo del controlador
+> o mejor aún, con una **propiedad del modelo** del controlador
 
 ---
 
@@ -312,11 +312,13 @@ public contact = { name: '', isVIP: false, gender: '', workStatus: 0 };
 
 > let **iterador** of **iterable**
 
+> > uso avanzado de _trackBy_
+
 ---
 
 ## 3.2 \*ngIf
 
-Directiva estructurales **condicional**
+Directiva estructural **condicional**
 
 Dado el siguiente modelo
 
@@ -417,6 +419,8 @@ public contact: Contact = {
 public contacts: Contact[] = [];
 ```
 
+---
+
 ## 3.2 ViewModel en el controlador
 
 No solo propiedades, también métodos
@@ -430,6 +434,55 @@ public saveContact() {
 
 ```html
 <input type="submit" value="Save" (click)="saveContact()" />
+```
+
+---
+
+### OnInit
+
+```typescript
+public workStatuses: Option[];
+public contact: Contact;
+public contacts: Contact[];
+constructor() {}
+public ngOnInit() {
+  this.workStatuses = [
+    { id: 0, description: 'unknow' },
+    { id: 1, description: 'student' },
+    { id: 2, description: 'unemployed' },
+    { id: 3, description: 'employed' }
+  ];
+  this.contact = {
+    name: '',
+    isVIP: false,
+    gender: '',
+    workStatus: 0,
+    companyName: '',
+    education: ''
+  };
+  this.contacts = [];
+}
+```
+
+---
+
+### Repasamos
+
+```html
+<ul *ngIf="contacts.length>0; else empty">
+  <li *ngFor="let contact of contacts">
+    <span>{{ contact.name }}</span>
+    <input type="button" value="Delete" (click)="deleteContact(contact)" />
+  </li>
+</ul>
+<ng-template #empty> <i>No data yet</i> </ng-template>
+```
+
+```typescript
+public deleteContact(contact: Contact) {
+  this.contacts = this.contacts.filter(c => c.name !== contact.name);
+  this.numContacts = this.contacts.length;
+}
 ```
 
 ---

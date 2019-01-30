@@ -43,7 +43,7 @@
         <span>{{ status.description }}</span>
       </option>
     </select>
-    <section *ngIf="contact.workStatus=='3'; else education">
+    <section *ngIf="contact.workStatus==3; else education">
       <label for="companyName">Company Name</label>
       <input type="text"
              name="companyName"
@@ -64,3 +64,14 @@
          (click)="saveContact()" />
 </form>
 <pre>{{ contact | json }}</pre>
+<ul *ngIf="contacts.length>0; else empty">
+  <li *ngFor="let contact of contacts">
+    <span>{{ contact.name }}</span>
+    <input type="button"
+           value="Delete"
+           (click)="deleteContact(contact)">
+  </li>
+</ul>
+<ng-template #empty>
+  <i>No data yet</i>
+</ng-template>
