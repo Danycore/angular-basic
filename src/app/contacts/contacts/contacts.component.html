@@ -17,10 +17,47 @@
     <label for="name">Name</label>
     <input type="text"
            name="name"
+           [(ngModel)]="contact.name"
            placeholder="Contact name" />
-    <label for="email">Password</label>
-    <input type="email"
-           name="email"
-           placeholder="e-mail address" />
+    <br>
+    <label for="isVIP">Is V.I.P.</label>
+    <input type="checkbox"
+           name="isVIP"
+           [(ngModel)]="contact.isVIP">
+    <br>
+    <label for="gender">Gender</label>
+    <input type="radio"
+           value="male"
+           name="gender"
+           [(ngModel)]="contact.gender"> <span>Male</span>
+    <input type="radio"
+           value="female"
+           name="gender"
+           [(ngModel)]="contact.gender"> <span>Female</span>
+    <br />
+    <label for="workStatus">Work Status</label>
+    <select name="workStatus"
+            [(ngModel)]="contact.workStatus">
+      <option *ngFor="let status of workStatuses"
+              [value]="status.id">
+        <span>{{ status.description }}</span>
+      </option>
+    </select>
+    <section *ngIf="contact.workStatus=='3'; else education">
+      <label for="companyName">Company Name</label>
+      <input type="text"
+             name="companyName"
+             [(ngModel)]="contact.companyName"
+             placeholder="Company name" />
+    </section>
+    <ng-template #education>
+      <br />
+      <label for="education">Education</label>
+      <input type="text"
+             name="education"
+             [(ngModel)]="contact.education"
+             placeholder="Education" />
+    </ng-template>
   </fieldset>
 </form>
+<pre>{{ contact | json }}</pre>
