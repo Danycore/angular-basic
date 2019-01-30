@@ -60,7 +60,7 @@ En `app-routing` y en `contacts-routing`:
   }
 ```
 
---
+---
 
 En `HeaderComponent`
 
@@ -74,7 +74,22 @@ En `HeaderComponent`
 
 ## 1.1 Binding
 
-En `contacts.component.html`
+---
+
+Primero un poco de propiedades:
+En `contacts.component.ts`
+
+```typescript
+  public header = 'Contacts';
+  public description = 'Manage your contact list';
+  public numContacts = 0;
+  public counterClass = 'tag secondary';
+  public formHidden = false;
+```
+
+---
+
+En `contacts.component.html` mostramos cabeceras con estilo
 
 ```html
 <h2>{{ header }}</h2>
@@ -83,6 +98,13 @@ En `contacts.component.html`
   You have <mark [class]="counterClass">{{ numContacts }}</mark> contacts right
   now.
 </p>
+```
+
+---
+
+En `contacts.component.html` también actuamos sobre la vista
+
+```html
 <input
   value="Show Form"
   type="button"
@@ -96,26 +118,8 @@ En `contacts.component.html`
   (click)="formHidden=true"
 />
 <form [ngClass]="{'hidden':formHidden}">
-  <fieldset>
-    <legend>Contact Form</legend>
-    <label for="name">Name</label>
-    <input type="text" name="name" placeholder="Contact name" />
-    <label for="email">Password</label>
-    <input type="email" name="email" placeholder="e-mail address" />
-  </fieldset>
+  <fieldset><legend>Contact Form</legend></fieldset>
 </form>
-```
-
----
-
-En `contacts.component.ts`
-
-```typescript
-  public header = 'Contacts';
-  public description = 'Manage your contact list';
-  public numContacts = 0;
-  public counterClass = 'tag secondary';
-  public formHidden = false;
 ```
 
 ---
