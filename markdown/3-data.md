@@ -16,9 +16,11 @@ class: impact
 
 ---
 
-# 1. Formularios
+# 1. Binding
 
-# 2. Estructuras y listados
+# 2. Doble Binding
+
+# 2. Estructuras
 
 # 3. Modelo y controlador
 
@@ -26,11 +28,15 @@ class: impact
 
 class: impact
 
-# 1. Formularios
+# 1. Binding
 
-## Binding
+## Base
 
-## Doble Binding
+## Directivas
+
+### Enlace del modelo hacia la vista
+
+### Enlace de la vista hacia el modelo
 
 ---
 
@@ -72,22 +78,21 @@ En `HeaderComponent`
 
 ---
 
-## 1.1 Binding
+## 1.1 Directivas
 
----
-
-Primero un poco de propiedades:
-En `contacts.component.ts`
+> Para empezar agregamos algunas propiedades. En `contacts.component.ts`:
 
 ```typescript
-  public header = 'Contacts';
-  public description = 'Manage your contact list';
-  public numContacts = 0;
-  public counterClass = 'tag secondary';
-  public formHidden = false;
+public header = 'Contacts';
+public description = 'Manage your contact list';
+public numContacts = 0;
+public counterClass = 'tag secondary';
+public formHidden = false;
 ```
 
 ---
+
+### 1.1.1 Enlace del modelo hacia la vista
 
 En `contacts.component.html` mostramos cabeceras con estilo
 
@@ -101,6 +106,8 @@ En `contacts.component.html` mostramos cabeceras con estilo
 ```
 
 ---
+
+### 1.1.2 Enlace de la vista hacia el modelo
 
 En `contacts.component.html` también actuamos sobre la vista
 
@@ -126,11 +133,15 @@ En `contacts.component.html` también actuamos sobre la vista
 
 > Recap:
 
-# 1. Formularios
+# 1. Binding
 
-## Binding
+## Base
 
-## Doble Binding
+## Directivas
+
+### Enlace del modelo hacia la vista
+
+### Enlace de la vista hacia el modelo
 
 ---
 
