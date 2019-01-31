@@ -4,71 +4,75 @@
 <p>{{ description | uppercase }}</p>
 <p>You have <mark [class]="counterClass">{{ numContacts }}</mark> contacts right now.</p>
 <input value="Show Form"
-       type="button"
        class="primary"
+       type="button"
        (click)="formHidden=false" />
 <input value="Hide Form"
-       type="button"
        class="inverse"
+       type="button"
        (click)="formHidden=true" />
 <form [ngClass]="{'hidden':formHidden}">
   <fieldset>
     <legend>Contact Form</legend>
-    <label for="name">Name</label>
-    <input type="text"
-           name="name"
-           [(ngModel)]="contact.name"
-           placeholder="Contact name" />
-    <br>
-    <label for="isVIP">Is V.I.P.</label>
-    <input type="checkbox"
-           name="isVIP"
-           [(ngModel)]="contact.isVIP">
-    <br>
-    <label for="gender">Gender</label>
-    <input type="radio"
-           value="male"
-           name="gender"
-           [(ngModel)]="contact.gender"> <span>Male</span>
-    <input type="radio"
-           value="female"
-           name="gender"
-           [(ngModel)]="contact.gender"> <span>Female</span>
-    <br />
-    <label for="workStatus">Work Status</label>
-    <select name="workStatus"
-            [(ngModel)]="contact.workStatus">
-      <option *ngFor="let status of workStatuses"
-              [value]="status.id">
-        <span>{{ status.description }}</span>
-      </option>
-    </select>
+    <section>
+      <label for="name">Name</label>
+      <input name="name"
+             type="text"
+             [(ngModel)]="contact.name"
+             placeholder="Contact name" />
+    </section>
+    <section>
+      <label for="isVIP">Is V.I.P.</label>
+      <input name="isVIP"
+             type="checkbox"
+             [(ngModel)]="contact.isVIP">
+    </section>
+    <section>
+      <label for="gender">Gender</label>
+      <input name="gender"
+             value="male"
+             type="radio"
+             [(ngModel)]="contact.gender"> <span>Male</span>
+      <input name="gender"
+             value="female"
+             type="radio"
+             [(ngModel)]="contact.gender"> <span>Female</span>
+    </section>
+    <section>
+      <label for="workStatus">Work Status</label>
+      <select name="workStatus"
+              [(ngModel)]="contact.workStatus">
+        <option *ngFor="let status of workStatuses"
+                [value]="status.id">
+          <span>{{ status.description }}</span>
+        </option>
+      </select>
+    </section>
     <section *ngIf="contact.workStatus==3; else education">
       <label for="companyName">Company Name</label>
-      <input type="text"
-             name="companyName"
+      <input name="companyName"
+             type="text"
              [(ngModel)]="contact.companyName"
              placeholder="Company name" />
     </section>
     <ng-template #education>
-      <br />
       <label for="education">Education</label>
-      <input type="text"
-             name="education"
+      <input name="education"
+             type="text"
              [(ngModel)]="contact.education"
              placeholder="Education" />
     </ng-template>
   </fieldset>
-  <input type="submit"
-         value="Save"
+  <input value="Save"
+         type="submit"
          (click)="saveContact()" />
 </form>
 <pre>{{ contact | json }}</pre>
 <ul *ngIf="contacts.length>0; else empty">
   <li *ngFor="let contact of contacts">
     <span>{{ contact.name }}</span>
-    <input type="button"
-           value="Delete"
+    <input value="Delete"
+           type="button"
            (click)="deleteContact(contact)">
   </li>
 </ul>

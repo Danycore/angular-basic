@@ -99,10 +99,7 @@ En `contacts.component.html` mostramos cabeceras con estilo
 ```html
 <h2>{{ header }}</h2>
 <p>{{ description | uppercase }}</p>
-<p>
-  You have <mark [class]="counterClass">{{ numContacts }}</mark> contacts right
-  now.
-</p>
+<p>You have <mark [class]="counterClass">{{ numContacts }}</mark> contacts right now.</p>
 ```
 
 ---
@@ -112,18 +109,8 @@ En `contacts.component.html` mostramos cabeceras con estilo
 En `contacts.component.html` también actuamos sobre la vista
 
 ```html
-<input
-  value="Show Form"
-  type="button"
-  class="primary"
-  (click)="formHidden=false"
-/>
-<input
-  value="Hide Form"
-  type="button"
-  class="inverse"
-  (click)="formHidden=true"
-/>
+<input value="Show Form" class="primary" type="button" (click)="formHidden=false" />
+<input value="Hide Form" class="inverse" type="button" (click)="formHidden=true" />
 <form [ngClass]="{'hidden':formHidden}">
   <fieldset><legend>Contact Form</legend></fieldset>
 </form>
@@ -161,7 +148,7 @@ class: impact
 
 ## 2.1 NgModel
 
-La directiva ngModel viene en el `FormsModule`
+La directiva _ngModel_ viene en el `FormsModule`
 
 Hay que importarlo antes de usarlo. Por ejemplo en `contacts.module.ts`
 
@@ -187,6 +174,10 @@ export class ContactsModule { }
 
 Hace referencia al _paréntesis dentro del corchete_
 
+```html
+[(ngModel)]="model.property"
+```
+
 Usa la comunicación en ambos sentidos
 
 - **(banana)** : de la vista al modelo
@@ -202,7 +193,10 @@ Usa la comunicación en ambos sentidos
 #### Directiva
 
 ```html
-<input type="text" name="name" [(ngModel)]="contact.name" />
+<section>
+  <label for="name">Name</label>
+  <input name="name" type="text" [(ngModel)]="contact.name" placeholder="Contact name" />
+</section>
 ```
 
 #### Modelo
@@ -227,7 +221,7 @@ export class ContactsComponent implements OnInit {
 
 Hay más usos de las directivas en los formularios
 
-Por ejemplo, dados el siguiente modelo:
+Por ejemplo, dado el siguiente modelo:
 
 ```typescript
 public contact = { name: '', isVIP: false, gender: '' };
@@ -238,20 +232,20 @@ public contact = { name: '', isVIP: false, gender: '' };
 ### 2.2.1 CheckBox
 
 ```html
-<br />
-<label for="isVIP">Is V.I.P.</label>
-<input type="checkbox" name="isVIP" [(ngModel)]="contact.isVIP" />
+<section>
+  <label for="isVIP">Is V.I.P.</label>
+  <input name="isVIP" type="checkbox" [(ngModel)]="contact.isVIP" />
+</section>
 ```
 
-### 2.2.2 RadioButton
+### 2.2.2 Radio Buttons
 
 ```html
-<br />
-<label for="gender">Gender</label>
-<input type="radio" value="male" name="gender" [(ngModel)]="contact.gender" />
-<span>Male</span>
-<input type="radio" value="female" name="gender" [(ngModel)]="contact.gender" />
-<span>Female</span>
+<section>
+  <label for="gender">Gender</label>
+  <input name="gender" value="male" type="radio" [(ngModel)]="contact.gender" /> <i>Male</i>
+  <input name="gender" value="female" type="radio" [(ngModel)]="contact.gender" /> <i>Female</i>
+</section>
 ```
 
 ---
@@ -340,12 +334,11 @@ public contact = {
 ```html
 <section *ngIf="contact.workStatus=='3'; else education">
   <label for="company">Company Name</label>
-  <input type="text" name="company" [(ngModel)]="contact.company" />
+  <input name="company" type="text" [(ngModel)]="contact.company" />
 </section>
 <ng-template #education>
-  <br />
   <label for="education">Education</label>
-  <input type="text" name="education" [(ngModel)]="contact.education" />
+  <input name="education" type="text" [(ngModel)]="contact.education" />
 </ng-template>
 ```
 
@@ -433,7 +426,7 @@ public saveContact() {
 ```
 
 ```html
-<input type="submit" value="Save" (click)="saveContact()" />
+<input value="Save" type="submit" (click)="saveContact()" />
 ```
 
 ---
@@ -472,7 +465,7 @@ public ngOnInit() {
 <ul *ngIf="contacts.length>0; else empty">
   <li *ngFor="let contact of contacts">
     <span>{{ contact.name }}</span>
-    <input type="button" value="Delete" (click)="deleteContact(contact)" />
+    <input value="Delete" type="button" (click)="deleteContact(contact)" />
   </li>
 </ul>
 <ng-template #empty> <i>No data yet</i> </ng-template>
