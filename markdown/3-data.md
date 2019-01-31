@@ -190,6 +190,14 @@ Usa la comunicación en ambos sentidos
 
 ---
 
+#### Modelo
+
+```typescript
+export class ContactsComponent implements OnInit {
+  public contact = { name: '' };
+}
+```
+
 #### Directiva
 
 ```html
@@ -197,16 +205,6 @@ Usa la comunicación en ambos sentidos
   <label for="name">Name</label>
   <input name="name" type="text" [(ngModel)]="contact.name" placeholder="Contact name" />
 </section>
-```
-
-#### Modelo
-
-```typescript
-export class ContactsComponent implements OnInit {
-  public contact = { name: '' };
-  constructor() {}
-  ngOnInit() {}
-}
 ```
 
 #### Espía
@@ -278,7 +276,7 @@ class: impact
 
 Directiva estructural **repetitiva**
 
-Dado el siguiente modelo
+Dado el siguiente modelo:
 
 ```typescript
 public workStatuses = [
@@ -295,13 +293,14 @@ public contact = { name: '', isVIP: false, gender: '', workStatus: 0 };
 > \*ngFor
 
 ```html
-<br />
-<label for="workStatus">Work Status</label>
-<select name="workStatus" [(ngModel)]="contact.workStatus">
-  <option *ngFor="let status of workStatuses" [value]="status.id">
-    <span>{{ status.description }}</span>
-  </option>
-</select>
+<section>
+  <label for="workStatus">Work Status</label>
+  <select name="workStatus" [(ngModel)]="contact.workStatus">
+    <option *ngFor="let status of workStatuses" [value]="status.id">
+      <span>{{ status.description }}</span>
+    </option>
+  </select>
+</section>
 ```
 
 > let **iterador** of **iterable**
