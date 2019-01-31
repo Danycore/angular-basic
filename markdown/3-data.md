@@ -99,7 +99,10 @@ En `contacts.component.html` mostramos cabeceras con estilo
 ```html
 <h2>{{ header }}</h2>
 <p>{{ description | uppercase }}</p>
-<p>You have <mark [class]="counterClass">{{ numContacts }}</mark> contacts right now.</p>
+<p>
+  You have <mark [class]="counterClass">{{ numContacts }}</mark> contacts right
+  now.
+</p>
 ```
 
 ---
@@ -109,8 +112,18 @@ En `contacts.component.html` mostramos cabeceras con estilo
 En `contacts.component.html` también actuamos sobre la vista
 
 ```html
-<input value="Show Form" class="primary" type="button" (click)="formHidden=false" />
-<input value="Hide Form" class="inverse" type="button" (click)="formHidden=true" />
+<input
+  value="Show Form"
+  class="primary"
+  type="button"
+  (click)="formHidden=false"
+/>
+<input
+  value="Hide Form"
+  class="inverse"
+  type="button"
+  (click)="formHidden=true"
+/>
 <form [ngClass]="{'hidden':formHidden}">
   <fieldset><legend>Contact Form</legend></fieldset>
 </form>
@@ -193,9 +206,7 @@ Usa la comunicación en ambos sentidos
 #### Modelo
 
 ```typescript
-export class ContactsComponent implements OnInit {
-  public contact = { name: '' };
-}
+public contact = { name: '' };
 ```
 
 #### Directiva
@@ -203,7 +214,12 @@ export class ContactsComponent implements OnInit {
 ```html
 <section>
   <label for="name">Name</label>
-  <input name="name" type="text" [(ngModel)]="contact.name" placeholder="Contact name" />
+  <input
+    name="name"
+    type="text"
+    [(ngModel)]="contact.name"
+    placeholder="Contact name"
+  />
 </section>
 ```
 
@@ -241,8 +257,10 @@ public contact = { name: '', isVIP: false, gender: '' };
 ```html
 <section>
   <label for="gender">Gender</label>
-  <input name="gender" value="male" type="radio" [(ngModel)]="contact.gender" /> <i>Male</i>
-  <input name="gender" value="female" type="radio" [(ngModel)]="contact.gender" /> <i>Female</i>
+  <input name="gender" value="m" type="radio" [(ngModel)]="contact.gender" />
+  <i>Male</i>
+  <input name="gender" value="f" type="radio" [(ngModel)]="contact.gender" />
+  <i>Female</i>
 </section>
 ```
 
@@ -493,6 +511,10 @@ public deleteContact(contact: Contact) {
 
 # Flujo de datos entre componentes Angular
 
-## To be defined
+## Contenedores y presentadores
+
+## @Input y @Output
 
 > **Blog de apoyo:** [Formularios, tablas y modelos de datos en Angular](https://academia-binaria.com/formularios-tablas-y-modelos-de-datos-en-angular/)
+
+> > By [Alberto Basalo](https://twitter.com/albertobasalo)

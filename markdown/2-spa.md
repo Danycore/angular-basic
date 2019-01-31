@@ -146,7 +146,7 @@ El componente `app-header` queda así:
   <a routerLink="/" class="logo">
     <span class="icon-home"></span> <span>{{ title }}</span>
   </a>
-  <a routerLink="heroes" routerLinkActive="router-link-active" class="button">
+  <a routerLink="heroes" class="button">
     <span> Heroes</span>
   </a>
 </header>
@@ -256,11 +256,10 @@ const routes: Routes = [
 
 ### Los bundles se descargan al navegar por las rutas
 
-Agregamos un enlace destacado a esta nueva ruta en el `HeaderComponent`
+Agregamos un enlace a esta nueva ruta en el `HeaderComponent`
 
 ```html
-<a routerLink="about" routerLinkActive="router-link-active" class="button">
-  <img width="32" style="vertical-align: -0.5em" src="assets/logo.png" />
+<a routerLink="about" class="button">
   <span> About us</span>
 </a>
 ```
@@ -298,7 +297,7 @@ En `HeaderComponent`
   <a routerLink="/" class="logo">
     <span class="icon-home"></span> <span>{{ title }}</span>
   </a>
-  <a routerLink="about" routerLinkActive="router-link-active" class="button">
+  <a routerLink="about" class="button">
     <span> About us</span>
   </a>
 </header>
@@ -340,8 +339,8 @@ En `AboutComponent` :
 
 ```html
 <header class="sticky">
-  <a routerLink="links" class="button"> <span> Tutorial Links</span> </a>
-  <a routerLink="info" class="button"> <span> More Info</span> </a>
+  <a routerLink="links" class="button"> Tutorial Links </a>
+  <a routerLink="info" class="button"> More Info </a>
 </header>
 <router-outlet></router-outlet>
 ```
@@ -438,7 +437,7 @@ Para acceder a datos de la URL activa y mostrar los datos en la vista
 Enlazamos todo agregando una entrada en `AboutComponent` :
 
 ```html
-<a routerLink="authors" class="button"> <span> Credit Authors</span> </a>
+<a routerLink="authors" class="button"> Credit Authors </a>
 ```
 
 --
@@ -446,8 +445,8 @@ Enlazamos todo agregando una entrada en `AboutComponent` :
 Y en `authors.component.html`
 
 ```html
-<a routerLink="albertobasalo" class="button"> <span> Alberto Basalo</span> </a>
-<a routerLink="johndoe" class="button"> <span> John Doe</span> </a>
+<a routerLink="albertobasalo" class="button"> Alberto Basalo </a>
+<a routerLink="johndoe" class="button"> John Doe </a>
 ```
 
 ---
@@ -473,3 +472,5 @@ Y en `authors.component.html`
 ## Modelo y controlador
 
 > **Blog de apoyo:** [Páginas y rutas Angular SPA](https://academia-binaria.com/paginas-y-rutas-angular-spa/)
+
+> > By [Alberto Basalo](https://twitter.com/albertobasalo)

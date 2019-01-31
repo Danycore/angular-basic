@@ -399,3 +399,5 @@ module.exports = {
 ## Transitividad y Organización
 
 > **Blog de apoyo:** [Hola Angular CLI](https://academia-binaria.com/hola-angular-cli/)
+
+> > By [Alberto Basalo](https://twitter.com/albertobasalo)
