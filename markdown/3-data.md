@@ -382,7 +382,7 @@ export interface Contact {
   isVIP: boolean;
   gender: string;
   workStatus: number | string;
-  companyName: string;
+  company: string;
   education: string;
 }
 ```
@@ -405,7 +405,7 @@ public contact: Contact = {
     isVIP: false,
     gender: '',
     workStatus: 0,
-    companyName: '',
+    company: '',
     education: ''
   };
 public contacts: Contact[] = [];
@@ -449,7 +449,7 @@ public ngOnInit() {
     isVIP: false,
     gender: '',
     workStatus: 0,
-    companyName: '',
+    company: '',
     education: ''
   };
   this.contacts = [];
