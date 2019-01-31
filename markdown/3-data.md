@@ -20,9 +20,9 @@ class: impact
 
 # 2. Doble Binding
 
-# 2. Estructuras
+# 3. Estructuras
 
-# 3. Modelo y controlador
+# 4. Modelo y controlador
 
 ---
 
@@ -359,7 +359,7 @@ public contact = {
 
 class: impact
 
-# 3. Modelo y controlador
+# 4. Modelo y controlador
 
 ## Interfaces y modelos
 
@@ -367,7 +367,7 @@ class: impact
 
 ---
 
-## 3.1 Interfaces y modelos
+## 4.1 Interfaces y modelos
 
 > Mejor interface que clase
 
@@ -413,7 +413,7 @@ public contacts: Contact[] = [];
 
 ---
 
-## 3.2 ViewModel en el controlador
+## 4.2 ViewModel en el controlador
 
 No solo propiedades, también métodos
 
@@ -481,7 +481,7 @@ public deleteContact(contact: Contact) {
 
 > Recap
 
-# 3. Modelo y controlador
+# 4. Modelo y controlador
 
 ## Interfaces y modelos
 
