@@ -511,9 +511,12 @@ public deleteContact(contact: Contact) {
 
 # Flujo de datos entre componentes Angular
 
-## Contenedores y presentadores
 
-## @Input y @Output
+## Comunicación entre componentes
+
+## Contenedor / Presentadores
+
+## Entre páginas o estructuras
 
 > **Blog de apoyo:** [Formularios, tablas y modelos de datos en Angular](https://academia-binaria.com/formularios-tablas-y-modelos-de-datos-en-angular/)
 

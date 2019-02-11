@@ -1,20 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HeroesComponent } from './2-spa/heroes/heroes.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
-import { HeroesComponent } from './heroes/heroes.component';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: './home/home.module#HomeModule'
+    loadChildren: './2-spa/home/home.module#HomeModule'
   },
   {
     path: 'about',
-    loadChildren: './about/about.module#AboutModule'
+    loadChildren: './2-spa/about/about.module#AboutModule'
+  },
+  {
+    path: 'car',
+    loadChildren: './4-flow/car/car.module#CarModule'
   },
   {
     path: 'contacts',
-    loadChildren: './contacts/contacts.module#ContactsModule'
+    loadChildren: './3-data/contacts/contacts.module#ContactsModule'
   },
   {
     path: 'heroes',
