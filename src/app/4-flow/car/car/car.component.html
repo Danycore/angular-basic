@@ -6,4 +6,6 @@
              [topSpeed]="car.maxSpeed"
              [units]="'Km/h'"></app-display>
 <app-pedals (brake)="onBrake($event)"
-            (throttle)="onThrottle($event)"></app-pedals>
+            [disableBrake]="disableBrake"
+            (throttle)="onThrottle($event)"
+            [disableThrottle]="disableThrottle"></app-pedals>

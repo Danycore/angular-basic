@@ -13,4 +13,9 @@ export class DisplayComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  public getSpeedClass = () =>
+    this.currentSpeed < this.getThreshold() ? 'primary' : 'secondary';
+
+  private getThreshold = () => this.topSpeed * 0.8;
 }

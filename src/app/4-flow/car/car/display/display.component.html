@@ -7,7 +7,8 @@
   </div>
   <div>
     <progress [value]="currentSpeed"
-              [ngClass]="{primary:currentSpeed<topSpeed*0.8, secondary:currentSpeed>=topSpeed*0.8}"
+              [ngClass]="getSpeedClass()"
               [max]="topSpeed"></progress>
   </div>
 </div>
+{{ getSpeedClass() | json }}
