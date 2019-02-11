@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-pedals',
@@ -6,10 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class PedalsComponent implements OnInit {
+  @Output() public brake = new EventEmitter<number>();
+  @Output() public throttle = new EventEmitter<number>();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

@@ -1,0 +1,9 @@
+<h2>
+  {{ car.name }}
+</h2>
+<h3> Top speed: {{ car.maxSpeed }}</h3>
+<app-display [currentSpeed]="car.currentSpeed"
+             [topSpeed]="car.maxSpeed"
+             [units]="'Km/h'"></app-display>
+<app-pedals (brake)="onBrake($event)"
+            (throttle)="onThrottle($event)"></app-pedals>

@@ -1,3 +1,13 @@
-<p>
-  display works!
-</p>
+<h3>
+  Speed:
+</h3>
+<div class="card">
+  <div class="section">
+    {{ currentSpeed | number:'1.2-2' }} {{ units }}
+  </div>
+  <div>
+    <progress [value]="currentSpeed"
+              [ngClass]="{primary:currentSpeed<topSpeed*0.8, secondary:currentSpeed>=topSpeed*0.8}"
+              [max]="topSpeed"></progress>
+  </div>
+</div>

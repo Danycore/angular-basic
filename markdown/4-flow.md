@@ -71,6 +71,19 @@ ng g c 4-flow/car/car/display
 ng g c 4-flow/car/car/pedals
 ```
 
+```typescript
+{
+  path: 'car',
+  loadChildren: './car/car.module#CarModule'
+}
+```
+
+```html
+<a routerLink="car" class="button">
+  <span> 4 - Car</span>
+</a>
+```
+
 ---
 
 ## 2.1 @Input()
