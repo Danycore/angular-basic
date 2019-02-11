@@ -6,11 +6,11 @@ module.exports = {
     singleQuote: true,
     trailingComma: 'none',
     bracketSpacing: true,
-    jsxBracketSameLine: false,
+    jsxBracketSameLine: true,
     arrowParens: 'avoid',
     rangeStart: 0,
     rangeEnd: Infinity,
     requirePragma: false,
     insertPragma: false,
-    proseWrap: 'preserve'
+    proseWrap: 'never'
 };

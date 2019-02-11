@@ -4,8 +4,10 @@
 <h3> Top speed: {{ car.maxSpeed }}</h3>
 <app-display [currentSpeed]="car.currentSpeed"
              [topSpeed]="car.maxSpeed"
-             [units]="'Km/h'"></app-display>
+             [units]="'Km/h'">
+</app-display>
 <app-pedals (brake)="onBrake($event)"
             [disableBrake]="disableBrake"
             (throttle)="onThrottle($event)"
-            [disableThrottle]="disableThrottle"></app-pedals>
+            [disableThrottle]="disableThrottle">
+</app-pedals>

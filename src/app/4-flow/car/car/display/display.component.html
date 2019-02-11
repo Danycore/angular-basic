@@ -5,9 +5,8 @@
   <div class="section">
     {{ currentSpeed | number:'1.2-2' }} {{ units }}
   </div>
-  <div>
-    <progress [value]="currentSpeed"
-              [ngClass]="getSpeedClass()"
-              [max]="topSpeed"></progress>
-  </div>
+  <progress [value]="currentSpeed"
+            [ngClass]="getSpeedClass()"
+            [max]="topSpeed">
+  </progress>
 </div>

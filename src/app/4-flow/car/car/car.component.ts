@@ -17,17 +17,6 @@ export class CarComponent implements OnInit {
     this.car = { name: 'Roadster', maxSpeed: 120, currentSpeed: 0 };
     this.checkLimits();
   }
-
-  public onBrake(drive: number) {
-    this.car.currentSpeed -= this.getDelta(drive);
-    this.checkLimits();
-  }
-
-  public onThrottle(drive: number) {
-    this.car.currentSpeed += this.getDelta(drive);
-    this.checkLimits();
-  }
-
   private checkLimits() {
     this.disableBrake = false;
     this.disableThrottle = false;
@@ -40,6 +29,15 @@ export class CarComponent implements OnInit {
     }
   }
 
+  public onBrake(drive: number) {
+    this.car.currentSpeed -= this.getDelta(drive);
+    this.checkLimits();
+  }
+
+  public onThrottle(drive: number) {
+    this.car.currentSpeed += this.getDelta(drive);
+    this.checkLimits();
+  }
   private getDelta = (drive: number) =>
     drive + (this.car.maxSpeed - this.car.currentSpeed) / 10;
 }
