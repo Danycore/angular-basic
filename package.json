@@ -18,6 +18,7 @@
     "ng": "ng",
     "pub:doc": "npm run build:doc && npm run push",
     "pub:pdf": "cd ./markdown/ && bs p -h -o ../public/readme",
+    "pub:prod": "npm run build:pub && npm run push",
     "pub": "npm run build:pub && npm run build:doc && npm run push",
     "push": "git add * && git commit -m 'pub' && git push",
     "start:doc": "cd ./markdown/ && bs s",
