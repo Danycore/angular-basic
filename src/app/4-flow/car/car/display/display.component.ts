@@ -6,6 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styles: []
 })
 export class DisplayComponent implements OnInit {
+  @Input() public model: string;
   @Input() public currentSpeed: number;
   @Input() public topSpeed: number;
   @Input() public units: string;

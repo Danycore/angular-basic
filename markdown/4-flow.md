@@ -18,9 +18,9 @@ class: impact
 
 # 1. Comunicación entre componentes
 
-# 2. Contenedor / Presentadores
+# 2. El patrón Contendor / Presentadores
 
-# 3. Entre páginas o estructuras
+# 3. Comunicaciones entre páginas o estructuras
 
 ---
 
@@ -28,13 +28,13 @@ class: impact
 
 # 1. Comunicación entre componentes
 
-## Necesidad
+## Necesidad de comunicación
 
-## Situaciones
+## Escenarios
 
 ---
 
-## 1.1 Necesidad
+## 1.1 Necesidad de comunicación
 
 - Principio de desarrollo _Divide y Vencerás_
 - Aplicaciones SPA
@@ -42,7 +42,7 @@ class: impact
 
 ---
 
-## 1.2 Situaciones
+## 1.2 Escenarios
 
 - Comunicar componentes acoplados
 - Comunicar componentes en páginas distintas
@@ -54,9 +54,9 @@ class: impact
 
 # 1. Comunicación entre componentes
 
-## Necesidad
+## Necesidad de comunicación
 
-## Situaciones
+## Escenarios
 
 ---
 
@@ -64,15 +64,17 @@ class: impact
 
 # 2. Contenedor / Presentadores
 
-## El patrón
+## El patrón Contendor / Presentadores
 
-## @Input()
+## El contendor
 
-## @Output()
+## Envío hacia el presentador con @Input()
+
+## Respuesta del presentador con @Output()
 
 ---
 
-## 2.1 El patrón
+## 2.1 El patrón Contendor / Presentadores
 
 Es una elección de arquitectura que promueve:
 
@@ -111,25 +113,18 @@ ng g c 4-flow/car/car/pedals
 
 ### Container
 
-<!-- prettier-ignore-start -->
-
 ```html
-<h2>
-  {{ car.name }}
-</h2>
-<h3>Top speed: {{ car.maxSpeed }}</h3>
-<app-display [currentSpeed]="car.currentSpeed"
-  [topSpeed]="car.maxSpeed"
-  [units]="'Km/h'" >
+<app-display [model]="car.name"
+             [currentSpeed]="car.currentSpeed"
+             [topSpeed]="car.maxSpeed"
+             [units]="'Km/h'">
 </app-display>
 <app-pedals (brake)="onBrake($event)"
-  [disableBrake]="disableBrake"
-  (throttle)="onThrottle($event)"
-  [disableThrottle]="disableThrottle">
+            [disableBrake]="disableBrake"
+            (throttle)="onThrottle($event)"
+            [disableThrottle]="disableThrottle">
 </app-pedals>
 ```
-
-## <!-- prettier-ignore-end -->
 
 ---
 
@@ -176,11 +171,11 @@ private getDelta = (drive: number) =>
 
 ---
 
-## 2.2 @Input()
+## 2.3 Envío hacia el presentador con @Input()
 
-Envío de información **desde el contendor hacia el presentador**
+Envío de información **desde el contenedor hacia el presentador**
 
-Usa `[propiedad]="expresion"` en el contendor
+Usa `[propiedad]="expresion"` en el contenedor
 
 Y `@Input() propiedad` en el presentador
 
@@ -188,6 +183,7 @@ Y `@Input() propiedad` en el presentador
 
 ```typescript
 export class DisplayComponent implements OnInit {
+  @Input() public model: string;
   @Input() public currentSpeed: number;
   @Input() public topSpeed: number;
   @Input() public units: string;
@@ -200,21 +196,22 @@ export class DisplayComponent implements OnInit {
 ```
 
 ```html
-<h3>Speed:</h3>
+<h2> {{ model }} </h2>
+<h3> Top speed: {{ topSpeed }}</h3>
 <div class="card">
   <div class="section">
     {{ currentSpeed | number:'1.2-2' }} {{ units }}
   </div>
   <progress [value]="currentSpeed"
-    [ngClass]="getSpeedClass()"
-    [max]="topSpeed">
+            [ngClass]="getSpeedClass()"
+            [max]="topSpeed">
   </progress>
 </div>
 ```
 
 ---
 
-## 2.3 @Output()
+## 2.4 @Output()
 
 Envío de información **desde el presentador hacia el contendor**
 
@@ -263,28 +260,33 @@ export class PedalsComponent implements OnInit {
 
 # 2. Contenedor / Presentadores
 
-## @Input()
+## El patrón Contendor / Presentadores
 
-## @Output()
+## El contendor
+
+## Envío hacia el presentador con @Input()
+
+## Respuesta del presentador con @Output()
 
 ---
 
 class: impact
 
-# 3. Entre páginas o estructuras
+# 3. Comunicaciones entre páginas o estructuras
 
-## Entre páginas
+## Comunicación entre distintas páginas
 
-## Entre estructuras desacopladas
+## Comunicación entre estructuras desacopladas
 
 ---
 
-## 3.1 Entre páginas
+## 3.1 Comunicación entre distintas páginas
 
 - A través del `RouterModule`
----
 
-## 3.2 Entre estructuras desacopladas
+--
+
+## 3.2 Comunicación entre estructuras desacopladas
 
 - Usando `Observables`
 
@@ -292,11 +294,11 @@ class: impact
 
 > Recap:
 
-# 3. Entre páginas o estructuras
+# 3. Comunicaciones entre páginas o estructuras
 
-## Entre páginas
+## Comunicación entre distintas páginas
 
-## Entre estructuras desacopladas
+## Comunicación entre estructuras desacopladas
 
 ---
 
