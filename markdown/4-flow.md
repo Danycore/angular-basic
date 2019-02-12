@@ -98,10 +98,10 @@ Es una elección de arquitectura que promueve:
 ### Contenedor y presentadores
 
 ```console
-ng g m 4-flow/car
-ng g c 4-flow/car/car
-ng g c 4-flow/car/car/display
-ng g c 4-flow/car/car/pedals
+ng g m car
+ng g c car/car
+ng g c car/car/display
+ng g c car/car/pedals
 ```
 
 ```typescript
