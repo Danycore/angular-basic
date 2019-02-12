@@ -36,17 +36,21 @@ class: impact
 
 ## 1.1 Necesidad de comunicación
 
+> Aplicaciones Complejas
+
+--
+
 - Principio de desarrollo _Divide y Vencerás_
-- Aplicaciones SPA
+- Múltiples páginas SPA
 -
 
 ---
 
 ## 1.2 Escenarios
 
-- Comunicar componentes acoplados
-- Comunicar componentes en páginas distintas
-- Comunicar entre estructuras dinámicas
+- Comunicar componentes **acoplados**
+- Comunicar componentes **en páginas distintas**
+- Comunicar componentes entre **estructuras dinámicas**
 
 ---
 
