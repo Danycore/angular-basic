@@ -49,7 +49,7 @@ class: impact
 ## 1.2 Escenarios
 
 - Comunicar componentes **acoplados**
-- Comunicar componentes **en páginas distintas**
+- Comunicar componentes entre **páginas distintas**
 - Comunicar componentes entre **estructuras dinámicas**
 
 ---
@@ -82,12 +82,16 @@ class: impact
 
 Es una elección de arquitectura que promueve:
 
-- Reparto de responsabilidades:
+### Reparto de responsabilidades:
 
-  - Contenedor: gestión de datos
-  - Presentadores: interacción con usuario
+  - **Contenedor**: gestión de datos
+  - **Presentadores**: interacción con usuario
 
-- Reutilización de presentadores
+--
+
+### Reutilización de presentadores
+
+- **Librerías**: presentadores genéricos
 
 ---
 
@@ -132,6 +136,8 @@ ng g c 4-flow/car/car/pedals
 
 ---
 
+### Manejo de datos
+
 ```typescript
 public car: CarModel;
 public disableBrake: boolean;
@@ -157,6 +163,8 @@ private checkLimits() {
 ```
 
 ---
+
+### Lógica de negocios
 
 ```typescript
 public onBrake(drive: number) {
@@ -185,6 +193,8 @@ Y `@Input() propiedad` en el presentador
 
 ---
 
+### Recepción en el controlador
+
 ```typescript
 export class DisplayComponent implements OnInit {
   @Input() public model: string;
@@ -198,6 +208,10 @@ export class DisplayComponent implements OnInit {
   private getThreshold = () => this.topSpeed * 0.8;
 }
 ```
+
+---
+
+### Presentación en la vista
 
 ```html
 <h2> {{ model }} </h2>
@@ -225,6 +239,8 @@ Y `@Output() evento = new EventEmitter<any>()` en el presentador
 
 ---
 
+### Emisión desde el controlador
+
 ```typescript
 export class PedalsComponent implements OnInit {
   @Input() public disableBrake: boolean;
@@ -239,6 +255,8 @@ export class PedalsComponent implements OnInit {
 ```
 
 ---
+
+### Suscripción desde la vista
 
 ```html
 <h3>
