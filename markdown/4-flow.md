@@ -98,7 +98,7 @@ Es una elección de arquitectura que promueve:
 ### Contenedor y presentadores
 
 ```console
-ng g m car
+ng g m car --routing true
 ng g c car/car
 ng g c car/car/display
 ng g c car/car/pedals
