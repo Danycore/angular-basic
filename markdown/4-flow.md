@@ -215,7 +215,7 @@ export class DisplayComponent implements OnInit {
 
 ```html
 <h2> {{ model }} </h2>
-<h3> Top speed: {{ topSpeed }}</h3>
+<h3> Top speed: {{ topSpeed | number:'1.0-0' }}</h3>
 <div class="card">
   <div class="section">
     {{ currentSpeed | number:'1.2-2' }} {{ units }}
@@ -326,11 +326,11 @@ class: impact
 
 > Next:
 
-# Flujo de datos entre componentes Angular
+# Servicios inyectables en Angular
 
-## Contenedores y presentadores
+## Inyección de dependencias
 
-## @Input y @Output
+## Inversión del control
 
 > **Blog de apoyo:** [Formularios, tablas y modelos de datos en Angular](https://academia-binaria.com/formularios-tablas-y-modelos-de-datos-en-angular/)
 

@@ -514,9 +514,9 @@ public deleteContact(contact: Contact) {
 
 ## Comunicación entre componentes
 
-## Contenedor / Presentadores
+## El patrón Contenedor / Presentadores
 
-## Entre páginas o estructuras
+## Comunicaciones entre páginas o estructuras
 
 > **Blog de apoyo:** [Formularios, tablas y modelos de datos en Angular](https://academia-binaria.com/formularios-tablas-y-modelos-de-datos-en-angular/)
 
