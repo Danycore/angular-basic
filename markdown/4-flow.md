@@ -18,7 +18,7 @@ class: impact
 
 # 1. Comunicación entre componentes
 
-# 2. El patrón Contendor / Presentadores
+# 2. El patrón Contenedor / Presentadores
 
 # 3. Comunicaciones entre páginas o estructuras
 
