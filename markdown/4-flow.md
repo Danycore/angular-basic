@@ -68,9 +68,9 @@ class: impact
 
 # 2. Contenedor / Presentadores
 
-## El patrón Contendor / Presentadores
+## El patrón Contenedor / Presentadores
 
-## El contendor
+## El contenedor
 
 ## Envío hacia el presentador con @Input()
 
@@ -282,9 +282,9 @@ export class PedalsComponent implements OnInit {
 
 # 2. Contenedor / Presentadores
 
-## El patrón Contendor / Presentadores
+## El patrón Contenedor / Presentadores
 
-## El contendor
+## El contenedor
 
 ## Envío hacia el presentador con @Input()
 
