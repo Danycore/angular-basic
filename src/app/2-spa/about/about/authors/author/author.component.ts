@@ -8,8 +8,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AuthorComponent implements OnInit {
   public authorId = '';
-  constructor(activateRoute: ActivatedRoute) {
-    this.authorId = activateRoute.snapshot.params['id'];
+  constructor(activatedRoute: ActivatedRoute) {
+    this.authorId = activatedRoute.snapshot.params['id'];
   }
 
   ngOnInit() {}
