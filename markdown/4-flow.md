@@ -20,7 +20,7 @@ class: impact
 
 # 2. El patrón Contenedor / Presentadores
 
-# 3. Comunicaciones entre páginas o estructuras
+# 3. Otras comunicaciones
 
 ---
 
@@ -294,7 +294,7 @@ export class PedalsComponent implements OnInit {
 
 class: impact
 
-# 3. Comunicaciones entre páginas o estructuras
+# 3. Otras comunicaciones
 
 ## Comunicación entre distintas páginas
 
@@ -306,17 +306,63 @@ class: impact
 
 - A través del `RouterModule`
 
---
+En `about-routing.module`
+
+```typescript
+{
+* path: 'authors/:id',
+  component: AuthorComponent
+}
+```
+
+En `authors-component.html`
+
+```html
+<a routerLink="albertobasalo"> <span> Alberto Basalo</span> </a>
+<a routerLink="johndoe"> <span> John Doe</span> </a>
+```
+
+---
+
+En `author.component.ts`
+
+```typescript
+export class AuthorComponent implements OnInit {
+  public authorId = '';
+  constructor(activateRoute: ActivatedRoute) {
+*   this.authorId = activateRoute.snapshot.params['id'];
+  }
+  ngOnInit() {}
+}
+```
+
+
+---
 
 ## 3.2 Comunicación entre estructuras desacopladas
 
 - Usando `Observables`
 
+En el `ShellComponent`
+
+```html
+<header class="sticky">
+  <a routerLink="/"> <span class="icon-home"></span>{{ title }}</a>
+  <a routerLink="car"> <span class="icon-home"></span>Car</a>
+  <a routerLink="contacts"> <span class="icon-home"></span>Contacts</a>
+</header>
+<main class="container ">
+* <router-outlet></router-outlet>
+</main>
+<app-footer></app-footer>
+```
+Lo que pasa dentro de _main_ no se conoce en _header_...
+
 ---
 
 > Recap:
 
-# 3. Comunicaciones entre páginas o estructuras
+# 3. Otras comunicaciones
 
 ## Comunicación entre distintas páginas
 
@@ -332,6 +378,6 @@ class: impact
 
 ## Inversión del control
 
-> **Blog de apoyo:** [Formularios, tablas y modelos de datos en Angular](https://academia-binaria.com/formularios-tablas-y-modelos-de-datos-en-angular/)
+> **Blog de apoyo:** [Flujo de datos entre componentes Angular](https://academia-binaria.com/flujo-de-datos-entre-componentes-angular/)
 
 > > By [Alberto Basalo](https://twitter.com/albertobasalo)
