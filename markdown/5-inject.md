@@ -48,6 +48,8 @@ ng g c converter/converter
 },
 ```
 
+---
+
 `converter-routing.module.ts`
 
 ```typescript
