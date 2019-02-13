@@ -71,12 +71,71 @@ ng g c converter/converter
 
 ## 1.1 Generación de servicios
 
+```console
+ng g s converter/converter
+```
+Implementación
+
+```typescript
+import { Injectable } from '@angular/core';
+
+@Injectable({
+*  providedIn: 'root'
+})
+export class ConverterService {
+  constructor() {}
+
+  public fromKilometersToMiles = (kilometers: number): number =>
+    kilometers * 0.62137;
+}
+```
 
 
 ---
 
 ## 1.2 Consumo de dependencias
 
+```typescript
+  export class ConverterComponent implements OnInit {
+    public kilometers = 0;
+    public miles: number;
+
+*   constructor(private converterService: ConverterService) {}
+
+    public ngOnInit() { this.convert(); }
+
+    public convert() {
+      this.miles =
+        this.converterService.fromKilometersToMiles(this.kilometers);
+    }
+  }
+```
+
+---
+
+### Presentación en vista
+
+```html
+<h2> Distance Converter.</h2>
+<h3> From Europe to USA </h3>
+<form>
+  <fieldset>
+    <section>
+      <label for="kilometers">Kilometers</label>
+      <input name="kilometers"
+             type="number"
+             [(ngModel)]="kilometers"
+             placeholder="0" />
+    </section>
+  </fieldset>
+  <input value="Convert"
+         type="button"
+         (click)="convert()">
+</form>
+<section>
+  <h4>{{ miles | number:'1.2-2' }} miles</h4>
+</section>
+```
 
 ---
 
@@ -106,18 +165,164 @@ class: impact
 
 ## 2.1 Interface y servicio base
 
+```console
+ng g interface converter/culture-converter
+ng g service converter/culture-converter
+ng g component converter/culture-converter
+```
+```typeScript
+export interface CultureConverter {
+  sourceCulture: string;
+  targetCulture: string;
+  convertDistance: (source: number) => number;
+  convertTemperature: (source: number) => number;
+}
+```
+
+```typescript
+export class CultureConverterService implements CultureConverter {
+  sourceCulture: string;
+  targetCulture: string;
+  convertDistance: (source: number) => number;
+  convertTemperature: (source: number) => number;
+  constructor() {}
+}
+```
+
+---
+
+### Consumo
+
+```typeScript
+  public source: string;
+  public target: string;
+  public sourceUnits = 0;
+  public targetUnits: number;
+  constructor(private cultureConverterService:CultureConverterService){
+  }
+
+  public ngOnInit() {
+    this.source = this.cultureConverterService.sourceCulture;
+    this.target = this.cultureConverterService.targetCulture;
+    this.convert();
+  }
+  public convert() {
+    this.targetUnits =
+      this.cultureConverterService.convertDistance(this.sourceUnits);
+  }
+```
+
+---
+
+```html
+<h2> Culture Converter.</h2>
+<h3> From {{ source }} to {{ target }} </h3>
+<form>
+  <fieldset>
+    <section>
+      <label for="sourceUnits">Distance</label>
+      <input name="sourceUnits"
+             type="number"
+             [(ngModel)]="sourceUnits"
+             placeholder="0" />
+    </section>
+  </fieldset>
+  <input value="Convert"
+         type="button"
+         (click)="convert()">
+</form>
+<section>
+  <h4>Distance {{ targetUnits | number:'1.2-2' }} </h4>
+</section>
+```
 ---
 
 ## 2.2 Implementaciones
+
+```typescript
+@Injectable({
+  providedIn: 'root'
+})
+export class ConverterService {
+  constructor() {}
+
+  public fromKilometersToMiles = (kilometers: number): number =>
+    kilometers * 0.62137;
+
+  public fromMilesToKilometers = (miles: number): number => miles * 1.609;
+
+  public fromCelsiusToFarenheit = (celsius: number): number =>
+    celsius * (9 / 5) + 32;
+
+  public fromFarenheitToCelsius = (farenheit: number): number =>
+    (farenheit - 32) * (5 / 9);
+}
+```
+---
+
+```typescript
+@Injectable()
+export class EuropeConverterService {
+  sourceCulture = 'USA';
+  targetCulture = 'Europe';
+  constructor(private converterService: ConverterService) {}
+  convertDistance = this.converterService.fromMilesToKilometers;
+  convertTemperature = this.converterService.fromFarenheitToCelsius;
+}
+```
+
+```typescript
+@Injectable()
+export class UsaConverterService implements CultureConverter {
+  sourceCulture = 'Europe';
+  targetCulture = 'USA';
+  constructor(private converterService: ConverterService) {}
+  convertDistance = this.converterService.fromKilometersToMiles;
+  convertTemperature = this.converterService.fromCelsiusToFarenheit;
+}
+```
+
 
 ---
 
 ## 2.3  Provisión manual
 
+```typescript
+{
+  providers: [
+    {
+      provide: CultureConverterService,
+      useClass: UsaConverterService
+    }
+  ]
+}
+```
 
 ---
 
 ## 2.4  Factoría
+
+```typescript
+{
+  providers: [
+    {
+      provide: CultureConverterService,
+      useFactory: cultureFactory,
+      deps: [ConverterService]
+    }
+  ]
+}
+```
+```typescript
+const cultureFactory = (converterService: ConverterService) => {
+  if (true) {
+    return new UsaConverterService(converterService);
+  } else {
+    return new EuropeConverterService(converterService);
+  }
+};
+```
+
 ---
 
 > Recap:
