@@ -1,0 +1,31 @@
+<h2>
+  Culture Converter.
+</h2>
+<h3>
+  From {{ source }} to {{ target }}
+</h3>
+<form>
+  <fieldset>
+    <section>
+      <label for="sourceTemperature">Temperature</label>
+      <input name="sourceTemperature"
+             type="number"
+             [(ngModel)]="sourceTemperature"
+             placeholder="0" />
+    </section>
+    <section>
+      <label for="sourceDistance">Distance</label>
+      <input name="sourceDistance"
+             type="number"
+             [(ngModel)]="sourceDistance"
+             placeholder="0" />
+    </section>
+  </fieldset>
+  <input value="Convert"
+         type="button"
+         (click)="convert()">
+</form>
+<section>
+  <h4>Temperature {{ targetTemperature | number:'1.2-2' }} </h4>
+  <h4>Distance {{ targetDistance | number:'1.2-2' }} </h4>
+</section>

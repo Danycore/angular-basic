@@ -21,6 +21,10 @@ const routes: Routes = [
     loadChildren: './3-data/contacts/contacts.module#ContactsModule'
   },
   {
+    path: 'converter',
+    loadChildren: './5-inject/converter/converter.module#ConverterModule'
+  },
+  {
     path: 'heroes',
     component: HeroesComponent
   },
