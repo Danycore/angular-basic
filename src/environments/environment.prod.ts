@@ -1,4 +1,5 @@
 export const environment = {
   appName: "Angular - Board",
-  production: true
+  production: true,
+  unitsCulture : 'metric'
 };

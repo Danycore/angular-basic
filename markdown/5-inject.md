@@ -96,19 +96,19 @@ export class ConverterService {
 ## 1.2 Consumo de dependencias
 
 ```typescript
-  export class ConverterComponent implements OnInit {
-    public kilometers = 0;
-    public miles: number;
+export class ConverterComponent implements OnInit {
+  public kilometers = 0;
+  public miles: number;
 
 *   constructor(private converterService: ConverterService) {}
 
-    public ngOnInit() { this.convert(); }
+  public ngOnInit() { this.convert(); }
 
-    public convert() {
-      this.miles =
-        this.converterService.fromKilometersToMiles(this.kilometers);
-    }
+  public convert() {
+    this.miles =
+      this.converterService.fromKilometersToMiles(this.kilometers);
   }
+}
 ```
 
 ---
@@ -301,6 +301,15 @@ export class UsaConverterService implements CultureConverter {
 ---
 
 ## 2.4  Factoría
+
+```typescript
+export const environment = {
+  appName: "Angular - Board",
+  production: false,
+  unitsCulture : 'metric'
+};
+```
+
 
 ```typescript
 {
