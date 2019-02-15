@@ -85,8 +85,7 @@ import { Injectable } from '@angular/core';
 export class ConverterService {
   constructor() {}
 
-  public fromKilometersToMiles = (kilometers: number): number =>
-    kilometers * 0.62137;
+  public fromKilometersToMiles = kilometers => kilometers * 0.621;
 }
 ```
 
@@ -100,7 +99,7 @@ export class ConverterComponent implements OnInit {
   public kilometers = 0;
   public miles: number;
 
-*   constructor(private converterService: ConverterService) {}
+* constructor(private converterService: ConverterService) {}
 
   public ngOnInit() { this.convert(); }
 
@@ -246,16 +245,13 @@ export class CultureConverterService implements CultureConverter {
 export class ConverterService {
   constructor() {}
 
-  public fromKilometersToMiles = (kilometers: number): number =>
-    kilometers * 0.62137;
+  public fromKilometersToMiles = kilometers => kilometers * 0.621;
 
-  public fromMilesToKilometers = (miles: number): number => miles * 1.609;
+  public fromMilesToKilometers = miles => miles * 1.609;
 
-  public fromCelsiusToFarenheit = (celsius: number): number =>
-    celsius * (9 / 5) + 32;
+  public fromCelsiusToFarenheit = celsius => celsius * (9/5) + 32;
 
-  public fromFarenheitToCelsius = (farenheit: number): number =>
-    (farenheit - 32) * (5 / 9);
+  public fromFarenheitToCelsius = farenheit => (farenheit-32) * (5/9);
 }
 ```
 ---
@@ -303,6 +299,16 @@ export class UsaConverterService implements CultureConverter {
 ## 2.4  Factoría
 
 ```typescript
+const cultureFactory = (converterService: ConverterService) => {
+  if (environment.unitsCulture === 'metric') {
+    return new EuropeConverterService(converterService);
+  } else {
+    return new UsaConverterService(converterService);
+  }
+};
+```
+
+```typescript
 export const environment = {
   appName: "Angular - Board",
   production: false,
@@ -310,6 +316,9 @@ export const environment = {
 };
 ```
 
+---
+
+La provisión del servicio apunta a la función factoría. Si además el servicio dependiese de otro tenemos que especificarlo en el sub-array `deps:[]`.
 
 ```typescript
 {
@@ -321,15 +330,6 @@ export const environment = {
     }
   ]
 }
-```
-```typescript
-const cultureFactory = (converterService: ConverterService) => {
-  if (true) {
-    return new UsaConverterService(converterService);
-  } else {
-    return new EuropeConverterService(converterService);
-  }
-};
 ```
 
 ---
