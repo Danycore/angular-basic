@@ -170,7 +170,7 @@ ng g service converter/culture-converter
 ng g component converter/culture-converter
 ```
 ```typeScript
-export interface CultureConverter {
+export interface CultureConverter implements CultureConverter {
   sourceCulture: string;
   targetCulture: string;
   convertDistance: (source: number) => number;
