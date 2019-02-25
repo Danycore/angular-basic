@@ -4,16 +4,18 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ConverterService {
+  private milesPerKilometer = 0.62137;
+  private kilometersPerMile = 1.609;
+  private boilingFahrenheit = 32;
+  private factorC2F = 1.8;
+  private factorF2C = 0.5555;
   constructor() {}
 
-  public fromKilometersToMiles = (kilometers: number): number =>
-    kilometers * 0.62137;
+  public fromKilometersToMiles = (kilometers: number): number => kilometers * this.milesPerKilometer;
 
-  public fromMilesToKilometers = (miles: number): number => miles * 1.609;
+  public fromMilesToKilometers = (miles: number): number => miles * this.kilometersPerMile;
 
-  public fromCelsiusToFarenheit = (celsius: number): number =>
-    celsius * (9 / 5) + 32;
+  public fromCelsiusToFahrenheit = (celsius: number): number => celsius * this.factorC2F + this.boilingFahrenheit;
 
-  public fromFarenheitToCelsius = (farenheit: number): number =>
-    (farenheit - 32) * (5 / 9);
+  public fromFahrenheitToCelsius = (fahrenheit: number): number => (fahrenheit - this.boilingFahrenheit) * this.factorF2C;
 }

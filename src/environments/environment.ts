@@ -3,9 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  appName: "Angular - Board",
+  appName: 'Angular - Board',
   production: false,
-  unitsCulture : 'metric'
+  unitsCulture: 'metric'
 };
 
 /*

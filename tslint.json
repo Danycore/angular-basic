@@ -15,12 +15,7 @@
     "member-ordering": [
       true,
       {
-        "order": [
-          "static-field",
-          "instance-field",
-          "static-method",
-          "instance-method"
-        ]
+        "order": ["static-field", "instance-field", "static-method", "instance-method"]
       }
     ],
     "no-arg": true,
@@ -49,14 +44,7 @@
     "triple-equals": [true, "allow-null-check"],
     "unified-signatures": true,
     "variable-name": false,
-    "whitespace": [
-      true,
-      "check-branch",
-      "check-decl",
-      "check-operator",
-      "check-separator",
-      "check-type"
-    ],
+    "whitespace": [true, "check-branch", "check-decl", "check-operator", "check-separator", "check-type"],
     "no-output-on-prefix": true,
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,
@@ -66,6 +54,16 @@
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
-    "directive-class-suffix": true
+    "directive-class-suffix": true,
+    "no-magic-numbers": true,
+    "no-multiple-empty-lines": ["error", { "max": 1 }],
+    "max-statements-per-line": ["error", { "max": 1 }],
+    "max-depth": ["error", 2],
+    "max-params": ["error", 4],
+    "complexity": ["error", 8],
+    "id-length": ["error", { "min": 4, "max": 16, "exceptions": ["x", "y", "i", "j"] }],
+    "max-statements": ["error", 32],
+    "max-len": ["error", 128],
+    "max-lines": ["error", 256]
   }
 }
