@@ -1,3 +1,16 @@
-<p>
-  rates works!
-</p>
+<h2>
+  Currency Rates.
+</h2>
+<h3>
+  From Euro to the world
+</h3>
+<pre>{{ currentEuroRates | json }}</pre>
+<input value="Save Rates"
+       class="primary"
+       type="button"
+       (click)="postRates()" />
+<input value="Refresh Rates"
+       class="secondary"
+       type="button"
+       (click)="getMyRates()" />
+<pre>{{ myRates | json }}</pre>

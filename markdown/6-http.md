@@ -28,9 +28,13 @@ class: impact
 
 # 1. El servicio HttpClient
 
-## Importación y uso básico
+## Importación y declaración de servicios
 
-## Consumo de dependencias
+## Obtención de datos
+
+## Envío de datos
+
+## Refresco de datos
 
 ---
 
@@ -50,120 +54,171 @@ ng g c rates/rates
 },
 ```
 
-https://exchangeratesapi.io/
-
 ---
 
-`converter-routing.module.ts`
+`rates-routing.module.ts`
 
 ```typescript
 {
   path: '',
-  component: ConverterComponent
+  component: RatesComponent
 }
 ```
 
 `header.component.html`
 
 ```html
-<a routerLink="converter" class="button">
-  <span> Converter</span>
+<a routerLink="rates" class="button">
+  <span> Rates</span>
 </a>
 ```
 
 ---
 
-## 1.1 Generación de servicios
+## 1.1 Importación y declaración de servicios
 
-```console
-ng g s converter/converter
-```
-
-Implementación
+### Importación
 
 ```typescript
-import { Injectable } from '@angular/core';
+*import { HttpClientModule } from '@angular/common/http';
 
-@Injectable({
-*  providedIn: 'root'
+
+@NgModule({
+  declarations: [RatesComponent],
+* imports: [HttpClientModule]
 })
-export class ConverterService {
-  constructor() {}
-
-  public fromKilometersToMiles = kilometers => kilometers * 0.621;
-}
+export class RatesModule { }
 ```
 
 ---
 
-## 1.2 Consumo de dependencias
+### Dependencia
 
 ```typescript
-export class ConverterComponent implements OnInit {
-  public kilometers = 0;
-  public miles: number;
+*import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 
-  *constructor(private converterService: ConverterService) {}
+@Component({
+  selector: 'app-rates',
+  templateUrl: './rates.component.html',
+  styles: []
+})
+export class RatesComponent implements OnInit {
+* constructor(private httpClient: HttpClient) {}
 
-  public ngOnInit() {
-    this.convert();
-  }
-
-  public convert() {
-    this.miles = this.converterService.fromKilometersToMiles(this.kilometers);
-  }
+  ngOnInit() {}
 }
 ```
 
 ---
+
+## 1.2 Obtención de datos
+
+```typescript
+export class RatesComponent implements OnInit {
+  private urlapi = 'https://api.exchangeratesapi.io/latest';
+  public currentEuroRates: any = null;
+
+  constructor(private httpClient: HttpClient) {}
+
+  ngOnInit() {
+    this.getCurrentEuroRates();
+  }
+
+  private getCurrentEuroRates() {
+    const currencies = 'USD,GBP,CHF,JPY';
+    const url = `${this.urlapi}?symbols=${currencies}`;
+*   this.httpClient.get(url).subscribe(v => (this.currentEuroRates = v));
+  }
+}
+```
 
 ### Presentación en vista
 
 ```html
-<h2>Distance Converter.</h2>
-<h3>From Europe to USA</h3>
-<form>
-  <fieldset>
-    <section>
-      <label for="kilometers">Kilometers</label>
-      <input
-        name="kilometers"
-        type="number"
-        [(ngModel)]="kilometers"
-        placeholder="0"
-      />
-    </section>
-  </fieldset>
-  <input value="Convert" type="button" (click)="convert()" />
-</form>
-<section>
-  <h4>{{ miles | number:'1.2-2' }} miles</h4>
-</section>
+<pre>{{ currentEuroRates | json }}</pre>
+```
+
+---
+
+## 1.3 Envío de datos
+
+```typescript
+export class RatesComponent implements OnInit {
+  private myRatesApi = 'https://api-base.herokuapp.com/api/pub/rates';
+
+  public postRates() {
+    const rates = this.transformData();
+*   rates.forEach(r => this.httpClient.post(this.myRatesApi, r).subscribe());
+  }
+
+  private transformData() {
+    const currentEntries = Object.entries(this.currentEuroRates.rates);
+    return currentEntries.map(currentEntrie => ({
+      date: this.currentEuroRates.date,
+      currency: currentEntrie[0],
+      euros: currentEntrie[1]
+    }));
+  }
+}
+```
+
+### Presentación en vista
+
+```html
+<input value="Save Rates" type="button" (click)="postRates()" />
+```
+
+---
+
+## 1.4 Refresco de datos
+
+```typescript
+export class RatesComponent implements OnInit {
+ private myRatesApi = 'https://api-base.herokuapp.com/api/pub/rates';
+ public myRates: any[] = null;
+
+
+ public getMyRates() {
+    this.httpClient
+*     .get<any[]>(this.myRatesApi)
+      .subscribe(apiResult => (this.myRates = apiResult));
+  }
+}
+```
+
+### Presentación en vista
+
+```html
+<input value="Refresh" type="button" (click)="getMyRates()" />
+<pre>{{ myRates | json }}</pre>
 ```
 
 ---
 
 > Recap:
 
-# 1. Inyección de dependencias
+# 1. El servicio HttpClient
 
-## Generación de servicios
+## Importación y declaración de servicios
 
-## Consumo de dependencias
+## Obtención de datos
+
+## Envío de datos
+
+## Refresco de datos
 
 ---
 
 class: impact
 
-# 2. Inversión del control
+# 2. Observables
 
-## Interface y servicio base
+## Async
 
-## Implementaciones
+## pipe
 
-## Provisión manual
-
-## Factoría
+## operators
 
 ---
 
