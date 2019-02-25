@@ -10,5 +10,5 @@ export class UsaConverterService implements CultureConverter {
   constructor(private converterService: ConverterService) {}
 
   public convertDistance = this.converterService.fromKilometersToMiles;
-  public convertTemperature = this.converterService.fromCelsiusToFarenheit;
+  public convertTemperature = this.converterService.fromCelsiusToFahrenheit;
 }

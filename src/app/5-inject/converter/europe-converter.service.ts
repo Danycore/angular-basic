@@ -9,5 +9,5 @@ export class EuropeConverterService {
   constructor(private converterService: ConverterService) {}
 
   public convertDistance = this.converterService.fromMilesToKilometers;
-  public convertTemperature = this.converterService.fromFarenheitToCelsius;
+  public convertTemperature = this.converterService.fromFahrenheitToCelsius;
 }

@@ -153,11 +153,11 @@ export class RatesComponent implements OnInit {
   }
 
   private transformData() {
-    const currentEntries = Object.entries(this.currentEuroRates.rates);
-    return currentEntries.map(currentEntrie => ({
+    const current = this.currentEuroRates.rates;
+    return Object.keys(current).map(key => ({
       date: this.currentEuroRates.date,
-      currency: currentEntrie[0],
-      euros: currentEntrie[1]
+      currency: key,
+      euros: current[key]
     }));
   }
 }
@@ -192,6 +192,20 @@ export class RatesComponent implements OnInit {
 ```html
 <input value="Refresh" type="button" (click)="getMyRates()" />
 <pre>{{ myRates | json }}</pre>
+```
+
+---
+
+### Borrado
+
+```typescript
+  public deleteMyRates() {
+    this.httpClient.delete(this.myRatesApi).subscribe();
+  }
+```
+
+```html
+<input value="Delete Rates" type="button" (click)="deleteMyRates()" />
 ```
 
 ---

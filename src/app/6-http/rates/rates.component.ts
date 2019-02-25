@@ -21,9 +21,7 @@ export class RatesComponent implements OnInit {
   private getCurrentEuroRates() {
     const currencies = 'USD,GBP,CHF,JPY';
     const url = `${this.ratesApi}?symbols=${currencies}`;
-    this.httpClient
-      .get(url)
-      .subscribe(apiResult => (this.currentEuroRates = apiResult));
+    this.httpClient.get(url).subscribe(apiResult => (this.currentEuroRates = apiResult));
   }
 
   public postRates() {
@@ -32,17 +30,19 @@ export class RatesComponent implements OnInit {
   }
 
   private transformData() {
-    const currentEntries = Object.entries(this.currentEuroRates.rates);
-    return currentEntries.map(currentEntrie => ({
+    const current = this.currentEuroRates.rates;
+    return Object.keys(current).map(key => ({
       date: this.currentEuroRates.date,
-      currency: currentEntrie[0],
-      euros: currentEntrie[1]
+      currency: key,
+      euros: current[key]
     }));
   }
 
   public getMyRates() {
-    this.httpClient
-      .get<any[]>(this.myRatesApi)
-      .subscribe(apiResult => (this.myRates = apiResult));
+    this.httpClient.get<any[]>(this.myRatesApi).subscribe(apiResult => (this.myRates = apiResult));
+  }
+
+  public deleteMyRates() {
+    this.httpClient.delete(this.myRatesApi).subscribe();
   }
 }
