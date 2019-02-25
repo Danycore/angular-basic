@@ -25,6 +25,10 @@ const routes: Routes = [
     loadChildren: './5-inject/converter/converter.module#ConverterModule'
   },
   {
+    path: 'rates',
+    loadChildren: './6-http/rates/rates.module#RatesModule'
+  },
+  {
     path: 'heroes',
     component: HeroesComponent
   },
