@@ -34,7 +34,7 @@ class: impact
 
 ## Envío de datos
 
-## Refresco de datos
+## Actualización de datos
 
 ---
 
@@ -128,7 +128,9 @@ export class RatesComponent implements OnInit {
   private getCurrentEuroRates() {
     const currencies = 'USD,GBP,CHF,JPY';
     const url = `${this.urlapi}?symbols=${currencies}`;
-*   this.httpClient.get(url).subscribe(v => (this.currentEuroRates = v));
+    this.httpClient
+*     .get(url)
+      .subscribe(apiResult => (this.currentEuroRates = apiResult));
   }
 }
 ```
@@ -149,7 +151,11 @@ export class RatesComponent implements OnInit {
 
   public postRates() {
     const rates = this.transformData();
-*   rates.forEach(r => this.httpClient.post(this.myRatesApi, r).subscribe());
+    rates.forEach(rate =>
+      this.httpClient
+*       .post(this.myRatesApi, rate)
+        .subscribe()
+    );
   }
 
   private transformData() {
@@ -171,7 +177,9 @@ export class RatesComponent implements OnInit {
 
 ---
 
-## 1.4 Refresco de datos
+## 1.4 Actualización de datos
+
+### Refresco
 
 ```typescript
 export class RatesComponent implements OnInit {
@@ -187,8 +195,6 @@ export class RatesComponent implements OnInit {
 }
 ```
 
-### Presentación en vista
-
 ```html
 <input value="Refresh" type="button" (click)="getMyRates()" />
 <pre>{{ myRates | json }}</pre>
@@ -200,7 +206,9 @@ export class RatesComponent implements OnInit {
 
 ```typescript
   public deleteMyRates() {
-    this.httpClient.delete(this.myRatesApi).subscribe();
+    this.httpClient
+*     .delete(this.myRatesApi)
+      .subscribe();
   }
 ```
 
@@ -220,7 +228,7 @@ export class RatesComponent implements OnInit {
 
 ## Envío de datos
 
-## Refresco de datos
+## Actualización de datos
 
 ---
 

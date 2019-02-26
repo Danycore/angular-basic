@@ -7,9 +7,9 @@
     "editorError.foreground": "#ff9900",
     "editorWarning.foreground": "#BBCBC2",
     "editorInfo.foreground": "#9ea39e",
-    "titleBar.activeBackground": "#4f7ce3",
+    "titleBar.activeBackground": "#b52e31",
     "titleBar.activeForeground": "#e7e7e7",
-    "titleBar.inactiveBackground": "#4f7ce3",
+    "titleBar.inactiveBackground": "#b52e31",
     "titleBar.inactiveForeground": "#e7e7e7"
   }
 }
