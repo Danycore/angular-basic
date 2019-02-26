@@ -1,0 +1,24 @@
+<h2>
+  Currency Observable Rates.
+</h2>
+<h3>
+  From Euro to the $ world
+</h3>
+<pre>{{ currentEuroRates$ | async | json }}</pre>
+<input value="Save Rates"
+       class="primary"
+       type="button"
+       (click)="postRates()" />
+<pre>{{ myRates$ | async | json }}</pre>
+<input value="Delete Rates"
+       class="secondary"
+       type="button"
+       (click)="deleteMyRates()" />
+<!--
+       <input value="Refresh Rates"
+       class="primary"
+       type="button"
+       (click)="getMyRates()" />
+
+
+<p><a [routerLink]="['observables']">Observables</a></p> -->

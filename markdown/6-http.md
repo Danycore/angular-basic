@@ -244,6 +244,17 @@ class: impact
 
 ---
 
+```
+ng g c rates/obserates
+{
+  path: 'observables',
+  component: ObseratesComponent
+}
+
+```
+
+---
+
 ## 2.1 Interface y servicio base
 
 ```console
