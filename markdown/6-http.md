@@ -135,9 +135,13 @@ export class RatesComponent implements OnInit {
 }
 ```
 
+---
+
 ### Presentación en vista
 
 ```html
+<h2> Currency Rates. </h2>
+<h3> From Euro to the world </h3>
 <pre>{{ currentEuroRates | json }}</pre>
 ```
 
@@ -168,6 +172,7 @@ export class RatesComponent implements OnInit {
   }
 }
 ```
+---
 
 ### Presentación en vista
 
