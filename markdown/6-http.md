@@ -358,6 +358,98 @@ const url = `${this.ratesApi}?symbols=USD,GBP,CHF,JPY`;
 
 ---
 
+```console
+ng g s rates/AuditInterceptor
+```
+
+Hay que crear un servicio inyectable y hacerle cumplir una Interfaz
+
+---
+
+## 3.1 La interfaz HttpInterceptor
+
+```typescript
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest }
+  from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuditInterceptorService implements HttpInterceptor {
+  public intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler )
+    : Observable<HttpEvent<any>> {
+    throw new Error( 'Method not implemented.' );
+  }
+
+  constructor() { }
+}
+```
+---
+
+## 3.2 Inversión del control vía token
+
+> 1. Quitamos el `providedIn: 'root'`
+
+> 2. Tomamos el control de la inyección
+
+```TypeScript
+providers: [
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuditInterceptorService,
+    multi: true
+  }
+]
+```
+
+El `HttpClient` en su constructor reclama `HTTP_INTERCEPTORS` un array de múltiples dependencias
+Le damos nuestro interceptor para que lo agregue a su array
+
+---
+
+## 3.3 Un auditor de llamadas
+
+```Typescript
+export class AuditInterceptorService implements HttpInterceptor {
+  constructor() {}
+
+  public intercept(req: HttpRequest<any>, next: HttpHandler)
+    : Observable<HttpEvent<any>> {
+    const startTime = Date.now();
+    return next.handle(req)
+      .pipe(
+        tap((event: HttpEvent<any>)
+          => this.auditEvent(event, startTime)));
+  }
+
+  private auditEvent(event: HttpEvent<any>, startTime: number) {
+    if (event instanceof HttpResponse) {
+      const elapsedMs = Date.now() - startTime;
+      const eventMessage = event.statusText + ' on ' + event.url;
+      const message = eventMessage + ' in ' + elapsedMs + 'ms';
+      console.log(message);
+    }
+  }
+}
+```
+
+---
+
+> Recap:
+
+# 3. Interceptores
+
+## La interfaz HttpInterceptor
+
+## Inversión del control vía token
+
+## Un auditor de llamadas
+---
+
 > Next:
 
 # Vigilancia y seguridad en Angular
