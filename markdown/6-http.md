@@ -1,10 +1,10 @@
 title: 6-http
-
 class: animation-fade
-
 layout: true
 
-.bottom-bar[ {{title}} ]
+.bottom-bar[
+{{title}}
+]
 
 ---
 

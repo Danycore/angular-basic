@@ -1,4 +1,5 @@
-class: animation-fade layout: true
+class: animation-fade
+layout: true
 
 .bottom-bar[
 

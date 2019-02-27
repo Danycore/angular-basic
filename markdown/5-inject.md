@@ -1,10 +1,10 @@
 title: 5-Inject
-
 class: animation-fade
-
 layout: true
 
-.bottom-bar[ {{title}} ]
+.bottom-bar[
+{{title}}
+]
 
 ---
 
