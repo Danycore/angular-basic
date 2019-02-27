@@ -16,13 +16,13 @@ class: impact
 
 ---
 
-# 1. Angular y el CLI
+    # 1. Angular y el CLI
 
-# 2. Estructura de una aplicación Angular
+    # 2. Estructura de una aplicación Angular
 
-# 3. Configuración
+    # 3. Configuración
 
-# 4. Angular y su ecosistema
+    # 4. Angular y su ecosistema
 
 ---
 

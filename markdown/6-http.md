@@ -255,175 +255,77 @@ ng g c rates/obserates
 
 ---
 
-## 2.1 Interface y servicio base
+## 2.1 Async
 
-```console
-ng g interface converter/culture-converter
-ng g service converter/culture-converter
-ng g component converter/culture-converter
-```
-
-```typeScript
-export interface CultureConverter implements CultureConverter {
-  sourceCulture: string;
-  targetCulture: string;
-  convertDistance: (source: number) => number;
-  convertTemperature: (source: number) => number;
-}
-```
-
-```typescript
-export class CultureConverterService implements CultureConverter {
-  sourceCulture: string;
-  targetCulture: string;
-  convertDistance: (source: number) => number;
-  convertTemperature: (source: number) => number;
-  constructor() {}
-}
-```
-
----
-
-### Consumo
-
-```typeScript
-  public source: string;
-  public target: string;
-  public sourceUnits = 0;
-  public targetUnits: number;
-  constructor(private cultureConverterService:CultureConverterService){
-  }
-
-  public ngOnInit() {
-    this.source = this.cultureConverterService.sourceCulture;
-    this.target = this.cultureConverterService.targetCulture;
-    this.convert();
-  }
-  public convert() {
-    this.targetUnits =
-      this.cultureConverterService.convertDistance(this.sourceUnits);
-  }
-```
-
----
+### Tuberías de Angular |
 
 ```html
-<h2>Culture Converter.</h2>
-<h3>From {{ source }} to {{ target }}</h3>
-<form>
-  <fieldset>
-    <section>
-      <label for="sourceUnits">Distance</label>
-      <input
-        name="sourceUnits"
-        type="number"
-        [(ngModel)]="sourceUnits"
-        placeholder="0"
-      />
-    </section>
-  </fieldset>
-  <input value="Convert" type="button" (click)="convert()" />
-</form>
-<section>
-  <h4>Distance {{ targetUnits | number:'1.2-2' }}</h4>
-</section>
+<h2> Currency Observable Rates. </h2>
+<h3> From Euro to the $ world </h3>
+<pre>{{ currentEuroRates$ | async | json }}</pre>
 ```
+
+> Recibe un observable, se suscribe, y devuelve el dato cuando llegue.
 
 ---
 
-## 2.2 Implementaciones
+En el controlador se exponen Observables
+
+```typeScript
+*public currentEuroRates$: Observable<any> = null;
+private getCurrentEuroRates() {
+  const currencies = 'USD,GBP,CHF,JPY';
+  const url = `${this.ratesApi}?symbols=${currencies}`;
+* this.currentEuroRates$ = this.httpClient.get(url)
+}
+```
+> No es necesaria la suscripción en código
+
+---
+
+## 2.2 Pipe
+
+### Tuberías en RxJS .pipe()
 
 ```typescript
-@Injectable({
-  providedIn: 'root'
-})
-export class ConverterService {
-  constructor() {}
-
-  public fromKilometersToMiles = kilometers => kilometers * 0.621;
-
-  public fromMilesToKilometers = miles => miles * 1.609;
-
-  public fromCelsiusToFarenheit = celsius => celsius * (9 / 5) + 32;
-
-  public fromFarenheitToCelsius = farenheit => (farenheit - 32) * (5 / 9);
+public myRates$: Observable<any[]> = null;
+private getCurrentEuroRates() {
+  const url = `${this.ratesApi}?symbols=USD,GBP,CHF,JPY`;
+  this.currentEuroRates$ = this.httpClient.get(url);
+* this.myRates$ = this.currentEuroRates$.pipe(map(this.transformData));
+}
+private transformData(currentRates) {
+  const current = currentRates.rates;
+  return Object.keys(current).map(key => ({
+    date: currentRates.date,
+    currency: key,
+    euros: current[key]
+  }));
 }
 ```
 
 ---
 
-```typescript
-@Injectable()
-export class EuropeConverterService {
-  sourceCulture = 'USA';
-  targetCulture = 'Europe';
-  constructor(private converterService: ConverterService) {}
-  convertDistance = this.converterService.fromMilesToKilometers;
-  convertTemperature = this.converterService.fromFarenheitToCelsius;
-}
+## 2.3 Operators
+
+```html
+<pre>{{ myRates$ | async | json }}</pre>
 ```
+El consumo sigue igual... pero...
+
+--
 
 ```typescript
-@Injectable()
-export class UsaConverterService implements CultureConverter {
-  sourceCulture = 'Europe';
-  targetCulture = 'USA';
-  constructor(private converterService: ConverterService) {}
-  convertDistance = this.converterService.fromKilometersToMiles;
-  convertTemperature = this.converterService.fromCelsiusToFarenheit;
-}
-```
-
----
-
-## 2.3 Provisión manual
-
-```typescript
-{
-  providers: [
-    {
-      provide: CultureConverterService,
-      useClass: UsaConverterService
-    }
-  ];
-}
-```
-
----
-
-## 2.4 Factoría
-
-```typescript
-const cultureFactory = (converterService: ConverterService) => {
-  if (environment.unitsCulture === 'metric') {
-    return new EuropeConverterService(converterService);
-  } else {
-    return new UsaConverterService(converterService);
-  }
-};
-```
-
-```typescript
-export const environment = {
-  appName: 'Angular - Board',
-  production: false,
-  unitsCulture: 'metric'
-};
-```
-
----
-
-La provisión del servicio apunta a la función factoría. Si además el servicio dependiese de otro tenemos que especificarlo en el sub-array `deps:[]`.
-
-```typescript
-{
-  providers: [
-    {
-      provide: CultureConverterService,
-      useFactory: cultureFactory,
-      deps: [ConverterService]
-    }
-  ];
+private getCurrentEuroRates() {
+const url = `${this.ratesApi}?symbols=USD,GBP,CHF,JPY`;
+  this.currentEuroRates$ = this.httpClient.get(url)
+*     .pipe(share());
+  this.myRates$ = this.currentEuroRates$
+      .pipe(
+*       tap(d=>conoloe.log(d)),
+        map(this.transformData),
+        tap(t=>conoloe.log(t))
+      );
 }
 ```
 
@@ -431,28 +333,36 @@ La provisión del servicio apunta a la función factoría. Si además el servici
 
 > Recap:
 
-# 2. Inversión del control
+# 2. Observables
 
-## Interface y servicio base
+## Async
 
-## Implementaciones
+## pipe
 
-## Provisión manual
+## operators
 
-## Factoría
+---
+
+# 3. Interceptores
+
+## La interfaz HttpInterceptor
+
+## Inversión del control vía token
+
+## Un auditor de llamadas
 
 ---
 
 > Next:
 
-# Comunicaciones http en Angular
+# Vigilancia y seguridad en Angular
 
-## El cliente http
+## Uso de observables para monitorizar datos
 
-## Operaciones con observables
+## Uso de interceptores para gestionar errores
 
-## Interceptores de llamadas
+## Un notificador de problemas
 
-> **Blog de apoyo:** [Servicios inyectables en Angular](https://academia-binaria.com/servicios-inyectables-en-Angular/)
+> **Blog de apoyo:** [Comunicaciones Http en Angular](https://academia-binaria.com/comunicaciones-http-en-Angular/)
 
 > > By [Alberto Basalo](https://twitter.com/albertobasalo)
