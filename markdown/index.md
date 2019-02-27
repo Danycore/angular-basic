@@ -1,5 +1,4 @@
-class: animation-fade
-layout: true
+class: animation-fade layout: true
 
 .bottom-bar[
 
@@ -26,3 +25,5 @@ class: impact
 # [4-Flow](https://academiabinaria.github.io/angular-board/readme/4-flow.html)
 
 # [5-Inject](https://academiabinaria.github.io/angular-board/readme/5-inject.html)
+
+# [6-Http](https://academiabinaria.github.io/angular-board/readme/6-http.html)
