@@ -255,7 +255,7 @@ ng g c rates/obserates
   path: 'observables',
   component: ObseratesComponent
 }
-
+<p><a [routerLink]="['observables']">Observables</a></p>
 ```
 
 ---
@@ -277,12 +277,20 @@ ng g c rates/obserates
 En el controlador se exponen Observables
 
 ```typeScript
-*public currentEuroRates$: Observable<any> = null;
-private getCurrentEuroRates() {
-  const currencies = 'USD,GBP,CHF,JPY';
-  const url = `${this.ratesApi}?symbols=${currencies}`;
-* this.currentEuroRates$ = this.httpClient.get(url)
-}
+  private ratesApi = 'https://api.exchangeratesapi.io/latest';
+* public currentEuroRates$: Observable<any> = null;
+
+  constructor(private httpClient: HttpClient) {}
+
+  ngOnInit() {
+    this.getCurrentEuroRates();
+  }
+
+  private getCurrentEuroRates() {
+    const currencies = 'USD,GBP,CHF,JPY';
+    const url = `${this.ratesApi}?symbols=${currencies}`;
+*   this.currentEuroRates$ = this.httpClient.get(url).pipe(share());
+  }
 ```
 > No es necesaria la suscripción en código
 
