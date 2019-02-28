@@ -382,7 +382,8 @@ export class AuditInterceptorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler )
     : Observable<HttpEvent<any>> {
-    throw new Error( 'Method not implemented.' );
+    // throw new Error( 'Method not implemented.' );
+    return next.handle(req);
   }
 
   constructor() { }
@@ -406,7 +407,8 @@ providers: [
 ]
 ```
 
-El `HttpClient` en su constructor reclama `HTTP_INTERCEPTORS` un array de múltiples dependencias
+El `HttpClient` en su constructor reclama `HTTP_INTERCEPTORS`, un array de múltiples dependencias
+
 Le damos nuestro interceptor para que lo agregue a su array
 
 ---
@@ -417,22 +419,19 @@ Le damos nuestro interceptor para que lo agregue a su array
 export class AuditInterceptorService implements HttpInterceptor {
   constructor() {}
 
-  public intercept(req: HttpRequest<any>, next: HttpHandler)
-    : Observable<HttpEvent<any>> {
-    const startTime = Date.now();
-    return next.handle(req)
-      .pipe(
-        tap((event: HttpEvent<any>)
-          => this.auditEvent(event, startTime)));
+  public intercept(req: HttpRequest<any>, next: HttpHandler){
+    const started = Date.now();
+    return next.handle(req).pipe(
+      filter((event: HttpEvent<any>) => event instanceof HttpResponse),
+      tap((resp: HttpResponse<any>) => this.auditEvent(resp, started))
+    );
   }
 
-  private auditEvent(event: HttpEvent<any>, startTime: number) {
-    if (event instanceof HttpResponse) {
-      const elapsedMs = Date.now() - startTime;
-      const eventMessage = event.statusText + ' on ' + event.url;
-      const message = eventMessage + ' in ' + elapsedMs + 'ms';
-      console.log(message);
-    }
+  private auditEvent(resp: HttpResponse<any>, started: number) {
+    const elapsedMs = Date.now() - started;
+    const eventMessage = resp.statusText + ' on ' + resp.url;
+    const message = eventMessage + ' in ' + elapsedMs + 'ms';
+    console.log(message);
   }
 }
 ```
