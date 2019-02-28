@@ -25,3 +25,6 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+sonar-scanner.bat -D"sonar.projectKey=AcademiaBinaria_angular-board" -D"sonar.organization=academiabinaria" -D"sonar.sources=." -D"sonar.host.url=https://sonarcloud.io" -D"sonar.login=897c2c548e08bb02069a555b4a61c9348308b4d3"
