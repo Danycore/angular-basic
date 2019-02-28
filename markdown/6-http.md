@@ -289,7 +289,7 @@ En el controlador se exponen Observables
   private getCurrentEuroRates() {
     const currencies = 'USD,GBP,CHF,JPY';
     const url = `${this.ratesApi}?symbols=${currencies}`;
-*   this.currentEuroRates$ = this.httpClient.get(url).pipe(share());
+*   this.currentEuroRates$ = this.httpClient.get(url);
   }
 ```
 > No es necesaria la suscripción en código
@@ -355,6 +355,8 @@ const url = `${this.ratesApi}?symbols=USD,GBP,CHF,JPY`;
 ## operators
 
 ---
+
+class: impact
 
 # 3. Interceptores
 
