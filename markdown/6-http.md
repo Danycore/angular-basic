@@ -335,9 +335,9 @@ const url = `${this.ratesApi}?symbols=USD,GBP,CHF,JPY`;
 *     .pipe(share());
   this.myRates$ = this.currentEuroRates$
       .pipe(
-*       tap(d=>conoloe.log(d)),
+*       tap(d=>console.log(d)),
         map(this.transformData),
-        tap(t=>conoloe.log(t))
+        tap(t=>console.log(t))
       );
 }
 ```
