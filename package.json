@@ -14,7 +14,7 @@
     "build:pub": "ng build --prod --output-path docs --base-href https://academiabinaria.github.io/angular-board/",
     "e2e": "ng e2e",
     "http-server": "http-server ./dist/angular-board/ -c-1 -p4271 -a localhost -o",
-    "lint": "ng lint",
+    "lint": "ng lint angular-board",
     "ng": "ng",
     "pub:doc": "npm run build:doc && npm run push",
     "pub:pdf": "cd ./markdown/ && bs p -h -o ../public/readme",

@@ -11,12 +11,13 @@ export class DisplayComponent implements OnInit {
   @Input() public topSpeed: number;
   @Input() public units: string;
 
+  private readonly factor = 0.8;
+
   constructor() {}
 
   ngOnInit() {}
 
-  public getSpeedClass = () =>
-    this.currentSpeed < this.getThreshold() ? 'primary' : 'secondary';
+  public getSpeedClass = () => (this.currentSpeed < this.getThreshold() ? 'primary' : 'secondary');
 
-  private getThreshold = () => this.topSpeed * 0.8;
+  private getThreshold = () => this.topSpeed * this.factor;
 }

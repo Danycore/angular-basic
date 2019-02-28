@@ -10,6 +10,7 @@ export class CarComponent implements OnInit {
   public car: CarModel;
   public disableBrake: boolean;
   public disableThrottle: boolean;
+  private readonly factor = 10;
 
   constructor() {}
 
@@ -39,5 +40,5 @@ export class CarComponent implements OnInit {
     this.checkLimits();
   }
   private getDelta = (drive: number) =>
-    drive + (this.car.maxSpeed - this.car.currentSpeed) / 10;
+    drive + (this.car.maxSpeed - this.car.currentSpeed) / this.factor;
 }
