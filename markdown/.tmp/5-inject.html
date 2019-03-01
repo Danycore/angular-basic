@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset="UTF-8">
-  <title></title>
-  <link rel="stylesheet" href="style.css">
-  <script src="./assets/remark.min.js"></script>
-  <script>
-    const config = {
-      ratio: '16:9',
-      highlightLines: true,
-      highlightLanguage: 'typescript',
-      highlightStyle: 'tomorrow-night-blue',
-      countIncrementalSlides: false,
-    };
-    const sourceConfig = { ...config, sourceUrl: '5-inject.md' };
-    function create() {
-      return remark.create( sourceConfig );
-    }
-  </script>
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+    <script src="./assets/remark.min.js"></script>
+    <script>
+      const config = {
+        ratio: '16:9',
+        highlightLines: true,
+        highlightLanguage: 'typescript',
+        highlightStyle: 'tomorrow-night-blue',
+        countIncrementalSlides: false,
+      };
+      const sourceConfig = { ...config, sourceUrl: '5-inject.md' };
+      function create() {
+        console.log('sc:', sourceConfig.source);
+        return remark.create(sourceConfig);
+      }
+    </script>
+  </head>
 
-<body onload="slideshow = create()">
-</body>
+  <body onload="slideshow = create()">
+  </body>
 
 </html>
