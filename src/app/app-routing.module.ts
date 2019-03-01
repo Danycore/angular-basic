@@ -29,6 +29,10 @@ const routes: Routes = [
     loadChildren: './6-http/rates/rates.module#RatesModule'
   },
   {
+    path: 'notifications',
+    loadChildren: './7-watch/notifications/notifications.module#NotificationsModule'
+  },
+  {
     path: 'heroes',
     component: HeroesComponent
   },
