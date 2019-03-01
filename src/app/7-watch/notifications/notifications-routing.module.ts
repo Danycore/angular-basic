@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ReceiverComponent } from '../receiver/receiver.component';
-import { SenderComponent } from '../sender/sender.component';
+import { ReceiverComponent } from './receiver/receiver.component';
+import { SenderComponent } from './sender/sender.component';
 
 const routes: Routes = [
   {

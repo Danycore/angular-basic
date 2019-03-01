@@ -5,3 +5,4 @@
   <li *ngFor="let note of notes$ | async">{{ note | json }}</li>
 </ul>
 <a [routerLink]="['../sender']">Go to sender</a>
+<button (click)="forceError()">Force http Error</button>

@@ -16,9 +16,9 @@ class: impact
 
 ---
 
-# 1. Uso de observables para monitorizar datos
+# 1. Observables para monitorizar datos
 
-# 2. Uso de interceptores para gestionar errores
+# 2. Interceptores para gestionar errores
 
 # 3. Un notificador de problemas
 
@@ -26,7 +26,7 @@ class: impact
 
 class: impact
 
-# 1. Uso de observables para monitorizar datos
+# 1. Observables para monitorizar datos
 
 ## Productores de observables
 
@@ -208,7 +208,7 @@ export class ReceiverComponent implements OnInit {
 
 > Recap:
 
-# 1. Uso de observables para monitorizar datos
+# 1. Observables para monitorizar datos
 
 ## Productores de observables
 
@@ -220,106 +220,93 @@ export class ReceiverComponent implements OnInit {
 
 class: impact
 
-# 2. Observables
+# 2. Interceptores para gestionar errores
 
-## Async
+## El operador catchError
 
-## pipe
+## Gestión centralizada de errores
 
-## operators
-
----
-
-```
-ng g c rates/obserates
-{
-  path: 'observables',
-  component: ObseratesComponent
-}
-<p><a [routerLink]="['observables']">Observables</a></p>
-```
 
 ---
 
-## 2.1 Async
+Creamos un servicio como base del interceptor
 
-### Tuberías de Angular |
-
-```html
-<h2> Currency Observable Rates. </h2>
-<h3> From Euro to the $ world </h3>
-<pre>{{ currentEuroRates$ | async | json }}</pre>
 ```
+ng g s notifications/errorInterceptor
 
-> Recibe un observable, se suscribe, y devuelve el dato cuando llegue.
-
----
-
-En el controlador se exponen Observables
-
-```typeScript
-  private ratesApi = 'https://api.exchangeratesapi.io/latest';
-* public currentEuroRates$: Observable<any> = null;
-
-  constructor(private httpClient: HttpClient) {}
-
-  ngOnInit() {
-    this.getCurrentEuroRates();
-  }
-
-  private getCurrentEuroRates() {
-    const currencies = 'USD,GBP,CHF,JPY';
-    const url = `${this.ratesApi}?symbols=${currencies}`;
-*   this.currentEuroRates$ = this.httpClient.get(url);
-  }
 ```
-> No es necesaria la suscripción en código
-
----
-
-## 2.2 Pipe
-
-### Tuberías en RxJS .pipe()
-
-```typescript
-public myRates$: Observable<any[]> = null;
-private getCurrentEuroRates() {
-  const url = `${this.ratesApi}?symbols=USD,GBP,CHF,JPY`;
-  this.currentEuroRates$ = this.httpClient.get(url);
-* this.myRates$ = this.currentEuroRates$.pipe(map(this.transformData));
-}
-private transformData(currentRates) {
-  const current = currentRates.rates;
-  return Object.keys(current).map(key => ({
-    date: currentRates.date,
-    currency: key,
-    euros: current[key]
-  }));
-}
-```
-
----
-
-## 2.3 Operators
-
-```html
-<pre>{{ myRates$ | async | json }}</pre>
-```
-El consumo sigue igual... pero...
-
 --
 
+le hacemos implementar la interface HttpInterceptor
+
 ```typescript
-private getCurrentEuroRates() {
-const url = `${this.ratesApi}?symbols=USD,GBP,CHF,JPY`;
-  this.currentEuroRates$ = this.httpClient.get(url)
-*     .pipe(share());
-  this.myRates$ = this.currentEuroRates$
-      .pipe(
-*       tap(d=>console.log(d)),
-        map(this.transformData),
-        tap(t=>console.log(t))
-      );
+export class ErrorInterceptorService implements HttpInterceptor {
+  constructor() {}
+
+  public intercept(req: HttpRequest<any>, next: HttpHandler)
+    : Observable<HttpEvent<any>> {
+    return next.handle(req);
+  }
+}
+```
+
+---
+
+y lo proveemos invirtiendo el control
+
+```typescript
+@NgModule({
+  declarations: [SenderComponent, ReceiverComponent],
+  imports: [
+    CommonModule,
+    NotificationsRoutingModule,
+    HttpClientModule,
+    FormsModule
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptorService,
+      multi: true
+    }
+  ]
+})
+export class NotificationsModule {}
+```
+
+---
+
+## 2.1 El operador catchError
+
+```typescript
+public intercept(req, next) {
+   return next.handle(req).pipe(tap(null, err=>console.log(err)));
+   // return next.handle(req).pipe(catchError(err => of(null)));
+   // return next.handle(req).pipe(catchError(err => throwError(err)));
+}
+```
+
+---
+## 2.2 Gestión centralizada de errores
+
+
+```typescript
+public intercept(req, next) {
+  return next.handle(req).pipe(catchError(this.handleError));
+}
+
+private handleError(err) {
+  const unauthorized_code = 401;
+  let userMessage = 'Fatal error';
+  if (err instanceof HttpErrorResponse) {
+    if (err.status === unauthorized_code) {
+      userMessage = 'Authorization needed';
+    } else {
+      userMessage = 'Comunications error';
+    }
+  }
+  console.log(userMessage);
+  return throwError(err);
 }
 ```
 
@@ -327,103 +314,56 @@ const url = `${this.ratesApi}?symbols=USD,GBP,CHF,JPY`;
 
 > Recap:
 
-# 2. Observables
+# 2. Interceptores para gestionar errores
 
-## Async
+## El operador catchError
 
-## pipe
-
-## operators
+## Gestión centralizada de errores
 
 ---
 
 class: impact
 
-# 3. Interceptores
+# 3. Un notificador de problemas
 
-## La interfaz HttpInterceptor
+## Emisión mediante el Store
 
-## Inversión del control vía token
-
-## Un auditor de llamadas
+## Recepción desacoplada del interceptor
 
 ---
 
-```console
-ng g s rates/AuditInterceptor
-```
-
-Hay que crear un servicio inyectable y hacerle cumplir una Interfaz
-
----
-
-## 3.1 La interfaz HttpInterceptor
+## 3.1 Emisión mediante el Store
 
 ```typescript
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest }
-  from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+// dependencia en el constructor
+constructor(private notificationsStore: NotificationsStoreService) {}
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AuditInterceptorService implements HttpInterceptor {
-  public intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler )
-    : Observable<HttpEvent<any>> {
-    // throw new Error( 'Method not implemented.' );
-    return next.handle(req);
-  }
+// En el interceptor.
+// Ojo al bind(this), necesario para no perder el contexto
+return next.handle(req).pipe(catchError(this.handleError.bind(this)));
 
-  constructor() { }
+private handleError(err) {
+  let userMessage = 'Fatal error';
+  // emisión de la notificación
+  this.notificationsStore.sendNotification(userMessage);
 }
 ```
 ---
 
-## 3.2 Inversión del control vía token
+## 3.2 Recepción desacoplada del interceptor
 
-> 1. Quitamos el `providedIn: 'root'`
+Por ejemplo desde el ReceiverComponent
 
-> 2. Tomamos el control de la inyección
-
-```TypeScript
-providers: [
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuditInterceptorService,
-    multi: true
-  }
-]
+```html
+<button (click)="forceError()">Force http Error</button>
 ```
 
-El `HttpClient` en su constructor reclama `HTTP_INTERCEPTORS`, un array de múltiples dependencias
-
-Le damos nuestro interceptor para que lo agregue a su array
-
----
-
-## 3.3 Un auditor de llamadas
-
-```Typescript
-export class AuditInterceptorService implements HttpInterceptor {
-  constructor() {}
-
-  public intercept(req: HttpRequest<any>, next: HttpHandler){
-    const started = Date.now();
-    return next.handle(req).pipe(
-      filter((event: HttpEvent<any>) => event instanceof HttpResponse),
-      tap((resp: HttpResponse<any>) => this.auditEvent(resp, started))
-    );
-  }
-
-  private auditEvent(resp: HttpResponse<any>, started: number) {
-    const elapsedMs = Date.now() - started;
-    const eventMessage = resp.statusText + ' on ' + resp.url;
-    const message = eventMessage + ' in ' + elapsedMs + 'ms';
-    console.log(message);
-  }
+```TypeScript
+public forceError() {
+  const privateUrl = 'https://api-base.herokuapp.com/api/priv/secrets';
+  this.httpClient.get(privateUrl).subscribe();
+  const notFoundUrl = 'https://api-base.herokuapp.com/api/pub/items/9';
+  this.httpClient.get(notFoundUrl).subscribe();
 }
 ```
 
@@ -431,25 +371,23 @@ export class AuditInterceptorService implements HttpInterceptor {
 
 > Recap:
 
-# 3. Interceptores
+# 3. Un notificador de problemas
 
-## La interfaz HttpInterceptor
+## Emisión mediante el Store
 
-## Inversión del control vía token
-
-## Un auditor de llamadas
+## Recepción desacoplada del interceptor
 ---
 
 > Next:
 
-# Vigilancia y seguridad en Angular
+# Formularios reactivos con Angular
 
-## Uso de observables para monitorizar datos
+## Desacoplar vista y modelo
 
-## Uso de interceptores para gestionar errores
+## El Form Group
 
-## Un notificador de problemas
+## Validaciones
 
-> **Blog de apoyo:** [Comunicaciones Http en Angular](https://academia-binaria.com/comunicaciones-http-en-Angular/)
+> **Blog de apoyo:** [Vigilancia y seguridad en Angular](https://academia-binaria.com/vigilancia-y-seguridad-en-Angular/)
 
 > > By [Alberto Basalo](https://twitter.com/albertobasalo)
