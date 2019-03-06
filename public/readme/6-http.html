@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet"
+        href="style.css">
   <script src="./assets/remark.min.js"></script>
   <script>
     const config = {
@@ -14,12 +15,10 @@
       highlightStyle: 'tomorrow-night-blue',
       countIncrementalSlides: false,
     };
-    const sourceConfig = { ...config, sourceUrl: '7-watch.md' };
+    const sourceConfig = { ...config, sourceUrl: '6-http.md' };
     function create() {
-      // console.log('sc:', sourceConfig.source);
-      const result = remark.create( sourceConfig );
-      console.log( 'result:', result );
-      return result;
+      console.log( 'sc:', sourceConfig.source );
+      return remark.create( sourceConfig );
     }
   </script>
 </head>
