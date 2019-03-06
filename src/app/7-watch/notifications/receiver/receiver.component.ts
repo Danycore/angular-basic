@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { NotificationsStoreService } from '../../notifications-store.service';
+import { NotificationsStoreService } from '../notifications-store.service';
 
 @Component({
   selector: 'app-receiver',

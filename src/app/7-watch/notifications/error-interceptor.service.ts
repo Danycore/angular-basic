@@ -2,7 +2,7 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { NotificationsStoreService } from '../notifications-store.service';
+import { NotificationsStoreService } from './notifications-store.service';
 
 @Injectable()
 export class ErrorInterceptorService implements HttpInterceptor {
@@ -22,7 +22,7 @@ export class ErrorInterceptorService implements HttpInterceptor {
         userMessage = 'Comunications error';
       }
     }
-    this.notificationsStoreService.sendNotification(userMessage);
+    this.notificationsStoreService.dispatchNotification(userMessage);
     return throwError(err);
   }
 }

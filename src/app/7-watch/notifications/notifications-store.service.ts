@@ -7,15 +7,15 @@ import { BehaviorSubject } from 'rxjs';
 export class NotificationsStoreService {
   private notifications = [];
 
-  private notifications$ = new BehaviorSubject<any[]>(this.notifications);
+  private notifications$ = new BehaviorSubject<any[]>([]);
   // private notifications$ = new Subject<any[]>();
 
   constructor() {}
 
   public select$ = () => this.notifications$.asObservable();
 
-  public sendNotification(notification) {
-    this.notifications = [...this.notifications, notification];
-    this.notifications$.next(this.notifications);
+  public dispatchNotification(notification) {
+    this.notifications.push(notification);
+    this.notifications$.next([...this.notifications]);
   }
 }

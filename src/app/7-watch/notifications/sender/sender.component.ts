@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NotificationsStoreService } from '../../notifications-store.service';
+import { NotificationsStoreService } from '../notifications-store.service';
 
 @Component({
   selector: 'app-sender',
@@ -14,6 +14,6 @@ export class SenderComponent implements OnInit {
   ngOnInit() {}
 
   public send() {
-    this.notificationsStoreService.sendNotification(this.note);
+    this.notificationsStoreService.dispatchNotification(this.note);
   }
 }
