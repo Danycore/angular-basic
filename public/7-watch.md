@@ -1,16 +1,4 @@
-title: 7-watch
-class: animation-fade
-layout: true
-
-.bottom-bar[
-{{title}}
-]
-
----
-
-class: impact
-
-# {{title}}
+# 7-watch
 
 ## Vigilancia y seguridad en Angular
 
@@ -23,8 +11,6 @@ class: impact
 # 3. Un notificador de problemas
 
 ---
-
-class: impact
 
 # 1. Observables para monitorizar datos
 
@@ -227,8 +213,6 @@ export class ReceiverComponent implements OnInit {
 
 ---
 
-class: impact
-
 # 2. Interceptores para gestionar errores
 
 ## El operador catchError
@@ -330,8 +314,6 @@ private handleError(err) {
 ## Gestión centralizada de errores
 
 ---
-
-class: impact
 
 # 3. Un notificador de problemas
 
