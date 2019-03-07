@@ -345,7 +345,7 @@ return next.handle(req).pipe(catchError(this.handleError.bind(this)));
 private handleError(err) {
   let userMessage = 'Fatal error';
   // emisión de la notificación
-  this.notificationsStore.sendNotification(userMessage);
+  this.notificationsStore.dispatchNotification(userMessage);
 }
 ```
 ---
