@@ -84,25 +84,37 @@ const routes: Routes = [
 
 ## 1.1 Productores de observables
 
-### Of from interval
+### Of y from
 
 ```typescript
-const data = {name:'', value:0};
-// To do of...
-// To do from...
-// To do interval...
+value$ = of(new Date().getMilliseconds());
+value$.subscribe(r=> console.log(r));
+stream$ = from([1, 'two', '***']);
+stream$.subscribe(r=> console.log(r));
+list$ = of(['N', 'S', 'E', 'W']);
+list$.subscribe(r=> console.log(r));
 ```
 
---
+---
 
 ### Subject y BehaviorSubject
 
 ```typescript
 const data = {name:'', value:0};
-const data_after_subscribe$ = new Subject<any>();
-const data_initialize_replay$ =
-  new Subject<any>().pipe(startWith(this.data), shareReplay(1));
-const data_behavior$ = new BehaviorSubject<any>(this.data);
+
+const need_sync$ = new Subject<any>();
+// on time
+need_sync.subscribe(r=> console.log(r));
+need_sync.next(data);
+// too late
+need_sync.subscribe(r=> console.log(r));
+
+const no_hurry$ = new BehaviorSubject<any>(this.data);
+// its ok
+no_hurry.subscribe(r=> console.log(r));
+no_hurry.next(data);
+// its also ok
+no_hurry.subscribe(r=> console.log(r));
 ```
 
 ---
@@ -116,15 +128,12 @@ ng g s notifications/notificationsStore
 ```typescript
 export class NotificationsStoreService {
   private notifications = [];
-
   private notifications$ = new BehaviorSubject<any[]>([]);
-  // private notifications$ = new Subject<any[]>();
 
   constructor() {}
 
   public select$ = () => this.notifications$.asObservable();
-
-  public dispatchNotification(notification) {
+  public dispatch(notification) {
     this.notifications.push(notification);
     this.notifications$.next([...this.notifications]);
   }
@@ -168,7 +177,7 @@ export class SenderComponent implements OnInit {
   ngOnInit() {}
 
   public send() {
-    this.notificationsStore.sendNotification(this.note);
+    this.notificationsStore.dispatch(this.note);
   }
 }
 ```
@@ -345,7 +354,7 @@ return next.handle(req).pipe(catchError(this.handleError.bind(this)));
 private handleError(err) {
   let userMessage = 'Fatal error';
   // emisión de la notificación
-  this.notificationsStore.dispatchNotification(userMessage);
+  this.notificationsStore.dispatch(userMessage);
 }
 ```
 ---
