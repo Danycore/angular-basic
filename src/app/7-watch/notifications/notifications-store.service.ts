@@ -14,7 +14,7 @@ export class NotificationsStoreService {
 
   public select$ = () => this.notifications$.asObservable();
 
-  public dispatchNotification(notification) {
+  public dispatch(notification) {
     this.notifications.push(notification);
     this.notifications$.next([...this.notifications]);
   }

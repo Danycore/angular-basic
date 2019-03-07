@@ -14,6 +14,6 @@ export class SenderComponent implements OnInit {
   ngOnInit() {}
 
   public send() {
-    this.notificationsStoreService.dispatchNotification(this.note);
+    this.notificationsStoreService.dispatch(this.note);
   }
 }

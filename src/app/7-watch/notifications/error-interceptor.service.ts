@@ -22,7 +22,7 @@ export class ErrorInterceptorService implements HttpInterceptor {
         userMessage = 'Comunications error';
       }
     }
-    this.notificationsStoreService.dispatchNotification(userMessage);
+    this.notificationsStoreService.dispatch(userMessage);
     return throwError(err);
   }
 }
