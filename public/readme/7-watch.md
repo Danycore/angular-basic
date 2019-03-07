@@ -124,9 +124,9 @@ export class NotificationsStoreService {
 
   public select$ = () => this.notifications$.asObservable();
 
-  public sendNotification(notification) {
-    this.notifications = [...this.notifications, notification];
-    this.notifications$.next(this.notifications);
+  public dispatchNotification(notification) {
+    this.notifications.push(notification);
+    this.notifications$.next([...this.notifications]);
   }
 }
 ```
@@ -345,7 +345,7 @@ return next.handle(req).pipe(catchError(this.handleError.bind(this)));
 private handleError(err) {
   let userMessage = 'Fatal error';
   // emisión de la notificación
-  this.notificationsStore.sendNotification(userMessage);
+  this.notificationsStore.dispatchNotification(userMessage);
 }
 ```
 ---

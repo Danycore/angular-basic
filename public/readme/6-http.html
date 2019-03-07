@@ -4,8 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
-  <link rel="stylesheet"
-        href="style.css">
+  <link rel="stylesheet" href="style.css">
   <script src="./assets/remark.min.js"></script>
   <script>
     const config = {
@@ -17,8 +16,10 @@
     };
     const sourceConfig = { ...config, sourceUrl: '6-http.md' };
     function create() {
-      console.log( 'sc:', sourceConfig.source );
-      return remark.create( sourceConfig );
+      // console.log('sc:', sourceConfig.source);
+      const result = remark.create( sourceConfig );
+      console.log( 'result:', result );
+      return result;
     }
   </script>
 </head>
