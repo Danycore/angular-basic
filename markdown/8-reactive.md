@@ -248,6 +248,8 @@ public register() {
 }
 ```
 
+---
+
 ### Validación particular por control
 
 ```typescript
