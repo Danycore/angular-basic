@@ -1,4 +1,4 @@
-title: 8-reactive
+title: 8-Reactive
 class: animation-fade
 layout: true
 
@@ -93,6 +93,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class SecurityModule { }
 ```
+---
 
 register.component.ts
 
@@ -100,11 +101,16 @@ register.component.ts
 export class RegisterComponent implements OnInit {
   public formGroup: FormGroup;
 
-  constructor( private formBuilder: FormBuilder ) { }
+* constructor( private formBuilder: FormBuilder ) { }
 
-  ngOnInit() {
+  public ngOnInit() {
+    this.buildForm();
+  }
+
+  private buildForm(){
     this.formGroup = this.formBuilder.group({});
   }
+
 }
 ```
 
@@ -113,13 +119,13 @@ export class RegisterComponent implements OnInit {
 ## 1.2 Form control
 
 ```typescript
-ngOnInit() {
+private buildForm() {
   const name = 'JOHN DOE';
   const dateLenght = 10;
   this.formGroup = this.formBuilder.group({
-    email: 'john@angular.io',
-    name: name.toLowerCase(),
     registeredOn: new Date().toISOString().substring(0, dateLenght),
+    name: name.toLowerCase(),
+    email: 'john@angular.io',
     password: ''
   });
 }
@@ -131,34 +137,23 @@ ngOnInit() {
 
 
 ```html
-<h2>
-  User registration
-</h2>
 <form [formGroup]="formGroup">
-  <section>
-    <label for="email">E-mail</label>
-    <input name="email"
-           formControlName="email"
-           type="email" />
-  </section>
-  <section>
-    <label for="name">Name</label>
-    <input name="name"
-           formControlName="name"
-           type="text" />
-  </section>
-  <section>
-    <label for="registeredOn">Registered On</label>
-    <input name="registeredOn"
-           formControlName="registeredOn"
-           type="date" />
-  </section>
-  <section>
-    <label for="password">Password</label>
-    <input name="password"
-           formControlName="password"
-           type="password" />
-  </section>
+  <label for="registeredOn">Registered On</label>
+  <input name="registeredOn"
+        formControlName="registeredOn"
+        type="date" />
+  <label for="name">Name</label>
+  <input name="name"
+        formControlName="name"
+        type="text" />
+  <label for="email">E-mail</label>
+  <input name="email"
+        formControlName="email"
+        type="email" />
+  <label for="password">Password</label>
+  <input name="password"
+        formControlName="password"
+        type="password" />
 </form>
 ```
 
@@ -187,6 +182,53 @@ class: impact
 ---
 
 ## 2.1 Validadores predefinidos y personalizados
+
+### Validators
+
+```typescript
+private buildForm() {
+  const name = 'JOHN DOE';
+  const dateLenght = 10;
+  const minPassLength = 4;
+  this.formGroup = this.formBuilder.group({
+    registeredOn: new Date().toISOString().substring(0, dateLenght),
+    name: [name.toLowerCase(), Validators.required],
+    email: ['john@angular.io', [
+      Validators.required, Validators.email
+    ]],
+    password: ['', [
+      Validators.required, Validators.minLength(minPassLength)
+    ]]
+  });
+}
+```
+---
+### Validaciones personalizadas
+
+```typescript
+password: ['', [
+  Validators.required,
+  Validators.minLength(minPassLength),
+  this.validatePassword
+]]
+
+```
+
+--
+
+```typescript
+private validatePassword(control: AbstractControl) {
+  const password = control.value.toISOString();
+  const isValid = null;
+  if (!password.includes('$')) {
+    return 'needs dolar symbol';
+  }
+  if (!parseFloat(password[0])) {
+    return 'must start with a number';
+  }
+  return isValid;
+}
+```
 
 ---
 
