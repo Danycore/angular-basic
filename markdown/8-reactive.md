@@ -79,8 +79,33 @@ const routes: Routes = [
 
 ## 1.1 Form builder
 
-```typescript
+ReactiveFormModule
 
+```typescript
+import { ReactiveFormsModule } from '@angular/forms';
+@NgModule({
+  declarations: [RegisterComponent],
+  imports: [
+    CommonModule,
+    SecurityRoutingModule,
+*   ReactiveFormsModule
+  ]
+})
+export class SecurityModule { }
+```
+
+register.component.ts
+
+```typescript
+export class RegisterComponent implements OnInit {
+  public formGroup: FormGroup;
+
+  constructor( private formBuilder: FormBuilder ) { }
+
+  ngOnInit() {
+    this.formGroup = this.formBuilder.group({});
+  }
+}
 ```
 
 ---
@@ -88,7 +113,16 @@ const routes: Routes = [
 ## 1.2 Form control
 
 ```typescript
-
+ngOnInit() {
+  const name = 'JOHN DOE';
+  const dateLenght = 10;
+  this.formGroup = this.formBuilder.group({
+    email: 'john@angular.io',
+    name: name.toLowerCase(),
+    registeredOn: new Date().toISOString().substring(0, dateLenght),
+    password: ''
+  });
+}
 ```
 
 ---
@@ -97,7 +131,35 @@ const routes: Routes = [
 
 
 ```html
-
+<h2>
+  User registration
+</h2>
+<form [formGroup]="formGroup">
+  <section>
+    <label for="email">E-mail</label>
+    <input name="email"
+           formControlName="email"
+           type="email" />
+  </section>
+  <section>
+    <label for="name">Name</label>
+    <input name="name"
+           formControlName="name"
+           type="text" />
+  </section>
+  <section>
+    <label for="registeredOn">Registered On</label>
+    <input name="registeredOn"
+           formControlName="registeredOn"
+           type="date" />
+  </section>
+  <section>
+    <label for="password">Password</label>
+    <input name="password"
+           formControlName="password"
+           type="password" />
+  </section>
+</form>
 ```
 
 ---
