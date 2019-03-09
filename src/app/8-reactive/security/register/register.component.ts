@@ -17,10 +17,10 @@ export class RegisterComponent implements OnInit {
 
   private buildForm() {
     const name = 'JOHN DOE';
-    const dateLenght = 10;
+    const dateLength = 10;
     const minPassLength = 4;
     this.formGroup = this.formBuilder.group({
-      registeredOn: new Date().toISOString().substring(0, dateLenght),
+      registeredOn: new Date().toISOString().substring(0, dateLength),
       name: [name.toLowerCase(), Validators.required],
       email: ['john@angular.io', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(minPassLength), this.validatePassword]]
@@ -28,14 +28,28 @@ export class RegisterComponent implements OnInit {
   }
 
   private validatePassword(control: AbstractControl) {
-    const password = control.value.toISOString();
+    const password = control.value;
     const isValid = null;
     if (!password.includes('$')) {
-      return 'needs dolar symbol';
+      return { dollar: 'needs dollar symbol' };
     }
     if (!parseFloat(password[0])) {
-      return 'must start with a number';
+      return { number: 'must start with a number' };
     }
     return isValid;
+  }
+
+  public register() {
+    const user = this.formGroup.value;
+    console.log(user);
+  }
+
+  public getError(controlName: string): string {
+    let error = '';
+    const control = this.formGroup.get(controlName);
+    if (control.touched && control.errors != null) {
+      error = JSON.stringify(control.errors);
+    }
+    return error;
   }
 }

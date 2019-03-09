@@ -13,17 +13,24 @@
     <input name="name"
            formControlName="name"
            type="text" />
+    <span>{{ getError('name')}}</span>
   </section>
   <section>
     <label for="email">E-mail</label>
     <input name="email"
            formControlName="email"
            type="email" />
+    <span>{{ getError('email')}}</span>
   </section>
   <section>
     <label for="password">Password</label>
     <input name="password"
            formControlName="password"
            type="password" />
+    <span>{{ getError('password')}}</span>
+  </section>
+  <section>
+    <button (click)="register()"
+            [disabled]="formGroup.invalid">Register me!</button>
   </section>
 </form>

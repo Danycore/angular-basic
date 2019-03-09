@@ -188,10 +188,10 @@ class: impact
 ```typescript
 private buildForm() {
   const name = 'JOHN DOE';
-  const dateLenght = 10;
+  const dateLength = 10;
   const minPassLength = 4;
   this.formGroup = this.formBuilder.group({
-    registeredOn: new Date().toISOString().substring(0, dateLenght),
+    registeredOn: new Date().toISOString().substring(0, dateLength),
     name: [name.toLowerCase(), Validators.required],
     email: ['john@angular.io', [
       Validators.required, Validators.email
@@ -218,13 +218,13 @@ password: ['', [
 
 ```typescript
 private validatePassword(control: AbstractControl) {
-  const password = control.value.toISOString();
+  const password = control.value;
   const isValid = null;
   if (!password.includes('$')) {
-    return 'needs dolar symbol';
+    return { dollar: 'needs dollar symbol' };
   }
   if (!parseFloat(password[0])) {
-    return 'must start with a number';
+    return { number: 'must start with a number' };
   }
   return isValid;
 }
@@ -233,6 +233,39 @@ private validatePassword(control: AbstractControl) {
 ---
 
 ## 2.2 Estados de cambio y validación
+
+### Validación general del formulario
+
+```html
+<button (click)="register()"
+    [disabled]="formGroup.invalid">Register me!</button>
+```
+
+```typescript
+public register() {
+  const user = this.formGroup.value;
+  console.log(user);
+}
+```
+
+### Validación particular por control
+
+```typescript
+public getError(controlName: string): string {
+  let error = '';
+  const control = this.formGroup.get(controlName);
+  if (control.touched && control.errors != null) {
+    error = JSON.stringify(control.errors);
+  }
+  return error;
+}
+```
+
+```html
+<span>{{ getError('name')}}</span>
+<span>{{ getError('email')}}</span>
+<span>{{ getError('password')}}</span>
+```
 
 ---
 
