@@ -33,6 +33,10 @@ const routes: Routes = [
     loadChildren: './7-watch/notifications/notifications.module#NotificationsModule'
   },
   {
+    path: 'security',
+    loadChildren: './8-reactive/security/security.module#SecurityModule'
+  },
+  {
     path: 'heroes',
     component: HeroesComponent
   },
