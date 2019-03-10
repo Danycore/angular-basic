@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './register/register.component';
+import { SecretComponent } from './secret/secret.component';
 
 const routes: Routes = [
   {
@@ -8,8 +9,12 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
+    path: 'secret',
+    component: SecretComponent
+  },
+  {
     path: '**',
-    redirectTo: 'register'
+    redirectTo: 'secret'
   }
 ];
 

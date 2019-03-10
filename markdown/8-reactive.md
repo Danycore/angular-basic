@@ -295,6 +295,66 @@ class: impact
 
 ## 3.1 Detección y redirección de intrusos
 
+```console
+ng g s security/auth-interceptor
+ng g c security/secret
+```
+
+```typescript
+/*
+
+<a routerLink="security/register" class="button">Register</a>
+
+const routes: Routes = [
+  {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: 'secret',
+    component: SecretComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'secret'
+  }
+];*/
+
+@NgModule({
+  declarations: [RegisterComponent, SecretComponent],
+  imports: [CommonModule, SecurityRoutingModule, ReactiveFormsModule, HttpClientModule],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ]
+})
+export class SecurityModule {}
+```
+
+---
+```typescript
+export class AuthInterceptorService implements HttpInterceptor {
+  constructor(private router: Router) {}
+
+  public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    return next.handle(req).pipe(catchError(this.handleError.bind(this)));
+  }
+
+  private handleError(err) {
+    const unauthorized_code = 401;
+    if (err instanceof HttpErrorResponse) {
+      if (err.status === unauthorized_code) {
+        this.router.navigate(['security/register']);
+      }
+    }
+    return throwError(err);
+  }
+}
+```
+
 ---
 
 ## 3.2 Almacenamiento y uso del token
