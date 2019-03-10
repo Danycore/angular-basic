@@ -120,10 +120,11 @@ export class RegisterComponent implements OnInit {
 
 ```typescript
 private buildForm() {
-  const name = 'JOHN DOE';
   const dateLenght = 10;
+  const today = new Date().toISOString().substring(0, dateLength);
+  const name = 'JOHN DOE';
   this.formGroup = this.formBuilder.group({
-    registeredOn: new Date().toISOString().substring(0, dateLenght),
+    registeredOn: today,
     name: name.toLowerCase(),
     email: 'john@angular.io',
     password: ''
@@ -187,11 +188,12 @@ class: impact
 
 ```typescript
 private buildForm() {
-  const name = 'JOHN DOE';
   const dateLength = 10;
+  const today = new Date().toISOString().substring(0, dateLength);
+  const name = 'JOHN DOE';
   const minPassLength = 4;
   this.formGroup = this.formBuilder.group({
-    registeredOn: new Date().toISOString().substring(0, dateLength),
+    registeredOn: today,
     name: [name.toLowerCase(), Validators.required],
     email: ['john@angular.io', [
       Validators.required, Validators.email

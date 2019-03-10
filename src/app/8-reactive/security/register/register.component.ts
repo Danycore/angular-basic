@@ -16,11 +16,12 @@ export class RegisterComponent implements OnInit {
   }
 
   private buildForm() {
-    const name = 'JOHN DOE';
     const dateLength = 10;
+    const today = new Date().toISOString().substring(0, dateLength);
+    const name = 'JOHN DOE';
     const minPassLength = 4;
     this.formGroup = this.formBuilder.group({
-      registeredOn: new Date().toISOString().substring(0, dateLength),
+      registeredOn: today,
       name: [name.toLowerCase(), Validators.required],
       email: ['john@angular.io', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(minPassLength), this.validatePassword]]
