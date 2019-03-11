@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
     const password = control.value;
     let error = null;
     if (!password.includes('$')) {
-      error = { ...error, dollar: 'needs dollar symbol' };
+      error = { ...error, dollar: 'needs a dollar symbol' };
     }
     if (!parseFloat(password[0])) {
       error = { ...error, number: 'must start with a number' };

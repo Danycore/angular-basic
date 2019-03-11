@@ -106,11 +106,9 @@ export class RegisterComponent implements OnInit {
   public ngOnInit() {
     this.buildForm();
   }
-
   private buildForm(){
     this.formGroup = this.formBuilder.group({});
   }
-
 }
 ```
 
@@ -213,7 +211,6 @@ password: ['', [
   Validators.minLength(minPassLength),
   this.validatePassword
 ]]
-
 ```
 
 --
@@ -223,7 +220,7 @@ private validatePassword(control: AbstractControl) {
   const password = control.value;
   let error = null;
   if (!password.includes('$')) {
-    error = { ...error, dollar: 'needs dollar symbol' };
+    error = { ...error, dollar: 'needs a dollar symbol' };
   }
   if (!parseFloat(password[0])) {
     error = { ...error, number: 'must start with a number' };
@@ -305,10 +302,11 @@ ng g c security/secret
 ---
 
 Rutas
+```html
+  <a routerLink="security/register" class="button">Register</a>
+```
 
 ```typescript
-<a routerLink="security/register" class="button">Register</a>
-
 const routes: Routes = [
   {
     path: 'register',
@@ -351,12 +349,11 @@ export class AuthInterceptorService implements HttpInterceptor {
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(catchError(this.handleError.bind(this)));
   }
-
   private handleError(err) {
     const unauthorized_code = 401;
     if (err instanceof HttpErrorResponse) {
       if (err.status === unauthorized_code) {
-        this.router.navigate(['security/register']);
+*       this.router.navigate(['security/register']);
       }
     }
     return throwError(err);
@@ -370,6 +367,10 @@ export class AuthInterceptorService implements HttpInterceptor {
 
 Token Store
 
+```console
+ng g s security/token_store
+```
+
 ```typescript
 export class TokenStoreService {
   private token = '';
@@ -378,7 +379,6 @@ export class TokenStoreService {
   constructor() {}
 
   public select$ = () => this.token$.asObservable();
-
   public dispatch(token) {
     this.token = token;
     this.token$.next(this.token);
@@ -407,7 +407,8 @@ Get Token en AuthInterceptorService
 ```typescript
 private token = '';
 constructor(private router: Router, private tokenStore: TokenStoreService) {
-  this.tokenStore.select$().subscribe(token => (this.token = token));
+  this.tokenStore.select$()
+    .subscribe(token => (this.token = token));
 }
 ```
 
@@ -420,7 +421,8 @@ Use Token
 public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
   const authHeader = { Authorization: 'bearer ' + this.token };
   const authReq = req.clone({ setHeaders: authHeader });
-  return next.handle(authReq).pipe(catchError(this.handleError.bind(this)));
+  return next.handle(authReq)
+    .pipe(catchError(this.handleError.bind(this)));
 }
 ```
 ---
