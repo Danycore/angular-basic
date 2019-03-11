@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TokenStoreService } from '../token-store.service';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +11,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 export class RegisterComponent implements OnInit {
   public formGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private httpClient: HttpClient, private tokenStore: TokenStoreService) {}
 
   public ngOnInit() {
     this.buildForm();
@@ -41,8 +43,9 @@ export class RegisterComponent implements OnInit {
   }
 
   public register() {
+    const loginUrl = 'https://api-base.herokuapp.com/api/pub/credentials/registration';
     const user = this.formGroup.value;
-    console.log(user);
+    this.httpClient.post<any>(loginUrl, user).subscribe(res => this.tokenStore.dispatch(res.token));
   }
 
   public getError(controlName: string): string {

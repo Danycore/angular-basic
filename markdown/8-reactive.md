@@ -295,14 +295,16 @@ class: impact
 
 ## 3.1 Detección y redirección de intrusos
 
+Servicios
+
 ```console
 ng g s security/auth-interceptor
 ng g c security/secret
 ```
 
-```typescript
-/*
+Rutas
 
+```typescript
 <a routerLink="security/register" class="button">Register</a>
 
 const routes: Routes = [
@@ -318,8 +320,10 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'secret'
   }
-];*/
+];
+```
 
+```typescript
 @NgModule({
   declarations: [RegisterComponent, SecretComponent],
   imports: [CommonModule, SecurityRoutingModule, ReactiveFormsModule, HttpClientModule],
@@ -335,6 +339,9 @@ export class SecurityModule {}
 ```
 
 ---
+
+Interceptor
+
 ```typescript
 export class AuthInterceptorService implements HttpInterceptor {
   constructor(private router: Router) {}
@@ -359,7 +366,61 @@ export class AuthInterceptorService implements HttpInterceptor {
 
 ## 3.2 Almacenamiento y uso del token
 
+Token Store
+
+```typescript
+export class TokenStoreService {
+  private token = '';
+  private token$ = new BehaviorSubject<string>('');
+
+  constructor() {}
+
+  public select$ = () => this.token$.asObservable();
+
+  public dispatch(token) {
+    this.token = token;
+    this.token$.next(this.token);
+  }
+}
+```
+
 ---
+
+
+Send credentials and dispatch token
+
+```typescript
+public register() {
+  const url = 'https://api-base.herokuapp.com/api/pub/credentials/registration';
+  const user = this.formGroup.value;
+  this.httpClient.post<any>(url, user)
+    .subscribe(res => this.tokenStore.dispatch(res.token));
+}
+```
+
+---
+
+Get Token en AuthInterceptorService
+
+```typescript
+private token = '';
+constructor(private router: Router, private tokenStore: TokenStoreService) {
+  this.tokenStore.select$().subscribe(token => (this.token = token));
+}
+```
+
+---
+
+Use Token
+
+
+```typescript
+public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  const authHeader = { Authorization: 'bearer ' + this.token };
+  const authReq = req.clone({ setHeaders: authHeader });
+  return next.handle(authReq).pipe(catchError(this.handleError.bind(this)));
+}
+```
 
 > Recap:
 
