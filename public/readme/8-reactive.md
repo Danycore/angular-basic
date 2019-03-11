@@ -121,7 +121,7 @@ private buildForm() {
   const dateLenght = 10;
   const today = new Date().toISOString().substring(0, dateLength);
   const name = 'JOHN DOE';
-  this.formGroup = this.formBuilder.group({
+* this.formGroup = this.formBuilder.group({
     registeredOn: today,
     name: name.toLowerCase(),
     email: 'john@angular.io',
@@ -136,10 +136,10 @@ private buildForm() {
 
 
 ```html
-<form [formGroup]="formGroup">
+*<form [formGroup]="formGroup">
   <label for="registeredOn">Registered On</label>
   <input name="registeredOn"
-        formControlName="registeredOn"
+*       formControlName="registeredOn"
         type="date" />
   <label for="name">Name</label>
   <input name="name"
@@ -190,7 +190,7 @@ private buildForm() {
   const today = new Date().toISOString().substring(0, dateLength);
   const name = 'JOHN DOE';
   const minPassLength = 4;
-  this.formGroup = this.formBuilder.group({
+* this.formGroup = this.formBuilder.group({
     registeredOn: today,
     name: [name.toLowerCase(), Validators.required],
     email: ['john@angular.io', [
@@ -209,7 +209,7 @@ private buildForm() {
 password: ['', [
   Validators.required,
   Validators.minLength(minPassLength),
-  this.validatePassword
+* this.validatePassword
 ]]
 ```
 
@@ -218,7 +218,7 @@ password: ['', [
 ```typescript
 private validatePassword(control: AbstractControl) {
   const password = control.value;
-  let error = null;
+* let error = null;
   if (!password.includes('$')) {
     error = { ...error, dollar: 'needs a dollar symbol' };
   }
@@ -242,7 +242,7 @@ private validatePassword(control: AbstractControl) {
 
 ```typescript
 public register() {
-  const user = this.formGroup.value;
+* const user = this.formGroup.value;
   console.log(user);
 }
 ```
@@ -255,7 +255,7 @@ public register() {
 public getError(controlName: string): string {
   let error = '';
   const control = this.formGroup.get(controlName);
-  if (control.touched && control.errors != null) {
+* if (control.touched && control.errors != null) {
     error = JSON.stringify(control.errors);
   }
   return error;
@@ -323,6 +323,8 @@ const routes: Routes = [
 ];
 ```
 
+---
+
 ```typescript
 @NgModule({
   declarations: [RegisterComponent, SecretComponent],
@@ -330,7 +332,7 @@ const routes: Routes = [
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptorService,
+*     useClass: AuthInterceptorService,
       multi: true
     }
   ]
@@ -374,7 +376,7 @@ ng g s security/token_store
 ```typescript
 export class TokenStoreService {
   private token = '';
-  private token$ = new BehaviorSubject<string>('');
+* private token$ = new BehaviorSubject<string>('');
 
   constructor() {}
 
@@ -396,7 +398,7 @@ public register() {
   const url = 'https://api-base.herokuapp.com/api/pub/credentials/registration';
   const user = this.formGroup.value;
   this.httpClient.post<any>(url, user)
-    .subscribe(res => this.tokenStore.dispatch(res.token));
+*   .subscribe(res => this.tokenStore.dispatch(res.token));
 }
 ```
 
@@ -407,7 +409,7 @@ Get Token en AuthInterceptorService
 ```typescript
 private token = '';
 constructor(private router: Router, private tokenStore: TokenStoreService) {
-  this.tokenStore.select$()
+* this.tokenStore.select$()
     .subscribe(token => (this.token = token));
 }
 ```
@@ -420,7 +422,7 @@ Use Token
 ```typescript
 public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
   const authHeader = { Authorization: 'bearer ' + this.token };
-  const authReq = req.clone({ setHeaders: authHeader });
+* const authReq = req.clone({ setHeaders: authHeader });
   return next.handle(authReq)
     .pipe(catchError(this.handleError.bind(this)));
 }

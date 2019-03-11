@@ -1,16 +1,4 @@
-title: 8-Reactive
-class: animation-fade
-layout: true
-
-.bottom-bar[
-{{title}}
-]
-
----
-
-class: impact
-
-# {{title}}
+# 8-Reactive
 
 ## Formularios reactivos con Angular
 
@@ -24,7 +12,6 @@ class: impact
 
 ---
 
-class: impact
 
 # 1. Desacople entre vista y modelo
 
@@ -170,7 +157,6 @@ private buildForm() {
 
 ---
 
-class: impact
 
 # 2. Validación y estados
 
@@ -280,7 +266,6 @@ public getError(controlName: string): string {
 
 ---
 
-class: impact
 
 # 3. Un gestor de credenciales
 
