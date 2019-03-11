@@ -37,3 +37,7 @@ class: impact
 # [6-Http](https://academiabinaria.github.io/angular-board/readme/6-http.html)
 
 # [7-Watch](https://academiabinaria.github.io/angular-board/readme/7-watch.html)
+
+---
+
+# [8-Reactive](https://academiabinaria.github.io/angular-board/readme/8-reactive.html)
