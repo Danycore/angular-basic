@@ -221,14 +221,14 @@ password: ['', [
 ```typescript
 private validatePassword(control: AbstractControl) {
   const password = control.value;
-  const isValid = null;
+  let error = null;
   if (!password.includes('$')) {
-    return { dollar: 'needs dollar symbol' };
+    error = { ...error, dollar: 'needs dollar symbol' };
   }
   if (!parseFloat(password[0])) {
-    return { number: 'must start with a number' };
+    error = { ...error, number: 'must start with a number' };
   }
-  return isValid;
+  return error;
 }
 ```
 
@@ -301,6 +301,8 @@ Servicios
 ng g s security/auth-interceptor
 ng g c security/secret
 ```
+
+---
 
 Rutas
 
@@ -421,6 +423,7 @@ public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent
   return next.handle(authReq).pipe(catchError(this.handleError.bind(this)));
 }
 ```
+---
 
 > Recap:
 
