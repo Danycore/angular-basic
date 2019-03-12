@@ -4,7 +4,6 @@ La **vigilancia** de los datos y la información en tiempo real al usuario son d
 
 Veremos ambos aspectos del desarrollo, pues están muy relacionados con la programación asíncrona y el dominio de los observables. Sentaremos las bases para unas **comunicaciones seguras y fluidas en Angular**.
 
-<!-- more -->
 
 Partiendo de la aplicación tal cómo quedó en [Comunicaciones http en Angular](../comunicaciones-http-en-Angular/). Al finalizar tendrás una aplicación que comunica a los usuarios cualquier información relevante y que gestiona de forma centralizada las respuestas de un servicio REST.
 
