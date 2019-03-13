@@ -121,6 +121,7 @@ class: impact
 # 3. Componentes básicos
 
 ## Navegación y layout
+
 ## Componentes básicos
 
 ---
