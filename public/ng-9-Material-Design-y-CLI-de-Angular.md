@@ -7,7 +7,7 @@ Un programador Angular debe **dominar el CLI** y debe conocer los beneficios que
 
 Partiendo de la aplicación tal cómo quedó en _Formularios reactivos con Angular_. Al finalizar tendrás, en el mismo repositorio, una nueva aplicación con la apariencia y usabilidad de _Material design_.
 
-> > Tienes una versión desplegada operativa para probar [Angular Board](https://academiabinaria.github.io/angular-board/)
+> > Tienes una versión desplegada operativa para probar [Angular Board](https://academiabinaria.github.io/angular-basic/)
 
 # 1. Repositorio multi-proyecto
 

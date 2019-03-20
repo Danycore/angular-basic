@@ -8,7 +8,7 @@ En este tutorial aprenderás a crear una Angular SPA fácilmente usando `@angula
 
 Partiendo de la aplicación tal cómo quedó en [Base para una aplicación Angular](../base-aplicacion-angular/). Seguimos usando el concepto de árbol, ahora como analogía de **las rutas y las vistas** asociadas. Al finalizar tendrás una angular SPA con vistas asociadas a sus rutas.
 
-> Código asociado a este artículo en _GitHub_: [AcademiaBinaria/angular-board/](https://github.com/AcademiaBinaria/angular-board/)
+> Código asociado a este artículo en _GitHub_: [AcademiaBinaria/angular-basic/](https://github.com/AcademiaBinaria/angular-basic/)
 
 # 1. Rutas
 

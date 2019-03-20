@@ -6,7 +6,7 @@
 
 El comúnmente conocido como **AngularCLI** o _angular cli_ o _angular-cli_ o _ CLI a secas_ es la herramienta de línea de comandos estándar para **crear, depurar y publicar aplicaciones Angular**. En su actual **versión 7** es más potente y versátil que nunca y es muy sencillo dominar los aspectos básicos.
 
-> Código asociado a este artículo en _GitHub_: [AcademiaBinaria/angular-board/](https://github.com/AcademiaBinaria/angular-board/)
+> Código asociado a este artículo en _GitHub_: [AcademiaBinaria/angular-basic/](https://github.com/AcademiaBinaria/angular-basic/)
 
 # 1. Instalación de Angular CLI 7
 
@@ -225,9 +225,9 @@ Los últimos toques antes de publicar pueden incluir el _script de analytics_ en
 {
   "scripts": {
     "build:prod": "ng build --prod",
-    "build:pub": "ng build --prod --output-path docs --base-href https://academiabinaria.github.io/angular-board/",
+    "build:pub": "ng build --prod --output-path docs --base-href https://academiabinaria.github.io/angular-basic/",
     "e2e": "ng e2e",
-    "http-server": "http-server ./dist/angular-board/ -c-1 -p4271 -a localhost -o",
+    "http-server": "http-server ./dist/angular-basic/ -c-1 -p4271 -a localhost -o",
     "lint": "ng lint",
     "ng": "ng",
     "pub": "npm run build:pub && npm run push",
