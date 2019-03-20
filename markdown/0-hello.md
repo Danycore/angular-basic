@@ -113,13 +113,13 @@ ng generate application compras -p acme --routing true
 
 --
 
-### 1.2.5 Angular Board
+### 1.2.5 Angular Basic
 
 La aplicación que sirve de ejemplo a este tutorial fue creada con este comando:
 
 ```console
-ng new angular-board --routing true -s -S
-cd angular-board
+ng new angular-basic --routing true -s -S
+cd angular-basic
 npm start
 ```
 
@@ -179,7 +179,7 @@ class: impact
 
 1. Abre el fichero `app.component.ts`
 2. Busca dentro de él una clase llamada `AppComponent`.
-3. Asígnale el saludo de rigor: `title = 'angular-board' + ' hello world'`
+3. Asígnale el saludo de rigor: `title = 'angular-basic' + ' hello world'`
 4. Guarda y comprueba que tu navegador **se actualiza automáticamente**.
 
 ---
@@ -250,9 +250,9 @@ Configuración en `angular.json`
 {
   "scripts": {
     "build:prod": "ng build --prod",
-    "build:pub": "ng build --prod --output-path docs --base-href https://academiabinaria.github.io/angular-board/",
+    "build:pub": "ng build --prod --output-path docs --base-href https://academiabinaria.github.io/angular-basic/",
     "e2e": "ng e2e",
-    "http-server": "http-server ./dist/angular-board/ -c-1 -p4271 -a localhost -o",
+    "http-server": "http-server ./dist/angular-basic/ -c-1 -p4271 -a localhost -o",
     "lint": "ng lint",
     "ng": "ng",
     "pub": "npm run build:pub && npm run push",
@@ -270,7 +270,7 @@ Configuración en `angular.json`
 
 ```typescript
 export const environment = {
-  appName: 'Angular Board',
+  appName: 'Angular Basic',
   production: false
 };
 ```
@@ -293,7 +293,7 @@ title = environment.appName + 'hello world ;-)';
 
 ```console
 npm run start:prod
-cd dist/angular-board
+cd dist/angular-basic
 http://localhost:4271/
 ```
 
@@ -344,7 +344,7 @@ class: impact
 
 ```js
 module.exports = {
-  printWidth: 100,
+  printWidth: 128,
   tabWidth: 2,
   useTabs: false,
   semi: true,

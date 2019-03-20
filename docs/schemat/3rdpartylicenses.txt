@@ -1,4 +1,4 @@
-angular-board
+angular-basic
 
 tslib
 Apache-2.0
