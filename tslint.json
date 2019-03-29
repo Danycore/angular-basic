@@ -10,7 +10,6 @@
     "forin": true,
     "import-blacklist": [true, "rxjs/Rx"],
     "interface-over-type-literal": true,
-    "label-position": true,
     "member-access": false,
     "member-ordering": [
       true,
@@ -24,8 +23,8 @@
     "no-construct": true,
     "no-debugger": true,
     "no-duplicate-super": true,
-    "no-empty": false,
     "no-empty-interface": true,
+    "no-empty": false,
     "no-eval": true,
     "no-inferrable-types": [true, "ignore-params"],
     "no-misused-new": true,
@@ -44,26 +43,40 @@
     "triple-equals": [true, "allow-null-check"],
     "unified-signatures": true,
     "variable-name": false,
-    "whitespace": [true, "check-branch", "check-decl", "check-operator", "check-separator", "check-type"],
-    "no-output-on-prefix": true,
-    "use-input-property-decorator": true,
-    "use-output-property-decorator": true,
-    "use-host-property-decorator": true,
-    "no-input-rename": true,
-    "no-output-rename": true,
-    "use-life-cycle-interface": true,
-    "use-pipe-transform-interface": true,
+    "nx-enforce-module-boundaries": [
+      true,
+      {
+        "allow": [],
+        "depConstraints": [
+          {
+            "sourceTag": "*",
+            "onlyDependOnLibsWithTags": ["*"]
+          }
+        ]
+      }
+    ],
     "component-class-suffix": true,
+    "component-selector": [true, "element", "app", "kebab-case"],
+    "cyclomatic-complexity": [true, 8],
     "directive-class-suffix": true,
-    "no-magic-numbers": true,
-    "no-multiple-empty-lines": ["error", { "max": 1 }],
-    "max-statements-per-line": ["error", { "max": 1 }],
-    "max-depth": ["error", 2],
-    "max-params": ["error", 4],
-    "complexity": ["error", 8],
+    "directive-selector": [true, "attribute", "app", "camelCase"],
     "id-length": ["error", { "min": 4, "max": 16, "exceptions": ["x", "y", "i", "j"] }],
-    "max-statements": ["error", 32],
+    "max-depth": ["error", 2],
+    "max-file-line-count": [true, 256],
     "max-len": ["error", 128],
-    "max-lines": ["error", 256]
+    "max-lines": ["error", 256],
+    "max-params": ["error", 4],
+    "max-statements-per-line": ["error", { "max": 1 }],
+    "max-statements": ["error", 32],
+    "no-input-rename": true,
+    "no-magic-numbers": [true, 0, 1],
+    "no-multiple-empty-lines": ["error", { "max": 1 }],
+    "no-output-on-prefix": true,
+    "no-output-rename": true,
+    "use-host-property-decorator": true,
+    "use-input-property-decorator": true,
+    "use-life-cycle-interface": true,
+    "use-output-property-decorator": true,
+    "use-pipe-transform-interface": true
   }
 }
