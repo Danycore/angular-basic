@@ -14,7 +14,7 @@
     "build:prod": "ng build --prod",
     "build:prod:schemat": "ng build schemat --prod",
     "build:pub:schemat": "ng build schemat --prod --output-path docs/schemat --base-href https://academiabinaria.github.io/angular-basic/schemat/",
-    "build:pub": "ng build --prod --output-path docs --base-href https://academiabinaria.github.io/angular-basic/",
+    "build:pub": "ng build --prod --output-path docs/board --base-href https://academiabinaria.github.io/angular-basic/board/",
     "e2e": "ng e2e",
     "http-server": "http-server ./dist/angular-basic/ -c-1 -p4271 -a localhost -o",
     "lint": "ng lint angular-basic",
