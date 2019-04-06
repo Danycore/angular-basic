@@ -41,14 +41,15 @@
     <section>
       <label for="workStatus">Work Status</label>
       <select name="workStatus"
-              [(ngModel)]="contact.workStatus">
+              [(ngModel)]="contact.workStatus"
+              (change)="onWorkStatusChanged()">
         <option *ngFor="let status of workStatuses"
                 [value]="status.id">
           <span>{{ status.description }}</span>
         </option>
       </select>
     </section>
-    <section *ngIf="contact.workStatus==3; else education">
+    <section *ngIf="contact.workStatus.toString()==='3'; else education">
       <label for="companyName">Company Name</label>
       <input name="companyName"
              type="text"

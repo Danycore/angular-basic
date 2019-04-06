@@ -46,4 +46,12 @@ export class ContactsComponent implements OnInit {
     this.contacts = this.contacts.filter(c => c.name !== contact.name);
     this.numContacts = this.contacts.length;
   }
+
+  public onWorkStatusChanged() {
+    if (this.contact.workStatus.toString() === '3') {
+      this.contact.education = null;
+    } else {
+      this.contact.companyName = '';
+    }
+  }
 }
