@@ -7,6 +7,10 @@ import { filter, tap } from 'rxjs/operators';
 export class AuditInterceptorService implements HttpInterceptor {
   constructor() {}
 
+  // public intercept( req: HttpRequest<any>, next: HttpHandler ): Observable<HttpEvent<any>> {
+  //   return next.handle(req);
+  // }
+
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const startTime = Date.now();
     return next.handle(req).pipe(
