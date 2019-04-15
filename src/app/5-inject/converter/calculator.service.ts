@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class ConverterService {
+export class CalculatorService {
   private milesPerKilometer = 0.62137;
   private kilometersPerMile = 1.609;
   private boilingFahrenheit = 32;

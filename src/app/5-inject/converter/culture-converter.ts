@@ -1,4 +1,4 @@
-export interface CultureConverter {
+export interface ICultureConverter {
   sourceCulture: string;
   targetCulture: string;
   convertDistance: (source: number) => number;

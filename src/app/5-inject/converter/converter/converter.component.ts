@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConverterService } from '../converter.service';
+import { CalculatorService } from '../calculator.service';
 
 @Component({
   selector: 'app-converter',
@@ -10,7 +10,7 @@ export class ConverterComponent implements OnInit {
   public kilometers = 0;
   public miles: number;
 
-  constructor(private converterService: ConverterService) {}
+  constructor(private converterService: CalculatorService) {}
 
   ngOnInit() {
     this.convert();

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { ConverterService } from './converter.service';
+import { CalculatorService } from './calculator.service';
+import { ICultureConverter } from './culture-converter';
 
 @Injectable()
-export class EuropeConverterService {
+export class EuropeConverterService implements ICultureConverter {
   sourceCulture = 'USA';
   targetCulture = 'Europe';
 
-  constructor(private converterService: ConverterService) {}
+  constructor(private converterService: CalculatorService) {}
 
   public convertDistance = this.converterService.fromMilesToKilometers;
   public convertTemperature = this.converterService.fromFahrenheitToCelsius;
