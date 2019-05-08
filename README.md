@@ -1,30 +1,67 @@
-# AngularBoard
+Angular, introducción al desarrollo de aplicaciones
+===================================================
+Crea aplicaciones multiplataforma, escalables y limpias.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.0.
+**Taller práctico** [Online](https://www.trainingit.es/curso-angular-basico/?promo=meetup10&af=abasalo)
 
-## Development server
+Introducción
+-------------------------------------------
+Este curso de Angular aborda el estudio de las prácticas necesarias para proyectos profesionales. Es un curso avanzado, por lo que se requieren conocimientos prácticos mínimos pues se explicarán técnicas habituales en proyectos grandes.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+El alumno será capaz de crear aplicaciones que aprovechan lo mejor del framework y lo mejor de la plataforma web, creando proyectos con un aspecto y comportamiento más depurado y con alto rendimiento.
 
 
-sonar-scanner.bat -D"sonar.projectKey=AcademiaBinaria_angular-board" -D"sonar.organization=academiabinaria" -D"sonar.sources=." -D"sonar.host.url=https://sonarcloud.io" -D"sonar.login=897c2c548e08bb02069a555b4a61c9348308b4d3"
+Objetivos
+-------------------------------------------
+- Desarrollar y desplegar aplicaciones Angular de nivel profesional.
+- Conocer técnicas y herramientas usadas en el ámbito de la gran empresa.
+
+
+
+A quién va dirigido
+-------------------------------------------
+- Programadores con experiencia en Front End.
+- Conocimientos básicos de HTML y JavaScript
+
+Material necesario
+-------------------------------------------
+- Editor de código recomendado VSCode
+- Navegador recomendado Chrome
+- Instalación de NodeJS versión 10 o superior
+
+
+---
+
+#[Temario](https://academiabinaria.github.io/angular-basic/readme/index.html)
+
+#[Ejecución](https://academiabinaria.github.io/angular-basic/board/)
+
+---
+
+# [0-Hello](https://academiabinaria.github.io/angular-basic/readme/0-hello.html)
+
+# [1-Base](https://academiabinaria.github.io/angular-basic/readme/1-base.html)
+
+---
+
+# [2-SPA](https://academiabinaria.github.io/angular-basic/readme/2-spa.html)
+
+# [3-Data](https://academiabinaria.github.io/angular-basic/readme/3-data.html)
+
+---
+
+# [4-Flow](https://academiabinaria.github.io/angular-basic/readme/4-flow.html)
+
+# [5-Inject](https://academiabinaria.github.io/angular-basic/readme/5-inject.html)
+
+---
+
+# [6-Http](https://academiabinaria.github.io/angular-basic/readme/6-http.html)
+
+# [7-Watch](https://academiabinaria.github.io/angular-basic/readme/7-watch.html)
+
+---
+
+# [8-Reactive](https://academiabinaria.github.io/angular-basic/readme/8-reactive.html)
+
+# [9-Material](https://academiabinaria.github.io/angular-basic/readme/9-material.html)
