@@ -2,7 +2,11 @@ Angular, introducción al desarrollo de aplicaciones
 ===================================================
 Crea aplicaciones multiplataforma, escalables y limpias.
 
-**Taller práctico** [Online](https://www.trainingit.es/curso-angular-basico/?promo=meetup10&af=abasalo)
+**Taller práctico**
+
+- [Temario](https://academiabinaria.github.io/angular-basic/readme/index.html)
+- [Ejemplo ejecutable](https://academiabinaria.github.io/angular-basic/board/)
+- [Curso Online](https://www.trainingit.es/curso-angular-basico/?promo=meetup10&af=abasalo)
 
 Introducción
 -------------------------------------------
@@ -10,13 +14,10 @@ Este curso de Angular aborda el estudio de las prácticas necesarias para proyec
 
 El alumno será capaz de crear aplicaciones que aprovechan lo mejor del framework y lo mejor de la plataforma web, creando proyectos con un aspecto y comportamiento más depurado y con alto rendimiento.
 
-
 Objetivos
 -------------------------------------------
 - Desarrollar y desplegar aplicaciones Angular de nivel profesional.
 - Conocer técnicas y herramientas usadas en el ámbito de la gran empresa.
-
-
 
 A quién va dirigido
 -------------------------------------------
@@ -29,12 +30,9 @@ Material necesario
 - Navegador recomendado Chrome
 - Instalación de NodeJS versión 10 o superior
 
-
 ---
 
-#[Temario](https://academiabinaria.github.io/angular-basic/readme/index.html)
-
-#[Ejecución](https://academiabinaria.github.io/angular-basic/board/)
+# Contenido
 
 ---
 
