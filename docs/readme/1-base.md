@@ -398,6 +398,8 @@ En `app.component.html`
 - Alguna será de uso único como el `CoreModule`
 - Y otras serán compartidas como el `SharedModule`
 
+---
+
 ```bash
 ng g m shared
 ng g c shared/now --export=true
@@ -408,6 +410,8 @@ ng g c shared/now --export=true
   {{ now | date:'long' }}
 </time>
 ```
+
+--
 
 ```bash
 ng g m 1-base/temporal
