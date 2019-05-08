@@ -69,20 +69,14 @@ $ ng new --help
 
 > Para más información mira la documentación del comando [ng new](https://angular.io/cli/new).
 
-```console
-ng new primera
-cd primera
-npm start
-```
-
---
-
 ---
 
 ### 1.2.1 Normal
 
 ```console
 ng new normal
+cd normal
+npm start
 ```
 
 --
@@ -108,7 +102,7 @@ ng new profesional -p acme --routing true
 ```console
 ng new empresarial --create-application false
 cd empresarial
-ng generate application compras -p acme --routing true
+ng g application compras -p acme --routing true
 ```
 
 --
@@ -297,6 +291,7 @@ cd dist/angular-basic
 http://localhost:4271/
 ```
 
+### Publicación
 Publicación en GitHub, con toques finales, analytics...
 
 ```console
@@ -344,7 +339,7 @@ class: impact
 
 ```js
 module.exports = {
-  printWidth: 128,
+  printWidth: 96,
   tabWidth: 2,
   useTabs: false,
   semi: true,
@@ -371,6 +366,7 @@ module.exports = {
 - [Apollo GraphQL](https://www.apollographql.com/docs/)
 - [Ionic](https://ionicframework.com/)
 - [Angular Console](https://angularconsole.com/)
+- [Angular Next](https://next.angular.io/)
 
 ---
 

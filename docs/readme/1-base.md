@@ -400,6 +400,31 @@ En `app.component.html`
 
 ```bash
 ng g m shared
+ng g c shared/now --export=true
+```
+
+```html
+<time>
+  {{ now | date:'long' }}
+</time>
+```
+
+```bash
+ng g m 1-base/temporal
+ng g c 1-base/temporal --export=true
+```
+
+```html
+<div>
+  <app-now></app-now>
+</div>
+```
+
+```html
+<main class="container ">
+  <router-outlet></router-outlet>
+* <app-temporal></app-temporal>
+</main>
 ```
 
 ---
@@ -420,8 +445,10 @@ AppModule
    +--CommonModule
    |
    +--RouterModule
-
-SharedModule
+   |
+   +--TemporalModule
+      |
+      +--SharedModule
 
 ```
 
@@ -439,6 +466,10 @@ AppComponent
    +--MainComponent
    |  |
    |  +--RouterOutletComponent
+   |  |
+   |  +--TemporalComponent
+   |     |
+   |     +--NowComponent
    |
    +--FooterComponent
 

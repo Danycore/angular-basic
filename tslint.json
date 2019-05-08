@@ -63,7 +63,7 @@
     "id-length": ["error", { "min": 4, "max": 16, "exceptions": ["x", "y", "i", "j"] }],
     "max-depth": ["error", 2],
     "max-file-line-count": [true, 256],
-    "max-len": ["error", 128],
+    "max-len": ["error", 96],
     "max-lines": ["error", 256],
     "max-params": ["error", 4],
     "max-statements-per-line": ["error", { "max": 1 }],
