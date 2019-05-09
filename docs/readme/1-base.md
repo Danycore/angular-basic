@@ -121,7 +121,7 @@ class: impact
 - Con un selector **html**
 
 ```typescript
-import { Core } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
