@@ -411,6 +411,14 @@ ng g c shared/now --export=true
 </time>
 ```
 
+```typescript
+export class NowComponent implements OnInit {
+  public now = new Date();
+  constructor() {}
+  ngOnInit() {}
+}
+```
+
 --
 
 ```bash
