@@ -384,7 +384,7 @@ module.exports = {
 
 > Next:
 
-# Base para una aplicación Angular
+# [Base para una aplicación Angular](https://academiabinaria.github.io/angular-basic/readme/1-base.html)
 
 ## Módulos
 
