@@ -74,6 +74,28 @@ ng g c heroes
 ng g c core/not-found
 ```
 
+
+```html
+<h2>Initial Links to start: </h2>
+<ul>
+  <li>
+    <h2><a target="_blank"
+         rel="noopener"
+         href="https://angular.io/tutorial">Tour of Heroes</a></h2>
+  </li>
+  <li>
+    <h2><a target="_blank"
+         rel="noopener"
+         href="https://angular.io/cli">CLI Documentation</a></h2>
+  </li>
+  <li>
+    <h2><a target="_blank"
+         rel="noopener"
+         href="https://blog.angular.io/">Angular blog</a></h2>
+  </li>
+</ul>
+```
+
 El componente `HeroesComponent` se asocia con la ruta `'heroes'`
 El componente `NotFoundComponent` se asocia con la ruta `'not-found'`
 
@@ -463,7 +485,7 @@ Y en `authors.component.html`
 
 > Next:
 
-# Formularios, tablas y modelos de datos en Angular
+# [Formularios, tablas y modelos de datos en Angular](https://academiabinaria.github.io/angular-basic/readme/3-data.html)
 
 ## Formularios
 
