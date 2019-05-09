@@ -512,7 +512,7 @@ AppComponent
 
 > Next:
 
-# Páginas y rutas Angular SPA
+# [Páginas y rutas Angular SPA](https://academiabinaria.github.io/angular-basic/readme/2-spa.html)
 
 ## Rutas
 
