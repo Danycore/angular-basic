@@ -432,11 +432,22 @@ ng g c 1-base/temporal --export=true
 </div>
 ```
 
+---
+
 ```html
 <main class="container ">
   <router-outlet></router-outlet>
 * <app-temporal></app-temporal>
 </main>
+```
+
+```typescript
+@NgModule({
+  declarations: [ShellComponent, HeaderComponent, MainComponent, FooterComponent],
+  imports: [CommonModule, RouterModule, TemporalModule],
+  exports: [ShellComponent]
+})
+export class CoreModule {}
 ```
 
 ---
