@@ -74,7 +74,7 @@ ng g c heroes
 ng g c core/not-found
 ```
 
-
+### heroes.cmponent.html
 ```html
 <h2>Initial Links to start: </h2>
 <ul>
@@ -165,11 +165,15 @@ El componente `app-header` queda así:
 
 ```html
 <header class="sticky">
-  <a routerLink="/" class="logo">
-    <span class="icon-home"></span> <span>{{ title }}</span>
+  <a routerLink="/"
+     class="logo">
+    <span class="icon-home"></span>
+    <span>{{ title }}</span>
   </a>
-  <a routerLink="heroes" class="button">
-    <span> Heroes</span>
+  <a routerLink="heroes"
+     routerLinkActive="router-link-active"
+     class="button">
+    <span> 2- Heroes</span>
   </a>
 </header>
 ```
@@ -281,8 +285,13 @@ const routes: Routes = [
 Agregamos un enlace a esta nueva ruta en el `HeaderComponent`
 
 ```html
-<a routerLink="about" class="button">
-  <span> About us</span>
+<a routerLink="about"
+    routerLinkActive="router-link-active"
+    class="button">
+  <img width="32"
+        style="vertical-align: -0.5em"
+        src="./assets/logo.png" />
+  <span> 2 - About us</span>
 </a>
 ```
 
@@ -439,7 +448,7 @@ import { ActivatedRoute } from '@angular/router';
 export class AuthorComponent implements OnInit {
   public authorId = '';
   constructor(activateRoute: ActivatedRoute) {
-    this.authorId = activateRoute.snapshot.params['id'];
+    this.authorId = activateRoute.snapshot.params.id;
   }
   ngOnInit() {}
 }
