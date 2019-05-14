@@ -71,8 +71,10 @@ En `app-routing` y en `contacts-routing`:
 En `HeaderComponent`
 
 ```html
-<a routerLink="contacts" routerLinkActive="router-link-active" class="button">
-  <span> Contacts</span>
+<a routerLink="contacts"
+    routerLinkActive="router-link-active"
+    class="button">
+  <span> 3 - Contacts</span>
 </a>
 ```
 
@@ -100,8 +102,7 @@ En `contacts.component.html` mostramos cabeceras con estilo
 <h2>{{ header }}</h2>
 <p>{{ description | uppercase }}</p>
 <p>
-  You have <mark [class]="counterClass">{{ numContacts }}</mark> contacts right
-  now.
+  You have <mark [class]="counterClass">{{ numContacts }}</mark> contacts now.
 </p>
 ```
 
@@ -509,7 +510,7 @@ public deleteContact(contact: Contact) {
 
 > Next:
 
-# Flujo de datos entre componentes Angular
+# [Flujo de datos entre componentes Angular](https://academiabinaria.github.io/angular-basic/readme/4-flow.html)
 
 
 ## Comunicación entre componentes

@@ -112,7 +112,9 @@ ng g c car/car/pedals
 ```
 
 ```html
-<a routerLink="car" class="button">
+<a routerLink="car"
+    routerLinkActive="router-link-active"
+    class="button">
   <span> 4 - Car</span>
 </a>
 ```
@@ -178,7 +180,17 @@ public onThrottle(drive: number) {
 }
 
 private getDelta = (drive: number) =>
-  drive + (this.car.maxSpeed - this.car.currentSpeed) / 10;
+  drive + (this.car.maxSpeed - this.car.currentSpeed) / 10
+```
+
+--
+
+```typescript
+export interface CarModel {
+  name: string;
+  maxSpeed: number;
+  currentSpeed: number;
+}
 ```
 
 ---
@@ -372,7 +384,7 @@ Lo que pasa dentro de _main_ no se conoce en _header_...
 
 > Next:
 
-# Servicios inyectables en Angular
+# [Servicios inyectables en Angular](https://academiabinaria.github.io/angular-basic/readme/5-inject.html)
 
 ## Inyección de dependencias
 
