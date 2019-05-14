@@ -170,8 +170,8 @@ class: impact
 
 ```console
 ng g interface converter/i-culture-converter
-ng g converter/abstract-culture-converter
-ng g component converter/culture-converter
+ng g s converter/abstract-culture-converter
+ng g c converter/culture-converter
 ```
 
 ```typescript
@@ -300,8 +300,8 @@ export class CalculatorService {
 ---
 
 ```console
-ng g service converter/european-culture-converter
-ng g service converter/american-culture-converter
+ng g s converter/european-culture-converter
+ng g s converter/american-culture-converter
 
 ```
 
