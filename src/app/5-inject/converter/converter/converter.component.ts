@@ -10,13 +10,13 @@ export class ConverterComponent implements OnInit {
   public kilometers = 0;
   public miles: number;
 
-  constructor(private converterService: CalculatorService) {}
+  constructor(private calculatorService: CalculatorService) {}
 
   ngOnInit() {
     this.convert();
   }
 
   public convert() {
-    this.miles = this.converterService.fromKilometersToMiles(this.kilometers);
+    this.miles = this.calculatorService.fromKilometersToMiles(this.kilometers);
   }
 }

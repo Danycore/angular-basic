@@ -105,9 +105,15 @@ ng g c car/car/pedals
 ```
 
 ```typescript
+//app-routing
 {
   path: 'car',
   loadChildren: './car/car.module#CarModule'
+}
+// car-routing
+{
+  path: '',
+  component: CarComponent
 }
 ```
 

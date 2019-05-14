@@ -62,8 +62,10 @@ ng g c converter/converter
 `header.component.html`
 
 ```html
-<a routerLink="converter" class="button">
-  <span> Converter</span>
+<a routerLink="converter"
+    routerLinkActive="router-link-active"
+    class="button">
+  <span> 5 - Converter</span>
 </a>
 ```
 
@@ -72,7 +74,7 @@ ng g c converter/converter
 ## 1.1 Generación de servicios
 
 ```console
-ng g s converter/converter
+ng g s converter/calculator
 ```
 
 Implementación
@@ -83,7 +85,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
 *  providedIn: 'root'
 })
-export class ConverterService {
+export class CalculatorService {
   constructor() {}
 
   public fromKilometersToMiles = kilometers => kilometers * 0.621;
@@ -99,14 +101,14 @@ export class ConverterComponent implements OnInit {
   public kilometers = 0;
   public miles: number;
 
-  *constructor(private converterService: ConverterService) {}
+* constructor(private calculatorService: CalculatorService) {}
 
-  public ngOnInit() {
+  ngOnInit() {
     this.convert();
   }
 
   public convert() {
-    this.miles = this.converterService.fromKilometersToMiles(this.kilometers);
+    this.miles = this.calculatorService.fromKilometersToMiles(this.kilometers);
   }
 }
 ```
@@ -135,6 +137,7 @@ export class ConverterComponent implements OnInit {
 <section>
   <h4>{{ miles | number:'1.2-2' }} miles</h4>
 </section>
+<a [routerLink]="['culture']">Go to Abstract Culture Converter</a>
 ```
 
 ---
@@ -166,13 +169,21 @@ class: impact
 ## 2.1 Interface y servicio base
 
 ```console
-ng g interface converter/culture-converter
-ng g service converter/culture-converter
+ng g interface converter/i-culture-converter
+ng g converter/abstract-culture-converter
 ng g component converter/culture-converter
 ```
 
+```typescript
+  // converter-routing
+  {
+    path: 'culture',
+    component: CultureConverterComponent
+  }
+```
+
 ```typeScript
-export interface CultureConverter implements CultureConverter {
+export interface ICultureConverter {
   sourceCulture: string;
   targetCulture: string;
   convertDistance: (source: number) => number;
@@ -181,11 +192,12 @@ export interface CultureConverter implements CultureConverter {
 ```
 
 ```typescript
-export class CultureConverterService implements CultureConverter {
+export class AbstractCultureConverterService implements ICultureConverter {
   sourceCulture: string;
   targetCulture: string;
   convertDistance: (source: number) => number;
   convertTemperature: (source: number) => number;
+
   constructor() {}
 }
 ```
@@ -195,45 +207,66 @@ export class CultureConverterService implements CultureConverter {
 ### Consumo
 
 ```typeScript
+export class CultureConverterComponent implements OnInit {
   public source: string;
   public target: string;
-  public sourceUnits = 0;
-  public targetUnits: number;
-  constructor(private cultureConverterService:CultureConverterService){
-  }
+  public sourceTemperature = 0;
+  public targetTemperature: number;
+  public sourceDistance = 0;
+  public targetDistance: number;
+  constructor(private cultureConverterService: AbstractCultureConverterService) {}
 
   public ngOnInit() {
     this.source = this.cultureConverterService.sourceCulture;
     this.target = this.cultureConverterService.targetCulture;
     this.convert();
   }
+
   public convert() {
-    this.targetUnits =
-      this.cultureConverterService.convertDistance(this.sourceUnits);
+    this.convertDistance();
+    this.convertTemperature();
   }
+
+  private convertTemperature() {
+    this.targetTemperature = this.cultureConverterService.convertTemperature(
+      this.sourceTemperature
+    );
+  }
+  private convertDistance() {
+    this.targetDistance = this.cultureConverterService.convertDistance(this.sourceDistance);
+  }
+}
 ```
 
 ---
 
 ```html
-<h2>Culture Converter.</h2>
-<h3>From {{ source }} to {{ target }}</h3>
+<h2> Culture Converter. </h2>
+<h3> From {{ source }} to {{ target }} </h3>
 <form>
   <fieldset>
     <section>
-      <label for="sourceUnits">Distance</label>
-      <input
-        name="sourceUnits"
-        type="number"
-        [(ngModel)]="sourceUnits"
-        placeholder="0"
-      />
+      <label for="sourceTemperature">Temperature</label>
+      <input name="sourceTemperature"
+             type="number"
+             [(ngModel)]="sourceTemperature"
+             placeholder="0" />
+    </section>
+    <section>
+      <label for="sourceDistance">Distance</label>
+      <input name="sourceDistance"
+             type="number"
+             [(ngModel)]="sourceDistance"
+             placeholder="0" />
     </section>
   </fieldset>
-  <input value="Convert" type="button" (click)="convert()" />
+  <input value="Convert"
+         type="button"
+         (click)="convert()">
 </form>
 <section>
-  <h4>Distance {{ targetUnits | number:'1.2-2' }}</h4>
+  <h4>Temperature {{ targetTemperature | number:'1.2-2' }} </h4>
+  <h4>Distance {{ targetDistance | number:'1.2-2' }} </h4>
 </section>
 ```
 
@@ -245,40 +278,54 @@ export class CultureConverterService implements CultureConverter {
 @Injectable({
   providedIn: 'root'
 })
-export class ConverterService {
+export class CalculatorService {
+  private milesPerKilometer = 0.62137;
+  private kilometersPerMile = 1.609;
+  private boilingFahrenheit = 32;
+  private factorC2F = 1.8;
+  private factorF2C = 0.5555;
+
   constructor() {}
 
-  public fromKilometersToMiles = kilometers => kilometers * 0.621;
+  public fromKilometersToMiles = (kilometers: number): number => kilometers * this.milesPerKilometer;
 
-  public fromMilesToKilometers = miles => miles * 1.609;
+  public fromMilesToKilometers = (miles: number): number => miles * this.kilometersPerMile;
 
-  public fromCelsiusToFarenheit = celsius => celsius * (9 / 5) + 32;
+  public fromCelsiusToFahrenheit = (celsius: number): number => celsius * this.factorC2F + this.boilingFahrenheit;
 
-  public fromFarenheitToCelsius = farenheit => (farenheit - 32) * (5 / 9);
+  public fromFahrenheitToCelsius = (fahrenheit: number): number => (fahrenheit - this.boilingFahrenheit) * this.factorF2C;
 }
+```
+
+---
+
+```console
+ng g service converter/european-culture-converter
+ng g service converter/american-culture-converter
+
 ```
 
 ---
 
 ```typescript
 @Injectable()
-export class EuropeConverterService {
+export class EuropeanCultureConverterService implements ICultureConverter {
   sourceCulture = 'USA';
   targetCulture = 'Europe';
-  constructor(private converterService: ConverterService) {}
-  convertDistance = this.converterService.fromMilesToKilometers;
-  convertTemperature = this.converterService.fromFarenheitToCelsius;
+  constructor(private calculatorService: CalculatorService) {}
+  public convertDistance = this.calculatorService.fromMilesToKilometers;
+  public convertTemperature = this.calculatorService.fromFahrenheitToCelsius;
 }
 ```
 
 ```typescript
 @Injectable()
-export class UsaConverterService implements CultureConverter {
+export class AmericanCultureConverterService implements ICultureConverter {
   sourceCulture = 'Europe';
   targetCulture = 'USA';
-  constructor(private converterService: ConverterService) {}
-  convertDistance = this.converterService.fromKilometersToMiles;
-  convertTemperature = this.converterService.fromCelsiusToFarenheit;
+  constructor(private calculatorService: CalculatorService) {}
+  public convertDistance = this.calculatorService.fromKilometersToMiles;
+  public convertTemperature = this.calculatorService.fromCelsiusToFahrenheit;
 }
 ```
 
@@ -290,8 +337,8 @@ export class UsaConverterService implements CultureConverter {
 {
   providers: [
     {
-      provide: CultureConverterService,
-      useClass: UsaConverterService
+      provide: AbstractCultureConverterService,
+      useClass: AmericanCultureConverterService
     }
   ];
 }
@@ -302,11 +349,11 @@ export class UsaConverterService implements CultureConverter {
 ## 2.4 Factoría
 
 ```typescript
-const cultureFactory = (converterService: ConverterService) => {
+const cultureConverterFactory = (calculatorService: CalculatorService) => {
   if (environment.unitsCulture === 'metric') {
-    return new EuropeConverterService(converterService);
+    return new EuropeanCultureConverterService(calculatorService);
   } else {
-    return new UsaConverterService(converterService);
+    return new AmericanCultureConverterService(calculatorService);
   }
 };
 ```
@@ -327,11 +374,11 @@ La provisión del servicio apunta a la función factoría. Si además el servici
 {
   providers: [
     {
-      provide: CultureConverterService,
-      useFactory: cultureFactory,
-      deps: [ConverterService]
+      provide: AbstractCultureConverterService,
+      useFactory: cultureConverterFactory,
+      deps: [CalculatorService]
     }
-  ];
+  ]
 }
 ```
 
@@ -353,7 +400,7 @@ La provisión del servicio apunta a la función factoría. Si además el servici
 
 > Next:
 
-# Comunicaciones http en Angular
+# [Comunicaciones http en Angular](https://academiabinaria.github.io/angular-basic/readme/6-http.html)
 
 ## El cliente http
 

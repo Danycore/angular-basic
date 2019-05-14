@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CultureConverterService } from '../culture-converter.service';
+import { AbstractCultureConverterService } from '../abstract-culture-converter.service';
 
 @Component({
   selector: 'app-culture-converter',
@@ -13,7 +13,7 @@ export class CultureConverterComponent implements OnInit {
   public targetTemperature: number;
   public sourceDistance = 0;
   public targetDistance: number;
-  constructor(private cultureConverterService: CultureConverterService) {}
+  constructor(private cultureConverterService: AbstractCultureConverterService) {}
 
   public ngOnInit() {
     this.source = this.cultureConverterService.sourceCulture;
@@ -32,8 +32,6 @@ export class CultureConverterComponent implements OnInit {
     );
   }
   private convertDistance() {
-    this.targetDistance = this.cultureConverterService.convertDistance(
-      this.sourceDistance
-    );
+    this.targetDistance = this.cultureConverterService.convertDistance(this.sourceDistance);
   }
 }

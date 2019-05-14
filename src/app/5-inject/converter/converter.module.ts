@@ -2,19 +2,19 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../../../environments/environment';
+import { AbstractCultureConverterService } from './abstract-culture-converter.service';
+import { AmericanCultureConverterService } from './american-culture-converter.service';
 import { CalculatorService } from './calculator.service';
 import { ConverterRoutingModule } from './converter-routing.module';
 import { ConverterComponent } from './converter/converter.component';
-import { CultureConverterService } from './culture-converter.service';
 import { CultureConverterComponent } from './culture-converter/culture-converter.component';
-import { EuropeConverterService } from './europe-converter.service';
-import { UsaConverterService } from './usa-converter.service';
+import { EuropeanCultureConverterService } from './european-culture-converter.service';
 
-const cultureFactory = (converterService: CalculatorService) => {
+const cultureConverterFactory = (calculatorService: CalculatorService) => {
   if (environment.unitsCulture === 'metric') {
-    return new EuropeConverterService(converterService);
+    return new EuropeanCultureConverterService(calculatorService);
   } else {
-    return new UsaConverterService(converterService);
+    return new AmericanCultureConverterService(calculatorService);
   }
 };
 
@@ -23,8 +23,8 @@ const cultureFactory = (converterService: CalculatorService) => {
   imports: [CommonModule, ConverterRoutingModule, FormsModule],
   providers: [
     {
-      provide: CultureConverterService,
-      useFactory: cultureFactory,
+      provide: AbstractCultureConverterService,
+      useFactory: cultureConverterFactory,
       deps: [CalculatorService]
     }
   ]
