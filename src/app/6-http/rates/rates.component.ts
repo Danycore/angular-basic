@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ExchangeRates } from './models/ExchangeRates';
+import { MyRate } from './models/MyRate';
 
 @Component({
   selector: 'app-rates',
@@ -9,8 +11,8 @@ import { Component, OnInit } from '@angular/core';
 export class RatesComponent implements OnInit {
   private ratesApi = 'https://api.exchangeratesapi.io/latest';
   private myRatesApi = 'https://api-base.herokuapp.com/api/pub/rates';
-  public currentEuroRates: any = null;
-  public myRates: any[] = null;
+  public currentEuroRates: ExchangeRates = null;
+  public myRates: MyRate[] = null;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -21,25 +23,30 @@ export class RatesComponent implements OnInit {
   private getCurrentEuroRates() {
     const currencies = 'USD,GBP,CHF,JPY';
     const url = `${this.ratesApi}?symbols=${currencies}`;
-    this.httpClient.get(url).subscribe(apiResult => (this.currentEuroRates = apiResult));
+    this.httpClient
+      .get<ExchangeRates>(url)
+      .subscribe(apiResult => (this.currentEuroRates = apiResult));
   }
 
   public postRates() {
-    const rates = this.transformData();
-    rates.forEach(r => this.httpClient.post(this.myRatesApi, r).subscribe());
+    const rates: MyRate[] = this.transformExchangeRates();
+    rates.forEach(rate => this.httpClient.post<MyRate>(this.myRatesApi, rate).subscribe());
   }
 
-  private transformData() {
-    const current = this.currentEuroRates.rates;
-    return Object.keys(current).map(key => ({
-      date: this.currentEuroRates.date,
-      currency: key,
-      euros: current[key]
+  private transformExchangeRates() {
+    const currentDate = this.currentEuroRates.date;
+    const currentRates = this.currentEuroRates.rates;
+    return Object.keys(currentRates).map((keyRate: string) => ({
+      date: currentDate,
+      currency: keyRate,
+      euros: currentRates[keyRate]
     }));
   }
 
   public getMyRates() {
-    this.httpClient.get<any[]>(this.myRatesApi).subscribe(apiResult => (this.myRates = apiResult));
+    this.httpClient
+      .get<MyRate[]>(this.myRatesApi)
+      .subscribe(apiResult => (this.myRates = apiResult));
   }
 
   public deleteMyRates() {

@@ -129,12 +129,36 @@ export class RatesComponent implements OnInit {
     const currencies = 'USD,GBP,CHF,JPY';
     const url = `${this.urlapi}?symbols=${currencies}`;
     this.httpClient
-*     .get(url)
+*     .get<ExchangeRates>(url)
       .subscribe(apiResult => (this.currentEuroRates = apiResult));
   }
 }
 ```
 
+---
+
+> tipos de datos
+
+
+```typescript
+export interface ExchangeRates {
+  base: string;
+  rates: Rates;
+  date: string;
+}
+export interface Rates {
+  CHF: number;
+  USD: number;
+  JPY: number;
+  GBP: number;
+}
+export interface MyRate {
+  date: string;
+  currency: string;
+  euros: number;
+  _id?: string;
+}
+```
 ---
 
 ### Presentación en vista
@@ -154,20 +178,21 @@ export class RatesComponent implements OnInit {
   private myRatesApi = 'https://api-base.herokuapp.com/api/pub/rates';
 
   public postRates() {
-    const rates = this.transformData();
+    const rates: MyRate[] = this.transformExchangeRates();
     rates.forEach(rate =>
       this.httpClient
-*       .post(this.myRatesApi, rate)
+ *      .post<MyRate>(this.myRatesApi, rate)
         .subscribe()
     );
   }
 
-  private transformData() {
-    const current = this.currentEuroRates.rates;
-    return Object.keys(current).map(key => ({
-      date: this.currentEuroRates.date,
-      currency: key,
-      euros: current[key]
+  private transformExchangeRates() {
+    const currentDate = this.currentEuroRates.date;
+    const currentRates = this.currentEuroRates.rates;
+    return Object.keys(currentRates).map((keyRate: string) => ({
+      date: currentDate,
+      currency: keyRate,
+      euros: currentRates[keyRate]
     }));
   }
 }
@@ -194,7 +219,7 @@ export class RatesComponent implements OnInit {
 
  public getMyRates() {
     this.httpClient
-*     .get<any[]>(this.myRatesApi)
+*     .get<MyRate[]>(this.myRatesApi)
       .subscribe(apiResult => (this.myRates = apiResult));
   }
 }
