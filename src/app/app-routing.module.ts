@@ -6,35 +6,35 @@ import { NotFoundComponent } from './core/not-found/not-found.component';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: './2-spa/home/home.module#HomeModule'
+    loadChildren: () => import('./2-spa/home/home.module').then(m => m.HomeModule)
   },
   {
     path: 'about',
-    loadChildren: './2-spa/about/about.module#AboutModule'
+    loadChildren: () => import('./2-spa/about/about.module').then(m => m.AboutModule)
   },
   {
     path: 'car',
-    loadChildren: './4-flow/car/car.module#CarModule'
+    loadChildren: () => import('./4-flow/car/car.module').then(m => m.CarModule)
   },
   {
     path: 'contacts',
-    loadChildren: './3-data/contacts/contacts.module#ContactsModule'
+    loadChildren: () => import('./3-data/contacts/contacts.module').then(m => m.ContactsModule)
   },
   {
     path: 'converter',
-    loadChildren: './5-inject/converter/converter.module#ConverterModule'
+    loadChildren: () => import('./5-inject/converter/converter.module').then(m => m.ConverterModule)
   },
   {
     path: 'rates',
-    loadChildren: './6-http/rates/rates.module#RatesModule'
+    loadChildren: () => import('./6-http/rates/rates.module').then(m => m.RatesModule)
   },
   {
     path: 'notifications',
-    loadChildren: './7-watch/notifications/notifications.module#NotificationsModule'
+    loadChildren: () => import('./7-watch/notifications/notifications.module').then(m => m.NotificationsModule)
   },
   {
     path: 'security',
-    loadChildren: './8-reactive/security/security.module#SecurityModule'
+    loadChildren: () => import('./8-reactive/security/security.module').then(m => m.SecurityModule)
   },
   {
     path: 'heroes',
@@ -42,7 +42,7 @@ const routes: Routes = [
   },
   {
     path: 'projects',
-    loadChildren: './projects/projects.module#ProjectsModule'
+    loadChildren: () => import('./projects/projects.module').then(m => m.ProjectsModule)
   },
   {
     path: 'not-found',
