@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, share } from 'rxjs/operators';
+import { map, share, tap } from 'rxjs/operators';
 import { ExchangeRates } from '../models/ExchangeRates';
 import { MyRate } from '../models/MyRate';
 
@@ -27,7 +27,7 @@ export class ObseratesComponent implements OnInit {
     this.myRates$ = this.currentEuroRates$.pipe(map(this.transformData));
   }
 
-  private transformData(exchangeRates) {
+  private transformData(exchangeRates: ExchangeRates): MyRate[] {
     const currentDate = exchangeRates.date;
     const currentRates = exchangeRates.rates;
     return Object.keys(currentRates).map((keyRate: string) => ({
@@ -35,5 +35,15 @@ export class ObseratesComponent implements OnInit {
       currency: keyRate,
       euros: currentRates[keyRate]
     }));
+  }
+
+  private getEuroRatesPlus() {
+    const url = `${this.ratesApi}?symbols=USD,GBP,CHF,JPY`;
+    this.currentEuroRates$ = this.httpClient.get<ExchangeRates>(url).pipe(share());
+    this.myRates$ = this.currentEuroRates$.pipe(
+      tap(d => console.log(d)),
+      map(this.transformData),
+      tap(t => console.log(t))
+    );
   }
 }

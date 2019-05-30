@@ -181,7 +181,7 @@ export class RatesComponent implements OnInit {
     const rates: MyRate[] = this.transformExchangeRates();
     rates.forEach(rate =>
       this.httpClient
- *      .post<MyRate>(this.myRatesApi, rate)
+*       .post<MyRate>(this.myRatesApi, rate)
         .subscribe()
     );
   }
@@ -303,7 +303,7 @@ En el controlador se exponen Observables
 
 ```typeScript
   private ratesApi = 'https://api.exchangeratesapi.io/latest';
-* public currentEuroRates$: Observable<any> = null;
+* public currentEuroRates$: Observable<ExchangeRates> = null;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -314,7 +314,7 @@ En el controlador se exponen Observables
   private getCurrentEuroRates() {
     const currencies = 'USD,GBP,CHF,JPY';
     const url = `${this.ratesApi}?symbols=${currencies}`;
-*   this.currentEuroRates$ = this.httpClient.get(url);
+*   this.currentEuroRates$ = this.httpClient.get<ExchangeRates>(url);
   }
 ```
 > No es necesaria la suscripción en código
@@ -326,18 +326,19 @@ En el controlador se exponen Observables
 ### Tuberías en RxJS .pipe()
 
 ```typescript
-public myRates$: Observable<any[]> = null;
+*public myRates$: Observable<MyRate[]> = null;
 private getCurrentEuroRates() {
   const url = `${this.ratesApi}?symbols=USD,GBP,CHF,JPY`;
-  this.currentEuroRates$ = this.httpClient.get(url);
+  this.currentEuroRates$ = this.httpClient.get<ExchangeRates>(url);
 * this.myRates$ = this.currentEuroRates$.pipe(map(this.transformData));
 }
-private transformData(currentRates) {
-  const current = currentRates.rates;
-  return Object.keys(current).map(key => ({
-    date: currentRates.date,
-    currency: key,
-    euros: current[key]
+private transformData(exchangeRates: ExchangeRates): MyRate[] {
+  const currentDate = exchangeRates.date;
+  const currentRates = exchangeRates.rates;
+  return Object.keys(currentRates).map((keyRate: string) => ({
+    date: currentDate,
+    currency: keyRate,
+    euros: currentRates[keyRate]
   }));
 }
 ```
@@ -364,6 +365,17 @@ const url = `${this.ratesApi}?symbols=USD,GBP,CHF,JPY`;
         map(this.transformData),
         tap(t=>console.log(t))
       );
+}
+private getEuroRatesPlus() {
+  const url = `${this.ratesApi}?symbols=USD,GBP,CHF,JPY`;
+  this.currentEuroRates$ = this.httpClient.get<ExchangeRates>(url)
+*   .pipe(share());
+  this.myRates$ = this.currentEuroRates$
+*   .pipe(
+      tap(d => console.log(d)),
+      map(this.transformData),
+      tap(t => console.log(t))
+    );
 }
 ```
 
@@ -456,10 +468,11 @@ export class AuditInterceptorService implements HttpInterceptor {
 
   public intercept(req: HttpRequest<any>, next: HttpHandler){
     const started = Date.now();
-    return next.handle(req).pipe(
-      filter((event: HttpEvent<any>) => event instanceof HttpResponse),
-      tap((resp: HttpResponse<any>) => this.auditEvent(resp, started))
-    );
+    return next.handle(req)
+*     .pipe(
+        filter((event: HttpEvent<any>) => event instanceof HttpResponse),
+        tap((resp: HttpResponse<any>) => this.auditEvent(resp, started))
+      );
   }
 
   private auditEvent(resp: HttpResponse<any>, started: number) {
@@ -486,7 +499,7 @@ export class AuditInterceptorService implements HttpInterceptor {
 
 > Next:
 
-# Vigilancia y seguridad en Angular
+# [Vigilancia y seguridad en Angular](https://academiabinaria.github.io/angular-basic/readme/7-watch.html)
 
 ## Uso de observables para monitorizar datos
 

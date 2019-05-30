@@ -33,7 +33,7 @@ export class RatesComponent implements OnInit {
     rates.forEach(rate => this.httpClient.post<MyRate>(this.myRatesApi, rate).subscribe());
   }
 
-  private transformExchangeRates() {
+  private transformExchangeRates(): MyRate[] {
     const currentDate = this.currentEuroRates.date;
     const currentRates = this.currentEuroRates.rates;
     return Object.keys(currentRates).map((keyRate: string) => ({
