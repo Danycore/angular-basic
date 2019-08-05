@@ -8,12 +8,15 @@ import { NotificationsStoreService } from '../notifications-store.service';
   styles: []
 })
 export class ReceiverComponent implements OnInit {
-  public notes$;
+  public notifications$;
 
-  constructor(private notificationsStoreService: NotificationsStoreService, private httpClient: HttpClient) {}
+  constructor(
+    private notificationsStoreService: NotificationsStoreService,
+    private httpClient: HttpClient
+  ) {}
 
   ngOnInit() {
-    this.notes$ = this.notificationsStoreService.select$();
+    this.notifications$ = this.notificationsStoreService.select$();
   }
   public forceError() {
     const protectedUrl = 'https://api-base.herokuapp.com/api/priv/operations';

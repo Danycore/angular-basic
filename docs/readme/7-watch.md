@@ -49,7 +49,7 @@ ng g c notifications/receiver
 ```typescript
 {
   path: 'notifications',
-  loadChildren: './notifications/notifications.module#NotificationsModule'
+  loadChildren: () => import('./7-watch/notifications/notifications.module').then(m => m.NotificationsModule)
 },
 ```
 
@@ -132,10 +132,12 @@ export class NotificationsStoreService {
 
   constructor() {}
 
+  public select = () => [...this.notifications];
   public select$ = () => this.notifications$.asObservable();
+
   public dispatch(notification) {
-    this.notifications.push(notification);
-    this.notifications$.next([...this.notifications]);
+    this.notifications.push({ ...notification });
+    this.notifications$.next(this.select());
   }
 }
 ```
@@ -157,7 +159,7 @@ Vista con un formulario para enviar mensajes
     <section>
       <label for="note">Note</label>
       <input name="note"
-             [(ngModel)]="note" />
+             [(ngModel)]="notification.note" />
     </section>
   </fieldset>
   <button (click)="send()">Send</button>
@@ -170,14 +172,14 @@ Dependencia y uso del servicio del almacén de notificaciones
 
 ```typescript
 export class SenderComponent implements OnInit {
-  public note = '';
+  public notification = {note:''};
 
   constructor(private notificationsStore: NotificationsStoreService) {}
 
   ngOnInit() {}
 
   public send() {
-    this.notificationsStore.dispatch(this.note);
+    this.notificationsStore.dispatch(this.notification.note);
   }
 }
 ```
@@ -192,7 +194,7 @@ Listado de notificaciones, no importa el orden de subscripción
   Notes receiver
 </h2>
 <ul>
-  <li *ngFor="let note of notes$ | async">{{ note | json }}</li>
+  <li *ngFor="let notification of notifications$ | async">{{ notification | json }}</li>
 </ul>
 <a [routerLink]="['../sender']">Go to sender</a>
 ```
@@ -203,12 +205,12 @@ Dependencia y uso del servicio del almacén de notificaciones
 
 ```typescript
 export class ReceiverComponent implements OnInit {
-  public notes$;
+  public notifications$;
 
   constructor(private notificationsStore: NotificationsStoreService) {}
 
   ngOnInit() {
-    this.notes$ = this.notificationsStore.select$();
+    this.notifications$ = this.notificationsStore.select$();
   }
 }
 ```
@@ -289,9 +291,12 @@ export class NotificationsModule {}
 
 ```typescript
 public intercept(req, next) {
+   // implementación con .tap() sin suscriptor para datos normales
    return next.handle(req).pipe(tap(null, err=>console.log(err)));
-   // return next.handle(req).pipe(catchError(err => of(null)));
-   // return next.handle(req).pipe(catchError(err => throwError(err)));
+   // implementación con catchError retornando nulo
+   return next.handle(req).pipe(catchError(err => of(null)));
+   // implementación con catchError re-lanzando el error
+   return next.handle(req).pipe(catchError(err => throwError(err)));
 }
 ```
 
@@ -348,13 +353,14 @@ class: impact
 constructor(private notificationsStore: NotificationsStoreService) {}
 
 // En el interceptor.
-// Ojo al bind(this), necesario para no perder el contexto
+// Ojo al .bind(this), necesario para no perder el contexto
 return next.handle(req).pipe(catchError(this.handleError.bind(this)));
 
 private handleError(err) {
   let userMessage = 'Fatal error';
   // emisión de la notificación
-  this.notificationsStore.dispatch(userMessage);
+  this.notificationsStoreService.dispatch({ note: userMessage });
+  return throwError(err);
 }
 ```
 ---

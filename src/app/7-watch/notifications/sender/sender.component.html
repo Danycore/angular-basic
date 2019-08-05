@@ -6,9 +6,11 @@
     <section>
       <label for="note">Note</label>
       <input name="note"
-             [(ngModel)]="note" />
+             [(ngModel)]="notification.note" />
     </section>
   </fieldset>
   <button (click)="send()">Send</button>
 </form>
-<a [routerLink]="['../receiver']">Go to receiver</a>
+<h3>
+  <a [routerLink]="['../receiver']">Go to receiver</a>
+</h3>

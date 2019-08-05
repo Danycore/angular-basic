@@ -48,7 +48,7 @@ ng g c security/register
 ```typescript
 {
   path: 'security',
-  loadChildren: './security/security.module#SecurityModule'
+  loadChildren: () => import('./8-reactive/security/security.module').then(m => m.SecurityModule)
 },
 ```
 

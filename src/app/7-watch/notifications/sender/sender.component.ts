@@ -7,13 +7,13 @@ import { NotificationsStoreService } from '../notifications-store.service';
   styles: []
 })
 export class SenderComponent implements OnInit {
-  public note = '';
+  public notification = { note: '' };
 
   constructor(private notificationsStoreService: NotificationsStoreService) {}
 
   ngOnInit() {}
 
   public send() {
-    this.notificationsStoreService.dispatch(this.note);
+    this.notificationsStoreService.dispatch(this.notification);
   }
 }

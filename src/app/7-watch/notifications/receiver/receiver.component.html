@@ -2,7 +2,9 @@
   Notes receiver
 </h2>
 <ul>
-  <li *ngFor="let note of notes$ | async">{{ note | json }}</li>
+  <li *ngFor="let notification of notifications$ | async">{{ notification | json }}</li>
 </ul>
-<a [routerLink]="['../sender']">Go to sender</a>
+<h3>
+  <a [routerLink]="['../sender']">Go to sender</a>
+</h3>
 <button (click)="forceError()">Force http Error</button>
