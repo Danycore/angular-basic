@@ -40,11 +40,16 @@ export class ContactsComponent implements OnInit {
 
   public saveContact() {
     this.contacts.push({ ...this.contact });
-    this.numContacts = this.contacts.length;
+    this.updateCounter();
   }
   public deleteContact(contact: Contact) {
     this.contacts = this.contacts.filter(c => c.name !== contact.name);
+    this.updateCounter();
+  }
+
+  private updateCounter() {
     this.numContacts = this.contacts.length;
+    this.counterClass = this.numContacts === 0 ? 'tag secondary' : 'tag primary';
   }
 
   public onWorkStatusChanged() {

@@ -239,11 +239,13 @@ Y se configuran las `rutas` con **'rutas al módulo'**
 const routes: Routes = [
   {
     path: '',
-    loadChildren: './home/home.module#HomeModule'
+    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+    //loadChildren: './home/home.module#HomeModule'
   },
   {
     path: 'about',
-    loadChildren: './about/about.module#AboutModule'
+    loadChildren: () => import('./about/about.module').then(m => m.AboutModule)
+    //loadChildren: './about/about.module#AboutModule'
   }
 ];
 ```

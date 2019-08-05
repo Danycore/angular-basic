@@ -2,7 +2,7 @@
   {{ header }}
 </h2>
 <p>{{ description | uppercase }}</p>
-<p>You have <mark [class]="counterClass">{{ numContacts }}</mark> contacts right now.</p>
+<p>You have <mark class="{{ counterClass }}">{{ numContacts }}</mark> contacts right now.</p>
 <input value="Show Form"
        class="primary"
        type="button"
@@ -57,11 +57,13 @@
              placeholder="Company name" />
     </section>
     <ng-template #education>
-      <label for="education">Education</label>
-      <input name="education"
-             type="text"
-             [(ngModel)]="contact.education"
-             placeholder="Education" />
+      <section>
+        <label for="education">Education</label>
+        <input name="education"
+               type="text"
+               [(ngModel)]="contact.education"
+               placeholder="Education" />
+      </section>
     </ng-template>
   </fieldset>
   <input value="Save"

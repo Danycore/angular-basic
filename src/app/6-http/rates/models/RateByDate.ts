@@ -1,4 +1,4 @@
-export interface MyRate {
+export interface RateByDate {
   date: string;
   currency: string;
   euros: number;

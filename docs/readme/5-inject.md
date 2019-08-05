@@ -44,7 +44,7 @@ ng g c converter/converter
 ```typescript
 {
   path: 'converter',
-  loadChildren: './converter/converter.module#ConverterModule'
+  loadChildren: () => import('./5-inject/converter/converter.module').then(m => m.ConverterModule)
 },
 ```
 
@@ -175,11 +175,11 @@ ng g c converter/culture-converter
 ```
 
 ```typescript
-  // converter-routing
-  {
-    path: 'culture',
-    component: CultureConverterComponent
-  }
+// converter-routing
+{
+  path: 'culture',
+  component: CultureConverterComponent
+}
 ```
 
 ```typeScript

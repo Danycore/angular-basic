@@ -57,7 +57,8 @@ En `app-routing` y en `contacts-routing`:
   // app-routing
   {
     path: 'contacts',
-    loadChildren: './contacts/contacts.module#ContactsModule'
+    loadChildren: () => import('./3-data/contacts/contacts.module').then(m => m.ContactsModule)
+    // loadChildren: './contacts/contacts.module#ContactsModule'
   },
   // contacts-routing
   {
@@ -355,8 +356,13 @@ public contact = {
   <input name="company" type="text" [(ngModel)]="contact.company" />
 </section>
 <ng-template #education>
-  <label for="education">Education</label>
-  <input name="education" type="text" [(ngModel)]="contact.education" />
+  <section>
+    <label for="education">Education</label>
+    <input name="education"
+            type="text"
+            [(ngModel)]="contact.education"
+            placeholder="Education" />
+  </section>
 </ng-template>
 ```
 
@@ -439,7 +445,12 @@ No solo propiedades, también métodos
 ```typescript
 public saveContact() {
   this.contacts.push({ ...this.contact });
+  this.updateCounter();
+}
+
+private updateCounter() {
   this.numContacts = this.contacts.length;
+  this.counterClass = this.numContacts === 0 ? 'tag secondary' : 'tag primary';
 }
 ```
 
@@ -492,7 +503,7 @@ public ngOnInit() {
 ```typescript
 public deleteContact(contact: Contact) {
   this.contacts = this.contacts.filter(c => c.name !== contact.name);
-  this.numContacts = this.contacts.length;
+  this.updateCounter();
 }
 ```
 

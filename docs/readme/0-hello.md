@@ -372,7 +372,7 @@ module.exports = {
 
 > Recap:
 
-# 4. Angular 7, el CLI 7 y su ecosistema
+# 4. Angular 8, el CLI 8 y su ecosistema
 
 ## Extensiones de Visual Studio
 

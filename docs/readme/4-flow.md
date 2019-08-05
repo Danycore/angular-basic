@@ -108,7 +108,7 @@ ng g c car/car/pedals
 //app-routing
 {
   path: 'car',
-  loadChildren: './car/car.module#CarModule'
+  loadChildren: () => import('./4-flow/car/car.module').then(m => m.CarModule)
 }
 // car-routing
 {

@@ -8,14 +8,14 @@
 <input value="Save Rates"
        class="primary"
        type="button"
-       (click)="postRates()" />
+       (click)="postRatesByDate()" />
 <input value="Refresh Rates"
        class="primary"
        type="button"
-       (click)="getMyRates()" />
-<pre>{{ myRates | json }}</pre>
-<input value="Delete Rates"
+       (click)="getRatesByDate()" />
+<pre>{{ ratesByDate | json }}</pre>
+<input value="Delete Rates By Date"
        class="secondary"
        type="button"
-       (click)="deleteMyRates()" />
-<p><a [routerLink]="['observables']">Observables</a></p>
+       (click)="deleteRatesByDate()" />
+<h3><a [routerLink]="['observables']">Observables</a></h3>

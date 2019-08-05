@@ -50,7 +50,7 @@ ng g c rates/rates
 ```typescript
 {
   path: 'rates',
-  loadChildren: './rates/rates.module#RatesModule'
+  loadChildren: () => import('./6-http/rates/rates.module').then(m => m.RatesModule)
 },
 ```
 
@@ -152,7 +152,7 @@ export interface Rates {
   JPY: number;
   GBP: number;
 }
-export interface MyRate {
+export interface RateByDate {
   date: string;
   currency: string;
   euros: number;
@@ -175,25 +175,24 @@ export interface MyRate {
 
 ```typescript
 export class RatesComponent implements OnInit {
-  private myRatesApi = 'https://api-base.herokuapp.com/api/pub/rates';
+  private ratesByDateApi = 'https://api-base.herokuapp.com/api/pub/rates';
 
-  public postRates() {
-    const rates: MyRate[] = this.transformExchangeRates();
-    rates.forEach(rate =>
-      this.httpClient
-*       .post<MyRate>(this.myRatesApi, rate)
-        .subscribe()
+  public postRatesByDate() {
+    const ratesByDate: RateByDate[] = this.transformExchangeRates();
+    ratesByDate.forEach(rate =>
+      this.httpClient.post<RateByDate>(this.ratesByDateApi, rate).subscribe()
     );
   }
 
-  private transformExchangeRates() {
+  private transformExchangeRates(): RateByDate[] {
     const currentDate = this.currentEuroRates.date;
     const currentRates = this.currentEuroRates.rates;
-    return Object.keys(currentRates).map((keyRate: string) => ({
+    const ratesByDate = Object.keys(currentRates).map((keyRate: string) => ({
       date: currentDate,
       currency: keyRate,
       euros: currentRates[keyRate]
     }));
+    return ratesByDate;
   }
 }
 ```
@@ -202,7 +201,7 @@ export class RatesComponent implements OnInit {
 ### Presentación en vista
 
 ```html
-<input value="Save Rates" type="button" (click)="postRates()" />
+<input value="Save Rates" type="button" (click)="postRatesByDate()" />
 ```
 
 ---
@@ -213,21 +212,21 @@ export class RatesComponent implements OnInit {
 
 ```typescript
 export class RatesComponent implements OnInit {
- private myRatesApi = 'https://api-base.herokuapp.com/api/pub/rates';
- public myRates: any[] = null;
+ private ratesByDateApi = 'https://api-base.herokuapp.com/api/pub/rates';
+ public ratesByDate: RateByDate[] = null;
 
 
- public getMyRates() {
+ public getRatesByDate() {
     this.httpClient
-*     .get<MyRate[]>(this.myRatesApi)
-      .subscribe(apiResult => (this.myRates = apiResult));
+      .get<RateByDate[]>(this.ratesByDateApi)
+      .subscribe(apiResult => (this.ratesByDate = apiResult));
   }
 }
 ```
 
 ```html
-<input value="Refresh" type="button" (click)="getMyRates()" />
-<pre>{{ myRates | json }}</pre>
+<input value="Refresh" type="button" (click)="getRatesByDate()" />
+<pre>{{ ratesByDate | json }}</pre>
 ```
 
 ---
@@ -235,15 +234,13 @@ export class RatesComponent implements OnInit {
 ### Borrado
 
 ```typescript
-  public deleteMyRates() {
-    this.httpClient
-*     .delete(this.myRatesApi)
-      .subscribe();
+  public deleteRatesByDate() {
+    this.httpClient.delete(this.ratesByDateApi).subscribe();
   }
 ```
 
 ```html
-<input value="Delete Rates" type="button" (click)="deleteMyRates()" />
+<input value="Delete Rates by Date" type="button" (click)="deleteRatesByDate()" />
 ```
 
 ---
@@ -330,16 +327,17 @@ En el controlador se exponen Observables
 private getCurrentEuroRates() {
   const url = `${this.ratesApi}?symbols=USD,GBP,CHF,JPY`;
   this.currentEuroRates$ = this.httpClient.get<ExchangeRates>(url);
-* this.myRates$ = this.currentEuroRates$.pipe(map(this.transformData));
+* this.ratesByDate$ = this.currentEuroRates$.pipe(map(this.transformData));
 }
-private transformData(exchangeRates: ExchangeRates): MyRate[] {
+private transformData(exchangeRates: ExchangeRates): RateByDate[] {
   const currentDate = exchangeRates.date;
   const currentRates = exchangeRates.rates;
-  return Object.keys(currentRates).map((keyRate: string) => ({
+  const ratesByDate = Object.keys(currentRates).map((keyRate: string) => ({
     date: currentDate,
     currency: keyRate,
     euros: currentRates[keyRate]
   }));
+  return ratesByDate;
 }
 ```
 
@@ -348,7 +346,7 @@ private transformData(exchangeRates: ExchangeRates): MyRate[] {
 ## 2.3 Operators
 
 ```html
-<pre>{{ myRates$ | async | json }}</pre>
+<pre>{{ ratesByDate$ | async | json }}</pre>
 ```
 El consumo sigue igual... pero...
 
@@ -359,18 +357,14 @@ private getCurrentEuroRates() {
 const url = `${this.ratesApi}?symbols=USD,GBP,CHF,JPY`;
   this.currentEuroRates$ = this.httpClient.get(url)
 *     .pipe(share());
-  this.myRates$ = this.currentEuroRates$
-      .pipe(
-*       tap(d=>console.log(d)),
-        map(this.transformData),
-        tap(t=>console.log(t))
-      );
+  this.ratesByDate$ = this.currentEuroRates$
+      .pipe(map(this.transformData));
 }
 private getEuroRatesPlus() {
   const url = `${this.ratesApi}?symbols=USD,GBP,CHF,JPY`;
   this.currentEuroRates$ = this.httpClient.get<ExchangeRates>(url)
 *   .pipe(share());
-  this.myRates$ = this.currentEuroRates$
+  this.ratesByDate$ = this.currentEuroRates$
 *   .pipe(
       tap(d => console.log(d)),
       map(this.transformData),
