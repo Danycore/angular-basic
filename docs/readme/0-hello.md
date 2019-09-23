@@ -30,13 +30,13 @@ class: impact
 
 # 1 Angular y el CLI
 
-## Instalación de Angular CLI 7
+## Instalación de Angular CLI
 
 ## Crear y ejecutar aplicaciones Angular
 
 ---
 
-## 1.1 Instalación de Angular CLI 7
+## 1.1 Instalación de Angular CLI
 
 > Angular es una plataforma de desarrollo dogmática y llave en mano.
 
@@ -123,7 +123,7 @@ npm start
 
 # 1 Angular y el CLI
 
-## Instalación de Angular CLI 7
+## Instalación de Angular CLI
 
 ## Crear y ejecutar aplicaciones Angular
 
@@ -372,7 +372,7 @@ module.exports = {
 
 > Recap:
 
-# 4. Angular 8, el CLI 8 y su ecosistema
+# 4. Angular, el CLI y su ecosistema
 
 ## Extensiones de Visual Studio
 
