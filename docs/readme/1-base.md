@@ -61,19 +61,19 @@ Un módulo es una clase decorada en **TypeScript**
 Usando el programa `ng` con el comando `generate` con la opción `module` y un nombre
 
 ```bash
-ng g m core
+ng g m layout
 ```
 
 --
 
-Resulta en el fichero `core/core.module.ts`
+Resulta en el fichero `core/layout.module.ts`
 
 ```typescript
 @NgModule({
   imports: [],
   declarations: []
 })
-export class CoreModule {}
+export class LayoutModule {}
 ```
 
 ---
@@ -85,7 +85,7 @@ Se agrega al array de importaciones en `AppModule`
 ```typescript
 @NgModule({
     declarations: [AppComponent],
-*   imports: [BrowserModule, AppRoutingModule, CoreModule],
+*   imports: [BrowserModule, AppRoutingModule, LayoutModule],
     providers: [],
     bootstrap: [AppComponent]
 })
@@ -140,7 +140,7 @@ export class AppComponent {}
 ```typescript
 @NgModule({
 * declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, CoreModule],
+  imports: [BrowserModule, AppRoutingModule, LayoutModule],
   providers: [],
   bootstrap: [AppComponent]
 })
@@ -164,10 +164,10 @@ export class AppModule {}
 Usando el programa `ng` con el comando `generate` con la opción `component`
 
 ```bash
-ng g c core/shell
-ng g c core/shell/header
-ng g c core/shell/main
-ng g c core/shell/footer
+ng g c layout/shell
+ng g c layout/shell/header
+ng g c layout/shell/main
+ng g c layout/shell/footer
 ```
 
 --
@@ -234,7 +234,7 @@ Los componentes inicialmente **sólo pueden usarse en su propio módulo**
   imports: [CommonModule, RouterModule],
 * exports: [ShellComponent]
 })
-export class CoreModule {}
+export class LayoutModule {}
 ```
 
 --
@@ -248,7 +248,7 @@ export class CoreModule {}
 ```typescript
 @NgModule({
   declarations: [AppComponent],
-* imports: [BrowserModule, AppRoutingModule, CoreModule],
+* imports: [BrowserModule, AppRoutingModule, LayoutModule],
   providers: [],
   bootstrap: [AppComponent]
 })
@@ -282,7 +282,7 @@ y entonces `app.component.html` queda ridículamente simple:
 * imports: [CommonModule, RouterModule],
   exports: [ShellComponent]
 })
-export class CoreModule {}
+export class LayoutModule {}
 ```
 
 ---
@@ -395,7 +395,7 @@ En `app.component.html`
 
 --
 
-- Alguna será de uso único como el `CoreModule`
+- Alguna será de uso único como el `LayoutModule`
 - Y otras serán compartidas como el `SharedModule`
 
 ---
@@ -463,7 +463,7 @@ AppModule
 |
 +--BrowserModule
 |
-+--CoreModule
++--LayoutModule
    |
    +--CommonModule
    |

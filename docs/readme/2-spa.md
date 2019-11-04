@@ -227,9 +227,9 @@ class: impact
 ```bash
 ng g m home --routing true
 ng g c home/home
-ng g m about --routing true
-ng g c about/about
-```
+# heads up, new route parameters
+ng g m about --routing true --route about --module app-routing.module
+ ```
 
 --
 
