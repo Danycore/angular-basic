@@ -274,7 +274,7 @@ y entonces `app.component.html` queda ridículamente simple:
 
 --
 
-- Falla porque no es conocido en `CoreModule`; hay que importarlo
+- Falla porque no es conocido en `LayoutModule`; hay que importarlo
 
 ```typescript
 @NgModule({

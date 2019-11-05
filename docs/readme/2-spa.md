@@ -71,7 +71,7 @@ export class AppRoutingModule {}
 
 ```bash
 ng g c heroes
-ng g c core/not-found
+ng g c layout/not-found
 ```
 
 ### heroes.cmponent.html
@@ -456,7 +456,7 @@ export class AuthorComponent implements OnInit {
 }
 ```
 
-Usamos la instancia `activateRoute` de la clase `ActivatedRoute`
+Usamos la instancia `activateRoute` de la clase `ActivatedRoute` inyectada por el framework según veremos en el tema 5.
 
 Para acceder a datos de la URL activa y mostrar los datos en la vista
 
@@ -479,7 +479,8 @@ Y en `authors.component.html`
 
 ```html
 <a routerLink="albertobasalo" class="button"> Alberto Basalo </a>
-<a routerLink="johndoe" class="button"> John Doe </a>
+<a routerLink="linustorvalds" class="button"> Linus Torvalds </a>
+<a routerLink="billgates" class="button"> Bill Gates </a>
 ```
 
 ---

@@ -45,8 +45,7 @@ class: impact
 Creamos una nueva ruta funcionalidad para la gestión de contactos. Requiere ruta, enlace, módulo y componente.
 
 ```bash
-ng g m contacts --routing true
-ng g c contacts/contacts
+ng g m contacts --routing true --route contacts --module app-routing.module
 ```
 
 --
@@ -100,11 +99,10 @@ public formHidden = false;
 En `contacts.component.html` mostramos cabeceras con estilo
 
 ```html
-<h2>{{ header }}</h2>
-<p>{{ description | uppercase }}</p>
-<p>
-  You have <mark [class]="counterClass">{{ numContacts }}</mark> contacts now.
-</p>
+<h3>
+  {{ header }}: {{ description | uppercase }}
+</h3>
+<p [style.color]="'green'">You have <mark class="{{ counterClass }}">{{ numContacts }}</mark> contacts right now.</p>
 ```
 
 ---
@@ -509,6 +507,11 @@ public deleteContact(contact: Contact) {
 
 ---
 
+### Recursos
+
+[Angular Mastery: Template Syntax](https://blog.angularindepth.com/angular-mastery-template-syntax-194bffe2ad6f)
+
+---
 > Recap
 
 # 4. Modelo y controlador

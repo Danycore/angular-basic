@@ -1,8 +1,7 @@
-<h2>
-  {{ header }}
-</h2>
-<p>{{ description | uppercase }}</p>
-<p>You have <mark class="{{ counterClass }}">{{ numContacts }}</mark> contacts right now.</p>
+<h3>
+  {{ header }}: {{ description | uppercase }}
+</h3>
+<p [style.color]="'green'">You have <mark class="{{ counterClass }}">{{ numContacts }}</mark> contacts right now.</p>
 <input value="Show Form"
        class="primary"
        type="button"
@@ -12,60 +11,58 @@
        type="button"
        (click)="formHidden=true" />
 <form [ngClass]="{'hidden':formHidden}">
-  <fieldset>
-    <legend>Contact Form</legend>
+
+  <section>
+    <label for="name">Name</label>
+    <input name="name"
+           type="text"
+           [(ngModel)]="contact.name"
+           placeholder="Contact name" />
+  </section>
+  <section>
+    <label for="isVIP">Is V.I.P.</label>
+    <input name="isVIP"
+           type="checkbox"
+           [(ngModel)]="contact.isVIP">
+  </section>
+  <section>
+    <label for="gender">Gender</label>
+    <input name="gender"
+           value="male"
+           type="radio"
+           [(ngModel)]="contact.gender"> <span>Male</span>
+    <input name="gender"
+           value="female"
+           type="radio"
+           [(ngModel)]="contact.gender"> <span>Female</span>
+  </section>
+  <section>
+    <label for="workStatus">Work Status</label>
+    <select name="workStatus"
+            [(ngModel)]="contact.workStatus"
+            (change)="onWorkStatusChanged()">
+      <option *ngFor="let status of workStatuses"
+              [value]="status.id">
+        <span>{{ status.description }}</span>
+      </option>
+    </select>
+  </section>
+  <section *ngIf="contact.workStatus.toString()==='3'; else education">
+    <label for="companyName">Company Name</label>
+    <input name="companyName"
+           type="text"
+           [(ngModel)]="contact.companyName"
+           placeholder="Company name" />
+  </section>
+  <ng-template #education>
     <section>
-      <label for="name">Name</label>
-      <input name="name"
+      <label for="education">Education</label>
+      <input name="education"
              type="text"
-             [(ngModel)]="contact.name"
-             placeholder="Contact name" />
+             [(ngModel)]="contact.education"
+             placeholder="Education" />
     </section>
-    <section>
-      <label for="isVIP">Is V.I.P.</label>
-      <input name="isVIP"
-             type="checkbox"
-             [(ngModel)]="contact.isVIP">
-    </section>
-    <section>
-      <label for="gender">Gender</label>
-      <input name="gender"
-             value="male"
-             type="radio"
-             [(ngModel)]="contact.gender"> <span>Male</span>
-      <input name="gender"
-             value="female"
-             type="radio"
-             [(ngModel)]="contact.gender"> <span>Female</span>
-    </section>
-    <section>
-      <label for="workStatus">Work Status</label>
-      <select name="workStatus"
-              [(ngModel)]="contact.workStatus"
-              (change)="onWorkStatusChanged()">
-        <option *ngFor="let status of workStatuses"
-                [value]="status.id">
-          <span>{{ status.description }}</span>
-        </option>
-      </select>
-    </section>
-    <section *ngIf="contact.workStatus.toString()==='3'; else education">
-      <label for="companyName">Company Name</label>
-      <input name="companyName"
-             type="text"
-             [(ngModel)]="contact.companyName"
-             placeholder="Company name" />
-    </section>
-    <ng-template #education>
-      <section>
-        <label for="education">Education</label>
-        <input name="education"
-               type="text"
-               [(ngModel)]="contact.education"
-               placeholder="Education" />
-      </section>
-    </ng-template>
-  </fieldset>
+  </ng-template>
   <input value="Save"
          type="submit"
          (click)="saveContact()" />
@@ -80,5 +77,5 @@
   </li>
 </ul>
 <ng-template #empty>
-  <i>No data yet</i>
+  <i><strong>No data yet</strong></i>
 </ng-template>
