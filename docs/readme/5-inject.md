@@ -35,28 +35,7 @@ class: impact
 Módulo y componente
 
 ```console
-ng g m converter --routing true
-ng g c converter/converter
-```
-
-`app-routing.module.ts`
-
-```typescript
-{
-  path: 'converter',
-  loadChildren: () => import('./5-inject/converter/converter.module').then(m => m.ConverterModule)
-},
-```
-
----
-
-`converter-routing.module.ts`
-
-```typescript
-{
-  path: '',
-  component: ConverterComponent
-}
+ng g m converter --routing true --route converter --module app-routing.module
 ```
 
 `header.component.html`
@@ -156,7 +135,7 @@ class: impact
 
 # 2. Inversión del control
 
-## Interface y servicio base
+## Clase abstracta para dependencias
 
 ## Implementaciones
 
@@ -166,10 +145,9 @@ class: impact
 
 ---
 
-## 2.1 Interface y servicio base
+## 2.1 Clase abstracta para dependencias
 
 ```console
-ng g interface converter/i-culture-converter
 ng g s converter/abstract-culture-converter
 ng g c converter/culture-converter
 ```
@@ -182,17 +160,8 @@ ng g c converter/culture-converter
 }
 ```
 
-```typeScript
-export interface ICultureConverter {
-  sourceCulture: string;
-  targetCulture: string;
-  convertDistance: (source: number) => number;
-  convertTemperature: (source: number) => number;
-}
-```
-
 ```typescript
-export class AbstractCultureConverterService implements ICultureConverter {
+export class AbstractCultureConverterService {
   sourceCulture: string;
   targetCulture: string;
   convertDistance: (source: number) => number;
@@ -309,10 +278,10 @@ ng g s converter/american-culture-converter
 
 ```typescript
 @Injectable()
-export class EuropeanCultureConverterService implements ICultureConverter {
+export class EuropeanCultureConverterService extends AbstractCultureConverterService {
   sourceCulture = 'USA';
   targetCulture = 'Europe';
-  constructor(private calculatorService: CalculatorService) {}
+  constructor(private calculatorService: CalculatorService) { super(); }
   public convertDistance = this.calculatorService.fromMilesToKilometers;
   public convertTemperature = this.calculatorService.fromFahrenheitToCelsius;
 }
@@ -320,10 +289,10 @@ export class EuropeanCultureConverterService implements ICultureConverter {
 
 ```typescript
 @Injectable()
-export class AmericanCultureConverterService implements ICultureConverter {
+export class AmericanCultureConverterService extends AbstractCultureConverterService {
   sourceCulture = 'Europe';
   targetCulture = 'USA';
-  constructor(private calculatorService: CalculatorService) {}
+  constructor(private calculatorService: CalculatorService) { super(); }
   public convertDistance = this.calculatorService.fromKilometersToMiles;
   public convertTemperature = this.calculatorService.fromCelsiusToFahrenheit;
 }
@@ -388,7 +357,7 @@ La provisión del servicio apunta a la función factoría. Si además el servici
 
 # 2. Inversión del control
 
-## Interface y servicio base
+## Clase abstracta para dependencias
 
 ## Implementaciones
 

@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ICultureConverter } from './i-culture-converter';
 
 @Injectable({
   providedIn: 'root'
 })
-export abstract class AbstractCultureConverterService implements ICultureConverter {
+export abstract class AbstractCultureConverterService {
   sourceCulture: string;
   targetCulture: string;
   convertDistance: (source: number) => number;
