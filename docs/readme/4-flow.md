@@ -98,23 +98,9 @@ Es una elección de arquitectura que promueve:
 ### Contenedor y presentadores
 
 ```console
-ng g m car --routing true
-ng g c car/car
+ng g m car --routing true --route car --module app-routing.module
 ng g c car/car/display
 ng g c car/car/pedals
-```
-
-```typescript
-//app-routing
-{
-  path: 'car',
-  loadChildren: () => import('./4-flow/car/car.module').then(m => m.CarModule)
-}
-// car-routing
-{
-  path: '',
-  component: CarComponent
-}
 ```
 
 ```html
