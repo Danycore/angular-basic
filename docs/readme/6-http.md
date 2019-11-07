@@ -41,28 +41,7 @@ class: impact
 El módulo de comunicaciones
 
 ```console
-ng g m rates --routing true
-ng g c rates/rates
-```
-
-`app-routing.module.ts`
-
-```typescript
-{
-  path: 'rates',
-  loadChildren: () => import('./6-http/rates/rates.module').then(m => m.RatesModule)
-},
-```
-
----
-
-`rates-routing.module.ts`
-
-```typescript
-{
-  path: '',
-  component: RatesComponent
-}
+ng g m rates --routing true --routes rates --module app.routing.module
 ```
 
 `header.component.html`
